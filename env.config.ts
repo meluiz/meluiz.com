@@ -12,6 +12,8 @@ export const env = defineEnv({
     NODE_ENV: z._default(z.enum(['development', 'production', 'test']), 'development'),
   },
   server: {
+    VERCEL_TOKEN: z.string(),
+    VERCEL_PROJECT_ID: z.string(),
     APP_URL: z.pipe(
       z.url(),
       z.transform((value) => new URL(value)),
