@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 import './env.config';
 
 export default {
+  typedRoutes: true,
   reactCompiler: true,
   crossOrigin: 'anonymous',
   transpilePackages: ['envin'],
@@ -12,8 +13,43 @@ export default {
       dynamic: 60,
     },
   },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        pathname: '/*.png',
+      },
+    ],
+  },
   headers: async () => {
     return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
       {
         source:
           '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|[^?]*\\.(?:css|js(?!on)|jpe?g|webp|png|gif|svg|ico|woff2?)).*)',
