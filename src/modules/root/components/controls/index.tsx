@@ -41,7 +41,7 @@ export const Controls = () => {
         <Button.Label>
           [
           <span className="inline-block min-w-6.5 text-clay-500 sm:min-w-5.5 dark:text-clay-400">
-            {state.enabled ? "ON" : "OFF"}
+            {state.enabled ? 'ON' : 'OFF'}
           </span>
           ]
         </Button.Label>
