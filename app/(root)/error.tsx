@@ -8,7 +8,7 @@ export type ErrorBoundaryProps = {
 };
 
 const ErrorBoundary = (props: ErrorBoundaryProps) => {
-  const { error, retry } = props;
+  const { error } = props;
 
   React.useEffect(() => {
     console.error(error);
