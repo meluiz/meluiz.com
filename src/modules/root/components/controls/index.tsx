@@ -19,11 +19,15 @@ export const Controls = () => {
         onClick={play.tick(() => setTheme())}
       >
         {match(resolved)
-          .with('dark', () => <IconMoonFill18 />)
-          .with('light', () => <IconSunFill18 />)
+          .with('dark', () => <IconMoonFill18 className="max-sm:hidden" />)
+          .with('light', () => <IconSunFill18 className="max-sm:hidden" />)
           .exhaustive()}
         <Button.Label>
-          [<span className="text-foreground-soft">{resolved}</span>]
+          [
+          <span className="inline-block min-w-10.5 text-center text-foreground-soft sm:min-w-9">
+            {resolved}
+          </span>
+          ]
         </Button.Label>
       </Button.Root>
       <Button.Root
@@ -33,10 +37,10 @@ export const Controls = () => {
         aria-pressed={state.enabled}
         onClick={play.tick(() => setEnabled())}
       >
-        <IconVolumeUpFill18 />
+        <IconVolumeUpFill18 className="max-sm:hidden" />
         <Button.Label>
           [
-          <span className="text-orange-500 dark:text-orange-400">
+          <span className="inline-block min-w-6.5 text-orange-500 sm:min-w-5.5 dark:text-orange-400">
             {state.enabled ? 'ON' : 'OFF'}
           </span>
           ]

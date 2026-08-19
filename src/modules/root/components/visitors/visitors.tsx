@@ -68,17 +68,17 @@ const StatsShell = (props: StatsShellProps) => {
 
   return (
     <div className="flex w-full items-center gap-x-5" aria-busy={loading}>
-      <div className="flex flex-col items-baseline gap-x-1.5">
+      <div className="flex flex-col items-stretch gap-x-1.5">
         <PaddedCount value={pageviews} length={3} />
         <span
           aria-hidden
-          className="font-medium font-mono text-foreground-soft/56 text-xs uppercase"
+          className="text-center font-medium font-mono text-foreground-soft/56 text-xs uppercase"
         >
           VISITS
         </span>
       </div>
-      <Separator.Root className="h-8" orientation="vertical" lighten />
-      <dl className="flex flex-col gap-y-0.5 font-medium font-mono text-sm uppercase">
+      <Separator.Root className="h-8 max-md:hidden" orientation="vertical" lighten />
+      <dl className="flex flex-col gap-y-0.5 font-medium font-mono text-sm uppercase max-md:hidden">
         <div className="flex items-center">
           <dt className="inline-block w-13 text-foreground-soft">Last</dt>
           <dd className="text-foreground">{last}</dd>
