@@ -15,8 +15,17 @@ export default {
   headers: async () => {
     return [
       {
-        source: '/(.*)',
+        source:
+          '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|[^?]*\\.(?:css|js(?!on)|jpe?g|webp|png|gif|svg|ico|woff2?)).*)',
         headers: [
+          {
+            key: 'Critical-CH',
+            value: 'Sec-CH-Prefers-Color-Scheme',
+          },
+          {
+            key: 'Vary',
+            value: 'Sec-CH-Prefers-Color-Scheme, Cookie',
+          },
           {
             key: 'Accept-CH',
             value:
