@@ -14,10 +14,12 @@
 
   --color-surface: var(--color-stone-200);
   --color-surface-soft: var(--color-stone-100);
+  --color-surface-muted: --alpha(var(--color-stone-900) / 6%);
   --color-surface-inverse: var(--color-stone-900);
 
   --color-foreground: var(--color-stone-900);
   --color-foreground-soft: var(--color-stone-500);
+  --color-foreground-muted: var(--color-neutral-800);
   --color-foreground-inverse: var(--color-stone-100);
 
   --color-stroke: var(--color-stone-300);
@@ -29,10 +31,12 @@
   @variant dark {
     --color-surface: var(--color-stone-900);
     --color-surface-soft: var(--color-stone-800);
+    --color-surface-muted: --alpha(var(--color-stone-100) / 4%);
     --color-surface-inverse: var(--color-stone-200);
 
     --color-foreground: var(--color-stone-100);
     --color-foreground-soft: var(--color-stone-500);
+    --color-foreground-muted: var(--color-neutral-100);
     --color-foreground-inverse: var(--color-stone-900);
 
     --color-stroke: var(--color-stone-700);
