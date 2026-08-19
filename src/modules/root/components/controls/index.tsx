@@ -40,8 +40,8 @@ export const Controls = () => {
         <IconVolumeUpFill18 className="max-sm:hidden" />
         <Button.Label>
           [
-          <span className="inline-block min-w-6.5 text-orange-500 sm:min-w-5.5 dark:text-orange-400">
-            {state.enabled ? 'ON' : 'OFF'}
+          <span className="inline-block min-w-6.5 text-clay-500 sm:min-w-5.5 dark:text-clay-400">
+            {state.enabled ? "ON" : "OFF"}
           </span>
           ]
         </Button.Label>
