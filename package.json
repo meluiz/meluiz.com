@@ -17,6 +17,8 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "axios": "^1.19.0",
+    "blobatar": "^0.1.0",
+    "cnfast": "^0.1.0",
     "cuelume": "^0.2.2",
     "envin": "^1.2.0",
     "js-cookie": "^3.0.8",
@@ -40,7 +42,7 @@
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "schema-dts": "^2.0.0",
-    "tailugin": "^0.1.1",
+    "tailugin": "^0.2.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
