@@ -1,8 +1,12 @@
 @import "tailwindcss";
 @import "tailugin";
 
+@import "blobatar/motion.css";
+
 @theme static {
   --radius-inherit: inherit;
+
+  /* ------- Font ------- */
 
   --font-sans:
     "Geist", ui-sans-serif, -apple-system, BlinkMacSystemFont, system-ui,
@@ -12,27 +16,27 @@
     "Geist Mono", ui-monospace, SFMono-Regular, SF Mono, Menlo, Monaco,
     Consolas, Liberation Mono, Courier New, monospace;
 
-  --color-clay-50: oklch(97% 0.01 41.9);
-  --color-clay-100: oklch(93.1% 0.023 45.6);
-  --color-clay-200: oklch(86.1% 0.047 43.3);
-  --color-clay-300: oklch(77.5% 0.078 43.1);
-  --color-clay-400: oklch(67.2% 0.131 38.8);
-  --color-clay-500: oklch(59.7% 0.135 39.9);
-  --color-clay-600: oklch(53.2% 0.129 38.8);
-  --color-clay-700: oklch(46.1% 0.114 37.5);
-  --color-clay-800: oklch(40% 0.091 36.5);
-  --color-clay-900: oklch(35.2% 0.071 36.7);
-  --color-clay-950: oklch(23.6% 0.046 29.4);
+  /* ------- Surface ------- */
 
   --color-surface: var(--color-stone-200);
+
   --color-surface-soft: var(--color-stone-100);
   --color-surface-muted: --alpha(var(--color-stone-900) / 6%);
   --color-surface-inverse: var(--color-stone-900);
 
+  --color-surface-accent: --alpha(var(--color-clay-400) / 10%);
+
+  /* ------- Foreground ------- */
+
   --color-foreground: var(--color-stone-900);
+
   --color-foreground-soft: var(--color-stone-500);
   --color-foreground-muted: var(--color-neutral-800);
   --color-foreground-inverse: var(--color-stone-100);
+
+  --color-foreground-accent: var(--color-clay-600);
+
+  /* ------- Stroke ------- */
 
   --color-stroke: var(--color-stone-300);
   --color-stroke-soft: --alpha(var(--color-black) / 8%);
@@ -41,15 +45,27 @@
 
 @layer theme {
   @variant dark {
+    /* ------- Surface ------- */
+
     --color-surface: var(--color-stone-900);
+
     --color-surface-soft: var(--color-stone-800);
     --color-surface-muted: --alpha(var(--color-stone-100) / 4%);
     --color-surface-inverse: var(--color-stone-200);
 
+    --color-surface-accent: --alpha(var(--color-clay-400) / 10%);
+
+    /* ------- Foreground ------- */
+
     --color-foreground: var(--color-stone-100);
+
     --color-foreground-soft: var(--color-stone-500);
     --color-foreground-muted: var(--color-neutral-100);
     --color-foreground-inverse: var(--color-stone-900);
+
+    --color-foreground-accent: var(--color-clay-400);
+
+    /* ------- Stroke ------- */
 
     --color-stroke: var(--color-stone-700);
     --color-stroke-soft: --alpha(var(--color-white) / 8%);
@@ -68,6 +84,7 @@
     hyphens: auto;
     font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
+    background-color: var(--color-surface);
   }
 
   body {
@@ -104,9 +121,18 @@
       "calt" 1;
   }
 
-  .container {
-    @apply mx-auto;
+  ::selection {
+    background-color: var(--color-stroke);
   }
+}
+
+/* ///////////////////////////////////////////////// */
+
+@utility container {
+  width: 100%;
+  max-width: var(--container-2xl);
+  display: block;
+  margin-inline: auto;
 }
 
 /* ///////////////////////////////////////////////// */
