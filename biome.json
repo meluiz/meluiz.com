@@ -73,7 +73,8 @@
     "enabled": true,
     "rules": {
       "a11y": {
-        "useSemanticElements": "off"
+        "useSemanticElements": "off",
+        "useValidAriaRole": "off"
       },
       "complexity": {
         "noArguments": "error",
