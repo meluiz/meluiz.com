@@ -117,9 +117,21 @@ export const ldJSON = Object.freeze<WithContext<Person>>({
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: manifest.name,
-  alternateName: manifest.short_name,
+  description: manifest.description,
   url: env.APP_URL.toString(),
+  alternateName: manifest.short_name,
+  image: 'https://avatars.githubusercontent.com/u/52682525',
   jobTitle: 'Front-end Developer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Grupo Plan Marketing',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: 'Minas Gerais',
+    addressCountry: 'BR',
+  },
+  knowsAbout: ['TypeScript', 'React', 'Next.js', 'React Native', 'Tailwind CSS'],
   sameAs: [
     'https://x.com/omeluiz',
     'https://github.com/meluiz',
