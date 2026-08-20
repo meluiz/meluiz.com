@@ -15,9 +15,9 @@ const Layout = async (props: LayoutProps<'/'>) => {
       </a>
       <header
         id="__APP_HEADER"
-        className="relative w-full border-stroke-soft border-b bg-surface text-foreground"
+        className="sticky inset-0 top-0 z-10 w-full border-stroke-soft border-b bg-surface text-foreground"
       >
-        <div className="container max-w-2xl border-stroke-soft px-4 sm:px-6 md:border-x">
+        <div className="container relative border-stroke-soft px-4 sm:px-6 md:border-x">
           <div className="center-between flex min-h-18 gap-x-6">
             <Suspense fallback={<Visitors.Loading />}>
               <Visitors.Stats />
