@@ -31,9 +31,7 @@ const Layout = async (props: LayoutProps<'/'>) => {
         id="__APP_MAIN"
         className="relative flex w-full flex-1 bg-surface text-foreground"
       >
-        <div className="container max-w-2xl flex-1 border-stroke-soft px-4 sm:px-6 md:border-x">
-          {children}
-        </div>
+        {children}
       </main>
     </div>
   );
