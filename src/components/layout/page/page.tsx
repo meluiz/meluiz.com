@@ -1,8 +1,8 @@
 import type { HTMLArkProps } from '@ark-ui/react';
 
 import { ark } from '@ark-ui/react';
+import { Blobatar } from '@blobatar/react';
 import { idle } from 'blobatar/expression';
-import { Blobatar } from 'blobatar/react';
 import cn from 'cnfast';
 
 import { Separator as $Separator } from '@/components/ui';
@@ -51,6 +51,10 @@ export const Separator = () => {
           title="meluiz"
           animate="always"
           expression={idle}
+          traits={{
+            shape: 0.1,
+            'eye.ratio': 2,
+          }}
           className="[--eye-color:var(--color-surface)] [--head-color:var(--color-stroke)] dark:[--head-color:var(--color-stroke-soft)]"
           palette={{
             eye: 'var(--eye-color)',
