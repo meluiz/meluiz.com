@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 
-import { Controls, Visitors } from '@/modules/root';
+import { Controls, Navigation, Visitors } from '@/modules/root';
 
 const Layout = async (props: LayoutProps<'/'>) => {
   const { children } = props;
@@ -41,6 +41,7 @@ const Layout = async (props: LayoutProps<'/'>) => {
           meluiz @ {new Date().getFullYear()}
         </p>
       </footer>
+      <Navigation />
     </div>
   );
 };

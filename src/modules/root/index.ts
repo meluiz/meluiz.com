@@ -1,1 +1,1 @@
-export { Controls, Visitors } from './components';
+export { Controls, Navigation, Visitors } from './components';
