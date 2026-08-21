@@ -55,7 +55,7 @@ export const Content = (props: ContentProps) => {
         aria-label={ariaLabel}
         aria-orientation="horizontal"
         onKeyDown={onKeyDown}
-        className="center pointer-events-auto relative flex min-h-fit overflow-hidden rounded-sm border border-stroke-soft bg-surface px-1.5 py-1"
+        className="center pointer-events-auto relative flex min-h-fit overflow-hidden rounded-sm border border-stroke-soft bg-surface px-1.5 py-1 shadow-overlay"
       >
         <AnimatePresence initial={false} mode="popLayout">
           <motion.div
