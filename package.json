@@ -47,7 +47,7 @@
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
     "schema-dts": "^2.0.0",
-    "tailugin": "^0.2.1",
+    "tailugin": "^1.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
