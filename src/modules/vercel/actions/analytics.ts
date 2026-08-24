@@ -37,8 +37,8 @@ export const getVisitsCount = async () => {
       log.error(`Error fetching visits count:\n   ${JSON.stringify(error.response?.data)}`);
     }
 
-    const until = DateTime.utc();
-    const since = until.minus({ days: 1 });
+    const until = DateTime.utc().endOf('day');
+    const since = until.startOf('day').minus({ days: 1 });
 
     return {
       version: 0,
@@ -69,8 +69,10 @@ type VisitsAggregateBucket = {
 };
 
 export const getVisitsAggregated = async () => {
-  const until = DateTime.utc();
-  const since = until.minus({ days: 1 });
+  const until = DateTime.utc().endOf('day');
+  const since = until.startOf('day').minus({ days: 1 });
+
+  console.log(until.toISO(), since.toISO());
 
   const params = new URLSearchParams({
     projectId: env.VERCEL_PROJECT_ID,
