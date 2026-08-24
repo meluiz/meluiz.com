@@ -20,7 +20,7 @@ export const Positioner = (props: PositionerProps) => {
   const { children } = props;
   return (
     <Portal>
-      <div className="center pointer-events-none fixed inset-x-0 bottom-0 z-20 flex pb-4">
+      <div className="center pointer-events-none fixed inset-x-0 bottom-0 z-20 flex pb-6">
         {children}
       </div>
     </Portal>
