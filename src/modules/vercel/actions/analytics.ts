@@ -72,8 +72,6 @@ export const getVisitsAggregated = async () => {
   const until = DateTime.utc().endOf('day');
   const since = until.startOf('day').minus({ days: 1 });
 
-  console.log(until.toISO(), since.toISO());
-
   const params = new URLSearchParams({
     projectId: env.VERCEL_PROJECT_ID,
     since: since.toISO(),
@@ -94,7 +92,7 @@ export const getVisitsAggregated = async () => {
   } catch (error) {
     if (isAxiosError(error)) {
       log.error(
-        `Error fetching aggregated visits:\n   ${JSON.stringify(error.response?.data)}`,
+        `Error fetching aggregated visits:\n   ${JSON.stringify(error.response?.data?.error?.message)}`,
       );
     }
 
