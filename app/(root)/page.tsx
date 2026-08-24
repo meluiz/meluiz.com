@@ -19,7 +19,6 @@ const HomePage = () => {
           </div>
         </div>
       </Page.Section>
-      <Page.Separator />
     </Page.Root>
   );
 };
