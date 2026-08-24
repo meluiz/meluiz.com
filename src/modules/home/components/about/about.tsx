@@ -31,13 +31,10 @@ export const Header = (props: HeaderProps) => {
         </div>
       </div>
       <hgroup className="relative flex flex-col">
-        <h1
-          id="page-title"
-          className="font-medium font-mono text-2xl text-foreground uppercase"
-        >
+        <h1 id="page-title" className="font-medium font-sans text-2xl text-foreground">
           {name}
         </h1>
-        <p className="font-medium font-mono text-base text-foreground-soft uppercase">{role}</p>
+        <p className="font-medium font-mono text-foreground-soft text-sm uppercase">{role}</p>
       </hgroup>
     </header>
   );
@@ -60,12 +57,12 @@ export const Section = (props: SectionProps) => {
 
   return (
     <section
-      className="relative flex flex-col gap-y-3"
+      className="relative flex flex-col gap-y-1.5"
       aria-labelledby={title.replace(/\s+/g, '-').toLowerCase()}
     >
       <h2
         id={title.replace(/\s+/g, '-').toLowerCase()}
-        className="font-medium font-mono text-foreground-accent text-lg"
+        className="font-medium font-sans text-foreground-accent text-lg"
       >
         {title}
       </h2>
@@ -73,7 +70,7 @@ export const Section = (props: SectionProps) => {
         {paragraphs.map(({ text, highlight = [] }, index) => (
           <p
             key={`about:section:${index}:${text}`}
-            className="font-mono text-foreground-prose text-sm leading-relaxed tracking-wide *:[mark]:bg-transparent *:[mark]:text-foreground-accent"
+            className="font-sans text-base text-foreground-prose leading-relaxed tracking-wide *:[mark]:bg-transparent *:[mark]:text-foreground-accent"
           >
             <Highlight text={text} query={highlight} />
           </p>
