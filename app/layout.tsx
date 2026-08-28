@@ -6,7 +6,7 @@ import { SoundProvider, ThemeProvider } from '@/providers/application';
 import { sound, theme } from '@/utils/actions';
 import { ldJSON } from '@/utils/constants';
 
-import './globals.css';
+import '@/assets/styles/globals.css';
 
 const Layout = async (props: LayoutProps<'/'>) => {
   const { children } = props;
