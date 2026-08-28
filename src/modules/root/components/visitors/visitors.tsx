@@ -1,4 +1,5 @@
 import { DateTime } from 'luxon';
+import { headers } from 'next/headers';
 
 import { Separator } from '@/components/ui';
 import {
@@ -10,6 +11,9 @@ import {
 import { countries } from '@/utils/constants';
 
 const getPortfolioStats = async () => {
+  const header = await headers();
+  const timezone = header.get('x-vercel-ip-timezone') ?? 'UTC';
+
   const [vercelCount, vercelVisits] = await Promise.all([
     getVisitsCount(),
     getVisitsAggregated(),
@@ -39,7 +43,7 @@ const getPortfolioStats = async () => {
   );
 
   const latestActivity = latestVisit?.timestamp
-    ? DateTime.fromISO(latestVisit.timestamp).toFormat('LLL d, hh:mm a')
+    ? DateTime.fromISO(latestVisit.timestamp).setZone(timezone).toFormat('LLL d, hh:mm a')
     : 'NO VISITS';
 
   return {
