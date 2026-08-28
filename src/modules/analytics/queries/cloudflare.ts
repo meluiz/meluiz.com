@@ -8,20 +8,17 @@ type ViewerTotalResponse = {
         sum: {
           visits: number;
         };
-        dimensions?: {
-          countryName?: string;
-          datetimeMinute?: string;
-        };
       }>;
     }>;
   };
 };
 
 type ViewerTotalVariables = {
-  accountTag: string;
+  hosts: string[];
   siteTag: string;
-  startDate: string;
   endDate: string;
+  startDate: string;
+  accountTag: string;
 };
 
 export type ViewerTotalQueryResult = TypedDocumentNode<
@@ -30,9 +27,10 @@ export type ViewerTotalQueryResult = TypedDocumentNode<
 >;
 
 export const ViewerTotalQuery: ViewerTotalQueryResult = gql`
-  query VisitsCount(
+  query ViewerTotal(
     $accountTag: string!
     $siteTag: string!
+    $hosts: [string!]
     $startDate: Time!
     $endDate: Time!
   ) {
@@ -42,9 +40,9 @@ export const ViewerTotalQuery: ViewerTotalQueryResult = gql`
           limit: 1
           filter: {
             siteTag: $siteTag
+            requestHost_in: $hosts
             datetime_geq: $startDate
             datetime_leq: $endDate
-            requestHost: "meluiz.com"
           }
         ) {
           count
@@ -77,7 +75,7 @@ type ViewerLastAccessResponse = {
 };
 
 type ViewerLastAccessVariables = {
-  limit: number;
+  hosts: string[];
   siteTag: string;
   endDate: string;
   startDate: string;
@@ -90,12 +88,12 @@ export type ViewerLastAccessQueryResult = TypedDocumentNode<
 >;
 
 export const ViewerLastAccessQuery: ViewerLastAccessQueryResult = gql`
-  query VisitsCount(
+  query ViewerLastAccess(
     $accountTag: string!
     $siteTag: string!
+    $hosts: [string!]
     $startDate: Time!
     $endDate: Time!
-    $limit: uint64!
   ) {
     viewer {
       accounts(filter: { accountTag: $accountTag }) {
@@ -104,7 +102,7 @@ export const ViewerLastAccessQuery: ViewerLastAccessQueryResult = gql`
           orderBy: [datetimeMinute_DESC]
           filter: {
             siteTag: $siteTag
-            requestHost: "meluiz.com"
+            requestHost_in: $hosts
             datetime_geq: $startDate
             datetime_leq: $endDate
           }
@@ -114,8 +112,8 @@ export const ViewerLastAccessQuery: ViewerLastAccessQueryResult = gql`
             visits
           }
           dimensions {
-            datetimeMinute
             countryName
+            datetimeMinute
           }
         }
       }

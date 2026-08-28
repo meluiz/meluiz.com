@@ -1,3 +1,3 @@
-export type { ViewerLastAccessQueryResult, ViewerTotalQueryResult } from './analytics';
+export type { ViewerLastAccessQueryResult, ViewerTotalQueryResult } from './cloudflare';
 
-export { ViewerLastAccessQuery, ViewerTotalQuery } from './analytics';
+export { ViewerLastAccessQuery, ViewerTotalQuery } from './cloudflare';
