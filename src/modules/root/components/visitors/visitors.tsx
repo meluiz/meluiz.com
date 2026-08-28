@@ -20,8 +20,6 @@ const getPortfolioStats = async () => {
     getViewerLastAccess(),
   ]);
 
-  console.log({ cloudflareCount, cloudflareVisits });
-
   const totalVisitors = cloudflareCount.data.visitors || vercelCount.data.visitors;
   const totalPageviews = cloudflareCount.data.pageviews || vercelCount.data.pageviews;
 
