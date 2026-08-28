@@ -117,11 +117,11 @@ const StatsShell = (props: StatsShellProps) => {
 
 export const Stats = async () => {
   const { totalVisitors, latestActivity, latestCountry } = await getPortfolioStats();
-  return <StatsShell from={latestCountry} last={latestActivity} pageviews={totalVisitors} />;
+  return <StatsShell from={latestCountry} last={latestActivity} visitors={totalVisitors} />;
 };
 
 /* ///////////////////////////////////////////////// */
 
 export const Loading = () => {
-  return <StatsShell from="-" last="NO VISITS" pageviews={0} loading />;
+  return <StatsShell from="-" last="NO VISITS" visitors={0} loading />;
 };
