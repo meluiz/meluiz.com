@@ -8,9 +8,8 @@ import { type ResolvedTheme, type Theme, ThemeScheme } from './theme-schemas';
 import { ThemeContextProvider, type UseThemeContext } from './use-theme-context';
 
 export const THEME_COOKIE = 'ch-prefers-color-scheme';
-
-const MEDIA_QUERY = '(prefers-color-scheme: dark)';
-const EXPIRES_DAYS = Duration.fromObject({ years: 1 }).as('days');
+export const THEME_MEDIA_QUERY = '(prefers-color-scheme: dark)';
+export const THEME_EXPIRES_DAYS = Duration.fromObject({ years: 1 }).as('days');
 
 /* ///////////////////////////////////////////////// */
 
@@ -18,7 +17,7 @@ const writeCookie = (name: string, value: string) => {
   Cookies.set(name, value, {
     path: '/',
     sameSite: 'lax',
-    expires: EXPIRES_DAYS,
+    expires: THEME_EXPIRES_DAYS,
   });
 };
 
@@ -54,7 +53,7 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
   };
 
   React.useEffect(() => {
-    const media = window.matchMedia(MEDIA_QUERY);
+    const media = window.matchMedia(THEME_MEDIA_QUERY);
 
     const synchronize = () => {
       setSystem(media.matches ? 'dark' : 'light');

@@ -12,6 +12,8 @@ export {
   ResolvedEnum,
   ResolvedScheme,
   THEME_COOKIE,
+  THEME_EXPIRES_DAYS,
+  THEME_MEDIA_QUERY,
   ThemeEnum,
   ThemeProvider,
   ThemeScheme,
