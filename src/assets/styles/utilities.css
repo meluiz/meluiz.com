@@ -1,0 +1,27 @@
+@utility container {
+  width: 100%;
+  max-width: var(--container-2xl);
+  display: block;
+  margin-inline: auto;
+}
+
+/* ------- Pattern ------- */
+
+@utility pattern-diagonal {
+  background-size: 24px 24px;
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 49%,
+      var(--color-stroke-soft) 49%,
+      var(--color-stroke-soft) 51%,
+      transparent 51%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 49%,
+      var(--color-stroke-soft) 49%,
+      var(--color-stroke-soft) 51%,
+      transparent 51%
+    );
+}
