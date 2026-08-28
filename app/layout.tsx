@@ -1,6 +1,5 @@
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import Script from 'next/script';
 
 import { geist, geistMono } from '@/configs/fonts';
 import { SoundProvider, ThemeProvider } from '@/providers/application';
@@ -8,8 +7,6 @@ import { sound, theme } from '@/utils/actions';
 import { ldJSON } from '@/utils/constants';
 
 import './globals.css';
-
-import { env } from 'envin/env';
 
 const Layout = async (props: LayoutProps<'/'>) => {
   const { children } = props;
@@ -42,14 +39,6 @@ const Layout = async (props: LayoutProps<'/'>) => {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(ldJSON).replace(/</g, '\\u003c'),
           }}
-        />
-        <Script
-          defer
-          strategy="afterInteractive"
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={JSON.stringify({
-            token: env.CLOUDFLARE_ACCOUNT_TAG,
-          })}
         />
       </body>
     </html>
