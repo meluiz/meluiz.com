@@ -1,9 +1,30 @@
+import type { Dict } from '@motiro/types';
+
 import { isAxiosError } from 'axios';
 import { env } from 'envin/env';
 import { DateTime } from 'luxon';
 
 import { vercel } from '@/configs/http';
 import { log } from '@/utils/helpers';
+
+const getTimeRange = () => {
+  const until = DateTime.utc().endOf('day');
+  const since = until.startOf('day').minus({ days: 1 });
+
+  return {
+    since: since.toISO(),
+    until: until.toISO(),
+  };
+};
+
+const buildInitialSearchParams = (data: Dict<string> = {}): URLSearchParams => {
+  return new URLSearchParams({
+    projectId: env.VERCEL_PROJECT_ID,
+    ...data,
+  });
+};
+
+/* ///////////////////////////////////////////////// */
 
 export type VisitsCount = {
   version: number;
@@ -21,10 +42,10 @@ type VisitsCountData = {
   pageviews: number;
 };
 
-export const getVisitsCount = async () => {
-  const params = new URLSearchParams({
-    projectId: env.VERCEL_PROJECT_ID,
-  });
+export const getVisitsCount = async (): Promise<VisitsCount> => {
+  const { since, until } = getTimeRange();
+
+  const params = buildInitialSearchParams();
 
   try {
     const { data } = await vercel.get<VisitsCount>(`/query/web-analytics/visits/count`, {
@@ -37,16 +58,15 @@ export const getVisitsCount = async () => {
       log.error(`Error fetching visits count:\n   ${JSON.stringify(error.response?.data)}`);
     }
 
-    const until = DateTime.utc().endOf('day');
-    const since = until.startOf('day').minus({ days: 1 });
-
     return {
       version: 0,
-      query: { since: since.toISO(), until: until.toISO() },
+      query: { since: since, until: until },
       data: { visitors: 0, pageviews: 0 },
     };
   }
 };
+
+/* ///////////////////////////////////////////////// */
 
 export type VisitsAggregate = {
   version: number;
@@ -68,14 +88,12 @@ type VisitsAggregateBucket = {
   timestamp: string;
 };
 
-export const getVisitsAggregated = async () => {
-  const until = DateTime.utc().endOf('day');
-  const since = until.startOf('day').minus({ days: 1 });
+export const getVisitsAggregated = async (): Promise<VisitsAggregate> => {
+  const { since, until } = getTimeRange();
 
-  const params = new URLSearchParams({
-    projectId: env.VERCEL_PROJECT_ID,
-    since: since.toISO(),
-    until: until.toISO(),
+  const params = buildInitialSearchParams({
+    since: since,
+    until: until,
     limit: '10',
   });
 
@@ -100,8 +118,8 @@ export const getVisitsAggregated = async () => {
       version: 1,
       data: [],
       query: {
-        since: since.toISO(),
-        until: until.toISO(),
+        since: since,
+        until: until,
         groupBy: ['country', 'hour'],
         limit: 10,
       },
