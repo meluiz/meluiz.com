@@ -10,7 +10,7 @@ type TimeRange = {
   since: string;
 };
 
-const getRangeTime = () => {
+const getTimeRange = () => {
   const until = DateTime.utc().endOf('day');
   const since = until.startOf('day').minus({ days: 30 });
 
@@ -21,7 +21,7 @@ const getRangeTime = () => {
 };
 
 const buildResultObject = <T>(data: T) => {
-  const { until, since } = getRangeTime();
+  const { until, since } = getTimeRange();
 
   return {
     data,
@@ -38,6 +38,7 @@ const buildVariables = (range: TimeRange) => {
     startDate: since,
     siteTag: env.CLOUDFLARE_SITE_TAG,
     accountTag: env.CLOUDFLARE_ACCOUNT_TAG,
+    hosts: [env.APP_URL.hostname, `www.${env.APP_URL.hostname}`],
   };
 };
 
@@ -60,7 +61,7 @@ type ViewerTotalData = {
 };
 
 export const getViewerTotal = async (): Promise<ViewerTotal> => {
-  const timeRange = getRangeTime();
+  const timeRange = getTimeRange();
 
   const { data } = await graphql.query({
     query: ViewerTotalQuery,
@@ -96,21 +97,18 @@ type ViewerLastAccessData = {
 };
 
 export const getViewerLastAccess = async (): Promise<ViewerLastAccess> => {
-  const timeRange = getRangeTime();
+  const timeRange = getTimeRange();
 
   const { data } = await graphql.query({
     query: ViewerLastAccessQuery,
-    variables: {
-      ...buildVariables(timeRange),
-      limit: 1,
-    },
+    variables: buildVariables(timeRange),
   });
 
   const account = data?.viewer.accounts[0];
   const result = account?.lastAccess.map((access) => ({
     country: access.dimensions.countryName ?? 'unknown',
-    visitors: access.count,
-    pageviews: access.sum.visits,
+    pageviews: access.count,
+    visitors: access.sum.visits,
     timestamp: access.dimensions.datetimeMinute,
   }));
 
