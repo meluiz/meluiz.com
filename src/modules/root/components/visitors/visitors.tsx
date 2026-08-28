@@ -1,31 +1,52 @@
 import { DateTime } from 'luxon';
 
 import { Separator } from '@/components/ui';
-import { getVisitsCount } from '@/modules/vercel';
-import { getVisitsAggregated } from '@/modules/vercel/actions/analytics';
+import {
+  getViewerLastAccess,
+  getViewerTotal,
+  getVisitsAggregated,
+  getVisitsCount,
+} from '@/modules/analytics';
 import { countries } from '@/utils/constants';
 
 const getPortfolioStats = async () => {
-  const [count, aggregated] = await Promise.all([getVisitsCount(), getVisitsAggregated()]);
+  const [vercelCount, vercelVisits] = await Promise.all([
+    getVisitsCount(),
+    getVisitsAggregated(),
+  ]);
 
-  const latest = aggregated.data
-    .filter((bucket) => bucket.pageviews > 0 && Boolean(bucket.timestamp))
-    .sort((a, b) => new Date(b.timestamp!).getTime() - new Date(a.timestamp!).getTime())
-    .at(0);
+  const [cloudflareCount, cloudflareVisits] = await Promise.all([
+    getViewerTotal(),
+    getViewerLastAccess(),
+  ]);
+
+  console.log({ cloudflareCount, cloudflareVisits });
+
+  const totalVisitors = cloudflareCount.data.visitors || vercelCount.data.visitors;
+  const totalPageviews = cloudflareCount.data.pageviews || vercelCount.data.pageviews;
+
+  const pickLatestVisit = (data: typeof vercelVisits.data) =>
+    data
+      .filter((bucket) => bucket.pageviews > 0 && Boolean(bucket.timestamp))
+      .sort((a, b) => new Date(b.timestamp!).getTime() - new Date(a.timestamp!).getTime())
+      .at(0);
+
+  const latestVisit =
+    pickLatestVisit(cloudflareVisits.data) ?? pickLatestVisit(vercelVisits.data);
 
   const latestCountry = countries.find(
-    (country) => country.short_code.toLocaleLowerCase() === latest?.country?.toLowerCase(),
+    (country) => country.short_code.toLocaleLowerCase() === latestVisit?.country?.toLowerCase(),
   );
 
-  const latestActivity = latest?.timestamp
-    ? DateTime.fromISO(latest.timestamp).toFormat('LLL d, hh:mm a')
+  const latestActivity = latestVisit?.timestamp
+    ? DateTime.fromISO(latestVisit.timestamp).toFormat('LLL d, hh:mm a')
     : 'NO VISITS';
 
   return {
-    totalVisitors: count.data.visitors,
-    totalPageviews: count.data.pageviews,
-    latestActivity: latestActivity,
-    latestVisitors: latest?.visitors ?? 0,
+    totalVisitors,
+    totalPageviews,
+    latestActivity,
+    latestVisitors: latestVisit?.visitors ?? 0,
     latestCountry: latestCountry?.name ?? '-',
   };
 };
