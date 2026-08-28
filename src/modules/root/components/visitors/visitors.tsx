@@ -23,15 +23,17 @@ const getPortfolioStats = async () => {
   const totalVisitors = cloudflareCount.data.visitors || vercelCount.data.visitors;
   const totalPageviews = cloudflareCount.data.pageviews || vercelCount.data.pageviews;
 
-  const pickLatestVisit = (data: typeof vercelVisits.data) =>
-    data
+  const pickLatestVisit = (data: typeof vercelVisits.data) => {
+    return data
       .filter((bucket) => bucket.pageviews > 0 && Boolean(bucket.timestamp))
       .sort((a, b) => new Date(b.timestamp!).getTime() - new Date(a.timestamp!).getTime())
       .at(0);
+  };
 
-  const latestVisit =
-    pickLatestVisit(cloudflareVisits.data) ?? pickLatestVisit(vercelVisits.data);
+  const latestVercelVisit = pickLatestVisit(vercelVisits.data);
+  const latestCloudflareVisit = pickLatestVisit(cloudflareVisits.data);
 
+  const latestVisit = latestCloudflareVisit ?? latestVercelVisit;
   const latestCountry = countries.find(
     (country) => country.short_code.toLocaleLowerCase() === latestVisit?.country?.toLowerCase(),
   );
@@ -78,17 +80,17 @@ const PaddedCount = ({ value, length = 3 }: PaddedCountProps) => {
 type StatsShellProps = {
   from: string;
   last: string;
+  visitors: number;
   loading?: boolean;
-  pageviews: number;
 };
 
 const StatsShell = (props: StatsShellProps) => {
-  const { from, last, pageviews, loading } = props;
+  const { from, last, visitors, loading } = props;
 
   return (
     <div className="flex w-full items-center gap-x-5" aria-busy={loading}>
       <div className="flex flex-col items-stretch gap-x-1.5">
-        <PaddedCount value={pageviews} length={3} />
+        <PaddedCount value={visitors} length={3} />
         <span
           aria-hidden
           className="text-center font-medium font-mono text-foreground-soft/56 text-xs uppercase"
@@ -114,8 +116,8 @@ const StatsShell = (props: StatsShellProps) => {
 /* ///////////////////////////////////////////////// */
 
 export const Stats = async () => {
-  const { totalPageviews, latestActivity, latestCountry } = await getPortfolioStats();
-  return <StatsShell from={latestCountry} last={latestActivity} pageviews={totalPageviews} />;
+  const { totalVisitors, latestActivity, latestCountry } = await getPortfolioStats();
+  return <StatsShell from={latestCountry} last={latestActivity} pageviews={totalVisitors} />;
 };
 
 /* ///////////////////////////////////////////////// */
