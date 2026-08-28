@@ -14,6 +14,9 @@ export const env = defineEnv({
   server: {
     VERCEL_TOKEN: z.string(),
     VERCEL_PROJECT_ID: z.string(),
+    CLOUDFLARE_TOKEN: z.string(),
+    CLOUDFLARE_SITE_TAG: z.string(),
+    CLOUDFLARE_ACCOUNT_TAG: z.string(),
     APP_URL: z.pipe(
       z.url(),
       z.transform((value) => new URL(value)),
