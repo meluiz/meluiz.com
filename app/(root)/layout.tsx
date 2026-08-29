@@ -35,7 +35,7 @@ const Layout = async (props: LayoutProps<'/'>) => {
       </main>
       <footer
         id="__APP_FOOTER"
-        className="container relative border-stroke-soft px-4 pt-2 pb-20 sm:px-6 sm:pt-4 md:border-x"
+        className="container relative border-stroke-soft px-4 pt-8 pb-24 sm:px-6 sm:pt-10 md:border-x"
       >
         <p className="text-center font-medium font-mono text-foreground-soft text-xs uppercase">
           meluiz @ {new Date().getFullYear()}
