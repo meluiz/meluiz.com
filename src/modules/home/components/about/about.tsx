@@ -62,7 +62,7 @@ export const Section = (props: SectionProps) => {
     >
       <h2
         id={title.replace(/\s+/g, '-').toLowerCase()}
-        className="font-medium font-sans text-foreground-accent text-lg"
+        className="font-medium font-mono text-base text-foreground-accent"
       >
         {title}
       </h2>
@@ -70,7 +70,7 @@ export const Section = (props: SectionProps) => {
         {paragraphs.map(({ text, highlight = [] }, index) => (
           <p
             key={`about:section:${index}:${text}`}
-            className="font-sans text-base text-foreground-prose leading-relaxed tracking-wide *:[mark]:bg-transparent *:[mark]:text-foreground-accent"
+            className="font-sans text-foreground-prose text-sm leading-relaxed tracking-wide *:[mark]:bg-transparent *:[mark]:text-foreground-accent"
           >
             <Highlight text={text} query={highlight} />
           </p>
