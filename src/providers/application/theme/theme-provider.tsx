@@ -39,7 +39,7 @@ export type ThemeProviderProps = React.PropsWithChildren<{
 export const ThemeProvider = (props: ThemeProviderProps) => {
   const { value: theme, children } = props;
 
-  const [value, setValue] = React.useState<Theme>(theme.value);
+  const [value, setValue] = React.useState<Theme>(theme.resolved);
   const [system, setSystem] = React.useState<ResolvedTheme>(theme.system);
 
   const resolved: ResolvedTheme = value === 'system' ? system : value;
