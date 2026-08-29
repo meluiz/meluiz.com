@@ -8,3 +8,4 @@ export {
   viewport,
 } from './layout';
 export { about, avatar } from './profile';
+export { github } from './socials';
