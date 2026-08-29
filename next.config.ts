@@ -7,6 +7,9 @@ export default {
   reactCompiler: true,
   crossOrigin: 'anonymous',
   transpilePackages: ['envin'],
+  env: {
+    BUILD_TIMESTAMP: new Date().toISOString(),
+  },
   experimental: {
     staleTimes: {
       static: 60,

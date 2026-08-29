@@ -12,6 +12,7 @@ export const env = defineEnv({
     NODE_ENV: z._default(z.enum(['development', 'production', 'test']), 'development'),
   },
   server: {
+    BUILD_TIMESTAMP: z._default(z.string(), new Date().toISOString()),
     VERCEL_TOKEN: z.string(),
     VERCEL_PROJECT_ID: z.string(),
     CLOUDFLARE_TOKEN: z.string(),
