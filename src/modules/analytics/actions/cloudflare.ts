@@ -2,6 +2,7 @@ import { env } from 'envin/env';
 import { DateTime } from 'luxon';
 
 import { graphql } from '@/configs/graphql';
+import { log } from '@/utils/helpers';
 
 import { ViewerLastAccessQuery, ViewerTotalQuery } from '../queries';
 
@@ -10,9 +11,9 @@ type TimeRange = {
   since: string;
 };
 
-const getTimeRange = () => {
-  const until = DateTime.utc().endOf('day');
-  const since = until.startOf('day').minus({ days: 30 });
+const getTimeRange = (days = 30) => {
+  const until = DateTime.utc().startOf('minute');
+  const since = until.minus({ days });
 
   return {
     since: since.toISO(),
@@ -20,25 +21,35 @@ const getTimeRange = () => {
   };
 };
 
-const buildResultObject = <T>(data: T) => {
-  const { until, since } = getTimeRange();
+type BuildResultObjectOptions = {
+  version?: number;
+  until: string;
+  since: string;
+};
+
+const buildResultObject = <T>(data: T, options: BuildResultObjectOptions) => {
+  const { version = 4, until, since } = options;
 
   return {
     data,
-    version: 4,
-    query: { since, until },
+    version,
+    query: {
+      since,
+      until,
+    },
   };
 };
 
 const buildVariables = (range: TimeRange) => {
   const { until, since } = range;
+  const { hostname } = env.APP_URL;
 
   return {
     endDate: until,
     startDate: since,
     siteTag: env.CLOUDFLARE_SITE_TAG,
     accountTag: env.CLOUDFLARE_ACCOUNT_TAG,
-    hosts: [env.APP_URL.hostname, `www.${env.APP_URL.hostname}`],
+    hosts: [hostname, `www.${hostname}`],
   };
 };
 
@@ -61,19 +72,42 @@ type ViewerTotalData = {
 };
 
 export const getViewerTotal = async (): Promise<ViewerTotal> => {
-  const timeRange = getTimeRange();
+  const timeRange = getTimeRange(30);
 
-  const { data } = await graphql.query({
-    query: ViewerTotalQuery,
-    variables: buildVariables(timeRange),
-  });
+  try {
+    const { data } = await graphql.query({
+      query: ViewerTotalQuery,
+      variables: buildVariables(timeRange),
+    });
 
-  const group = data?.viewer.accounts.at(0)?.total.at(0);
+    const group = data?.viewer.accounts.at(0)?.total.at(0);
 
-  return buildResultObject({
-    pageviews: group?.count ?? 0,
-    visitors: group?.sum.visits ?? 0,
-  });
+    if (!group) {
+      throw new Error('Cloudflare returned no groups');
+    }
+
+    log.info(
+      `cloudflare total: count=${group.count} visits=${group.sum.visits} interval=${group.avg.sampleInterval}`,
+    );
+
+    return buildResultObject(
+      {
+        pageviews: group.count,
+        visitors: group.sum.visits,
+      },
+      timeRange,
+    );
+  } catch (error) {
+    log.error(`Error fetching Cloudflare total:\n   ${error}`);
+
+    return buildResultObject(
+      {
+        pageviews: 0,
+        visitors: 0,
+      },
+      { ...timeRange, version: 0 },
+    );
+  }
 };
 
 /* ///////////////////////////////////////////////// */
@@ -99,18 +133,28 @@ type ViewerLastAccessData = {
 export const getViewerLastAccess = async (): Promise<ViewerLastAccess> => {
   const timeRange = getTimeRange();
 
-  const { data } = await graphql.query({
-    query: ViewerLastAccessQuery,
-    variables: buildVariables(timeRange),
-  });
+  try {
+    const { data } = await graphql.query({
+      query: ViewerLastAccessQuery,
+      variables: buildVariables(timeRange),
+    });
 
-  const account = data?.viewer.accounts[0];
-  const result = account?.lastAccess.map((access) => ({
-    country: access.dimensions.countryName ?? 'unknown',
-    pageviews: access.count,
-    visitors: access.sum.visits,
-    timestamp: access.dimensions.datetimeMinute,
-  }));
+    const account = data?.viewer.accounts[0];
+    const results = account?.lastAccess.map((access) => ({
+      country: access.dimensions.countryName ?? 'unknown',
+      pageviews: access.count,
+      visitors: access.sum.visits,
+      timestamp: access.dimensions.datetimeMinute,
+    }));
 
-  return buildResultObject(result ?? []);
+    if (!results) {
+      throw new Error('Cloudflare returned no results');
+    }
+
+    return buildResultObject(results, timeRange);
+  } catch (error) {
+    log.error(`Error fetching Cloudflare last access:\n   ${error}`);
+
+    return buildResultObject([], { ...timeRange, version: 0 });
+  }
 };
