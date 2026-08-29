@@ -1,3 +1,10 @@
-export { about, avatar } from './biography';
 export { countries } from './countries';
-export { ldJSON, manifest, metadata, robots, sitemap, viewport } from './layout';
+export {
+  ldJSON,
+  manifest,
+  metadata,
+  robots,
+  sitemap,
+  viewport,
+} from './layout';
+export { about, avatar } from './profile';
