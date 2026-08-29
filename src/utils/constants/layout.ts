@@ -3,7 +3,9 @@ import type { Person, WithContext } from 'schema-dts';
 
 import { env } from 'envin/env';
 
-export const manifest = Object.freeze<MetadataRoute.Manifest>({
+import { freeze } from '../helpers';
+
+export const manifest = freeze<MetadataRoute.Manifest>({
   name: 'Luiz Felipe',
   short_name: 'meluiz',
   start_url: '/',
@@ -26,7 +28,7 @@ export const manifest = Object.freeze<MetadataRoute.Manifest>({
   ],
 });
 
-export const metadata = Object.freeze<Metadata>({
+export const metadata = freeze<Metadata>({
   title: {
     default: manifest.short_name ?? 'meluiz',
     template: `%s | ${manifest.short_name ?? 'meluiz'}`,
@@ -82,7 +84,7 @@ export const metadata = Object.freeze<Metadata>({
   },
 });
 
-export const viewport = Object.freeze<Viewport>({
+export const viewport = freeze<Viewport>({
   minimumScale: 1,
   initialScale: 1,
   width: 'device-width',
@@ -95,7 +97,7 @@ export const viewport = Object.freeze<Viewport>({
   ],
 });
 
-export const robots = Object.freeze<MetadataRoute.Robots>({
+export const robots = freeze<MetadataRoute.Robots>({
   host: env.APP_URL.toString(),
   sitemap: new URL('/sitemap.xml', env.APP_URL).toString(),
   rules: {
@@ -104,7 +106,7 @@ export const robots = Object.freeze<MetadataRoute.Robots>({
   },
 });
 
-export const sitemap = Object.freeze<MetadataRoute.Sitemap>([
+export const sitemap = freeze<MetadataRoute.Sitemap>([
   {
     priority: 1,
     lastModified: new Date(),
@@ -113,7 +115,7 @@ export const sitemap = Object.freeze<MetadataRoute.Sitemap>([
   },
 ]);
 
-export const ldJSON = Object.freeze<WithContext<Person>>({
+export const ldJSON = freeze<WithContext<Person>>({
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: manifest.name,

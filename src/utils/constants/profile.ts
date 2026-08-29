@@ -1,9 +1,11 @@
-export const avatar = Object.freeze({
+import { freeze } from '../helpers';
+
+export const avatar = freeze({
   src: 'https://avatars.githubusercontent.com/u/52682525',
   alt: 'Portrait of Luiz Felipe in a black T-shirt against a brown background.',
 });
 
-export const about = Object.freeze([
+export const about = freeze([
   {
     title: 'Me in 10 seconds',
     paragraphs: [

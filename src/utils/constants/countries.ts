@@ -1,4 +1,6 @@
-export const countries = Object.freeze([
+import { freeze } from '../helpers';
+
+export const countries = freeze([
   {
     id: `afg_4`,
     short_code: 'af',
