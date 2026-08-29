@@ -5,6 +5,9 @@ type ViewerTotalResponse = {
     accounts: Array<{
       total: Array<{
         count: number;
+        avg: {
+          sampleInterval: number;
+        };
         sum: {
           visits: number;
         };
@@ -39,13 +42,18 @@ export const ViewerTotalQuery: ViewerTotalQueryResult = gql`
         total: rumPageloadEventsAdaptiveGroups(
           limit: 1
           filter: {
-            siteTag: $siteTag
-            requestHost_in: $hosts
-            datetime_geq: $startDate
-            datetime_leq: $endDate
+            AND: [
+              { datetime_geq: $startDate, datetime_leq: $endDate }
+              { bot: 0 }
+              { siteTag_in: [$siteTag] }
+              { requestHost_in: $hosts }
+            ]
           }
         ) {
           count
+          avg {
+            sampleInterval
+          }
           sum {
             visits
           }
@@ -101,10 +109,12 @@ export const ViewerLastAccessQuery: ViewerLastAccessQueryResult = gql`
           limit: 1
           orderBy: [datetimeMinute_DESC]
           filter: {
-            siteTag: $siteTag
-            requestHost_in: $hosts
-            datetime_geq: $startDate
-            datetime_leq: $endDate
+            AND: [
+              { datetime_geq: $startDate, datetime_leq: $endDate }
+              { bot: 0 }
+              { siteTag_in: [$siteTag] }
+              { requestHost_in: $hosts }
+            ]
           }
         ) {
           count
