@@ -52,6 +52,8 @@ export const getVisitsCount = async (): Promise<VisitsCount> => {
       params,
     });
 
+    log.info(`vercel total: count=${data.data.pageviews} visits=${data.data.visitors}`);
+
     return data;
   } catch (error) {
     if (isAxiosError(error)) {
@@ -115,7 +117,7 @@ export const getVisitsAggregated = async (): Promise<VisitsAggregate> => {
     }
 
     return {
-      version: 1,
+      version: 0,
       data: [],
       query: {
         since: since,
