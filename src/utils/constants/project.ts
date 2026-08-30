@@ -54,3 +54,47 @@ export const stacks = freeze(
     return version ? [{ name, version }] : [];
   }),
 );
+
+/* ///////////////////////////////////////////////// */
+
+export const projects = freeze([
+  {
+    name: 'Motiro',
+    description:
+      'Tree-shakeable TypeScript utilities for strings, numbers and collections. Import only what you use.',
+    stacks: ['Bun', 'Typescript'],
+    links: [
+      {
+        type: 'repository',
+        href: `${github.url}/motiro`,
+      },
+    ],
+  },
+  {
+    name: 'Unique ID Generator',
+    description:
+      'Generate UUID, CUID2, Nano ID and ULID in the browser. Nothing ever leaves your machine.',
+    stacks: ['Void', 'React.js', 'Typescript'],
+    links: [
+      {
+        type: 'website',
+        href: `https://uidg.meluiz.com`,
+      },
+      {
+        type: 'repository',
+        href: `${github.url}/uidg`,
+      },
+    ],
+  },
+  {
+    name: 'Tailugin',
+    description: 'Extra utilities and theme tokens for Tailwind CSS v4, as a drop-in plugin.',
+    stacks: ['Tailwind'],
+    links: [
+      {
+        type: 'repository',
+        href: `${github.url}/tailugin`,
+      },
+    ],
+  },
+]);

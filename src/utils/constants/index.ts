@@ -8,5 +8,5 @@ export {
   viewport,
 } from './layout';
 export { about, avatar } from './profile';
-export { buildInfo, stacks } from './project';
+export { buildInfo, projects, stacks } from './project';
 export { github } from './socials';
