@@ -1,5 +1,6 @@
 import { About } from '@/modules/home';
-import { about, avatar } from '@/utils/constants';
+import { Projects } from '@/modules/home/components';
+import { about, avatar, github, projects } from '@/utils/constants';
 
 const HomePage = () => {
   return (
@@ -16,6 +17,13 @@ const HomePage = () => {
           ))}
         </div>
       </About.Root>
+      <Projects.Root>
+        <Projects.Header
+          title="Things I've built"
+          description="Small open-source tools where i explore reusable APIs and developer experience"
+        />
+        <Projects.Content githubUrl={github.url} items={projects} />
+      </Projects.Root>
     </div>
   );
 };
