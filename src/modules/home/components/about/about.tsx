@@ -3,6 +3,20 @@
 import { Highlight } from '@ark-ui/react';
 import Image from 'next/image';
 
+export type RootProps = React.PropsWithChildren;
+
+export const Root = (props: RootProps) => {
+  return (
+    <section
+      className="relative flex flex-col gap-y-6 px-4 py-8 sm:px-6 sm:py-12"
+      aria-labelledby="page-title"
+      {...props}
+    />
+  );
+};
+
+/* ///////////////////////////////////////////////// */
+
 export type HeaderProps = {
   name: string;
   role: string;
@@ -16,6 +30,7 @@ type Avatar = {
 
 export const Header = (props: HeaderProps) => {
   const { name, role, avatar } = props;
+
   return (
     <header className="flex flex-col gap-4">
       <div className="center flex size-24 border">
