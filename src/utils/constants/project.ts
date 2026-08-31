@@ -14,10 +14,10 @@ const COMMIT_SHA = env.VERCEL_GIT_COMMIT_SHA ?? null;
 const BUILD_TIMESTAMP = env.BUILD_TIMESTAMP;
 
 const STACK_DEPENDENCIES = [
+  '@ark-ui/react',
   'next',
   'react',
   'tailwindcss',
-  '@ark-ui/react',
   'typescript',
 ] as const;
 
@@ -49,8 +49,10 @@ export const buildInfo = freeze({
 });
 
 export const stacks = freeze(
-  STACK_DEPENDENCIES.flatMap((name) => {
-    const version = DECLARED_VERSIONS[name]?.match(SEMVER)?.[1];
+  STACK_DEPENDENCIES.flatMap((key) => {
+    const version = DECLARED_VERSIONS[key]?.replace(/^[^\d]*/, '');
+    const name = key.replace(/^@[^/]+\//, '');
+
     return version ? [{ name, version }] : [];
   }),
 );
