@@ -1,9 +1,9 @@
-import { About, colophons, Projects } from '@/modules/home';
+import { About, Colophon, colophons, Projects } from '@/modules/home';
 import { about, avatar, github, projects } from '@/utils/constants';
 
 const HomePage = () => {
   return (
-    <div className="container block flex-1 divide-y divide-stroke-soft border-stroke-soft md:border-x">
+    <div className="container block flex-1 divide-y divide-stroke-soft border-stroke-soft *:last:border-stroke-soft *:last:border-b md:border-x">
       <About.Root>
         <About.Header avatar={avatar} name="Luiz Felipe" role="Front-end Developer" />
         <div className="relative space-y-6">
@@ -23,6 +23,12 @@ const HomePage = () => {
         />
         <Projects.Content githubUrl={github.url} items={projects} />
       </Projects.Root>
+      <Colophon.Root>
+        <Colophon.Header title="meluiz.com" tagline="Relishing the art of building things" />
+        <Colophon.List items={colophons.fields} columns="narrow" />
+        <Colophon.List items={colophons.stacks} columns="wide" />
+        <Colophon.Inspiration items={colophons.inspiration} />
+      </Colophon.Root>
     </div>
   );
 };
