@@ -118,7 +118,7 @@ export const Content = (props: ContentProps) => {
                 {stacks.map((stack) => (
                   <li
                     key={`projects:${name}:item:${stack}:stack`}
-                    className="border border-stroke-inverse/8 px-1 py-0.5 font-mono text-foreground-soft text-xs lowercase hover:bg-stroke-soft/24"
+                    className="border border-stroke-inverse/8 px-1 py-0.5 font-medium font-mono text-foreground-soft text-xs lowercase tracking-tight hover:bg-stroke-soft/24"
                   >
                     {stack}
                   </li>
