@@ -1,5 +1,4 @@
-import { About } from '@/modules/home';
-import { Projects } from '@/modules/home/components';
+import { About, colophons, Projects } from '@/modules/home';
 import { about, avatar, github, projects } from '@/utils/constants';
 
 const HomePage = () => {
