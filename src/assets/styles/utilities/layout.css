@@ -1,0 +1,7 @@
+@utility container {
+  width: 100%;
+  max-width: var(--container-2xl);
+  min-height: 0;
+  display: block;
+  margin-inline: auto;
+}

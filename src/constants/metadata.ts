@@ -1,0 +1,177 @@
+import type { Metadata, MetadataRoute, Viewport } from 'next';
+import type { Person, WithContext } from 'schema-dts';
+
+import env from 'envin/env';
+
+import { freeze } from '@/utils/helpers';
+
+export const manifest = freeze<MetadataRoute.Manifest>({
+  name: 'Luiz Felipe',
+  short_name: 'meluiz',
+  start_url: '/',
+  description: 'Relishing the details. Fostering innovation. Achieving excellence.',
+  display: 'standalone',
+  theme_color: '#1C1917',
+  background_color: '#E7E5E4',
+  icons: [
+    {
+      src: '/icon/16',
+      sizes: '16x16',
+      type: 'image/png',
+    },
+    {
+      src: '/icon/32',
+      sizes: '32x32',
+      type: 'image/png',
+    },
+    {
+      src: '/icon/48',
+      sizes: '48x48',
+      type: 'image/png',
+    },
+    {
+      src: '/icon/96',
+      sizes: '96x96',
+      type: 'image/png',
+    },
+    {
+      src: '/icon/144',
+      sizes: '144x144',
+      type: 'image/png',
+    },
+    {
+      src: '/icon/192',
+      sizes: '192x192',
+      type: 'image/png',
+    },
+    {
+      src: '/icon/512',
+      sizes: '512x512',
+      type: 'image/png',
+      purpose: 'maskable',
+    },
+  ],
+});
+
+export const metadata = freeze<Metadata>({
+  title: {
+    default: manifest.short_name ?? 'meluiz',
+    template: `%s | ${manifest.short_name ?? 'meluiz'}`,
+  },
+  appleWebApp: true,
+  description: manifest.description,
+  applicationName: manifest.short_name,
+  category: 'personal',
+  generator: 'Next.js',
+  metadataBase: env.APP_URL,
+  manifest: '/manifest.webmanifest',
+  alternates: {
+    canonical: '/',
+  },
+  authors: [
+    {
+      name: 'meluiz',
+      url: 'https://meluiz.com',
+    },
+  ],
+  keywords: [
+    'meluiz',
+    'luiz felipe',
+    'front-end developer',
+    'frontend engineer',
+    'react developer',
+    'next.js developer',
+    'react native developer',
+    'typescript',
+    'web development',
+    'mobile development',
+    'ui development',
+    'web performance',
+    'responsive design',
+    'digital accessibility',
+    'developer portfolio',
+    'freelance developer Brazil',
+  ],
+  openGraph: {
+    locale: 'en_US',
+    type: 'website',
+    url: env.APP_URL.toString(),
+    title: manifest.short_name,
+    siteName: manifest.short_name,
+    description: manifest.description,
+    images: new URL('/opengraph-image.png', env.APP_URL),
+  },
+  twitter: {
+    title: manifest.short_name,
+    description: manifest.description,
+    site: '@omeluiz',
+    creator: '@omeluiz',
+    card: 'summary_large_image',
+    images: new URL('/twitter-image.png', env.APP_URL),
+  },
+});
+
+export const viewport = freeze<Viewport>({
+  minimumScale: 1,
+  initialScale: 1,
+  width: 'device-width',
+  userScalable: false,
+  viewportFit: 'cover',
+  colorScheme: 'dark light',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#e7e5e4' },
+    { media: '(prefers-color-scheme: dark)', color: '#1c1917' },
+  ],
+});
+
+export const robots = freeze<MetadataRoute.Robots>({
+  host: env.APP_URL.toString(),
+  sitemap: new URL('/sitemap.xml', env.APP_URL).toString(),
+  rules: {
+    allow: '/',
+    userAgent: '*',
+  },
+});
+
+export const sitemap = freeze<MetadataRoute.Sitemap>([
+  {
+    priority: 1,
+    lastModified: new Date(),
+    changeFrequency: 'yearly',
+    url: env.APP_URL.toString(),
+  },
+]);
+
+export const ldJSON = freeze<WithContext<Person>>({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: manifest.name,
+  description: manifest.description,
+  url: env.APP_URL.toString(),
+  alternateName: manifest.short_name,
+  image: 'https://avatars.githubusercontent.com/u/52682525',
+  jobTitle: 'Front-end Developer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Grupo Plan Marketing',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: 'Minas Gerais',
+    addressCountry: 'BR',
+  },
+  knowsAbout: [
+    'TypeScript',
+    'React',
+    'Next.js',
+    'React Native',
+    'Tailwind CSS',
+    'Node',
+    'Bunjs',
+  ],
+  sameAs: [
+    'https://x.com/omeluiz',
+    'https://github.com/meluiz',
+    'https://linkedin.com/in/meluiz',
+  ],
+});

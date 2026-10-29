@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@import "tailugin/theme";
+@import "tailugin/variants";
+@import "tailugin/utilities";
+
+@import "./tokens/index.css";
+@import "./utilities/index.css";
+
+@layer base {
+  *,
+  ::before,
+  ::after,
+  ::backdrop,
+  ::file-selector-button {
+    @apply border-stroke;
+  }
+
+  html {
+    @apply bg-surface;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+    font-feature-settings:
+      "tnum" 1,
+      "zero" 1,
+      "liga" 1,
+      "calt" 1;
+  }
+
+  ::selection {
+    color: var(--color-foreground-accent);
+    background-color: var(--color-surface-accent);
+  }
+
+  /* ------- prefers-reduced-motion ------- */
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0ms !important;
+      transition-duration: 0ms !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+}

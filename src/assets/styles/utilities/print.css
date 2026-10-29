@@ -1,0 +1,134 @@
+/* ---------------------- hatch ---------------------- */
+
+@property --tw-hatch-color {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --tw-hatch-size {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0.625rem;
+}
+
+@property --tw-hatch-thickness {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 1px;
+}
+
+@property --tw-hatch-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: -45deg;
+}
+
+@property --tw-hatch-offset {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@utility bg-hatch {
+  --tw-hatch-fallback: color-mix(in oklab, currentColor 15%, transparent);
+  --tw-hatch-stroke: var(--tw-hatch-color, var(--tw-hatch-fallback));
+
+  --tw-hatch-end: calc(var(--tw-hatch-offset) + var(--tw-hatch-thickness));
+  --tw-hatch-gap: calc(var(--tw-hatch-end) + 0.5px);
+  --tw-hatch-cycle: calc(var(--tw-hatch-offset) + var(--tw-hatch-size));
+
+  background-image: repeating-linear-gradient(
+    var(--tw-hatch-angle),
+    var(--tw-hatch-stroke) var(--tw-hatch-offset) var(--tw-hatch-end),
+    transparent var(--tw-hatch-gap) var(--tw-hatch-cycle)
+  );
+}
+
+@utility hatch-* {
+  --tw-hatch-color: --value(--color-*, [color]);
+  --tw-hatch-color: color-mix(
+    in oklab,
+    --value(--color-*, [color]) calc(--modifier(integer) * 1%),
+    transparent
+  );
+
+  --tw-hatch-size: --spacing(--value(number));
+  --tw-hatch-size: --value([percentage], [length]);
+}
+
+@utility hatch-angle-* {
+  --tw-hatch-angle: calc(--value(integer) * 1deg);
+  --tw-hatch-angle: --value([angle]);
+}
+
+@utility -hatch-angle-* {
+  --tw-hatch-angle: calc(--value(integer) * -1deg);
+}
+
+@utility hatch-current {
+  --tw-hatch-color: color-mix(in oklab, currentColor 15%, transparent);
+}
+
+@utility hatch-offset-* {
+  --tw-hatch-offset: --spacing(--value(number));
+  --tw-hatch-offset: --value([length]);
+}
+
+@utility hatch-thickness-* {
+  --tw-hatch-thickness: calc(--value(integer) * 1px);
+  --tw-hatch-thickness: --value([length]);
+}
+
+/* ---------------------- brackets ---------------------- */
+
+@property --tw-brackets-color {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --tw-brackets-gap {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+
+@utility brackets {
+  &::before,
+  &::after {
+    color: var(--tw-brackets-color, currentColor);
+  }
+
+  &::before {
+    content: "[";
+    content: "[" / "";
+    margin-inline-end: var(--tw-brackets-gap);
+  }
+
+  &::after {
+    content: "]";
+    content: "]" / "";
+    margin-inline-start: var(--tw-brackets-gap);
+  }
+}
+
+@utility brackets-* {
+  &::before,
+  &::after {
+    --tw-brackets-color: --value(--color-*, [color]);
+    --tw-brackets-color: color-mix(
+      in oklab,
+      --value(--color-*, [color]) calc(--modifier(integer) * 1%),
+      transparent
+    );
+
+    --tw-brackets-gap: --spacing(--value(number));
+    --tw-brackets-gap: --value([length]);
+  }
+}
+
+@utility brackets-current {
+  &::before,
+  &::after {
+    --tw-brackets-color: currentColor;
+  }
+}

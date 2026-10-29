@@ -1,0 +1,63 @@
+@theme static {
+  /* ------- surface ------- */
+
+  --color-surface: var(--color-silt-100);
+  --color-surface-soft: var(--color-silt-50);
+  --color-surface-solid: var(--color-silt-950);
+  --color-surface-muted: --alpha(var(--color-silt-950) / 6%);
+
+  --color-surface-brand: var(--color-clay-600);
+  --color-surface-accent: --alpha(var(--color-clay-500) / 12%);
+
+  /* ------- foreground ------- */
+
+  --color-foreground: var(--color-silt-950);
+  --color-foreground-soft: var(--color-silt-700);
+  --color-foreground-prose: var(--color-silt-800);
+  --color-foreground-muted: var(--color-silt-600);
+  --color-foreground-solid: var(--color-silt-50);
+
+  --color-foreground-accent: var(--color-clay-700);
+  --color-foreground-brand: var(--color-clay-50);
+
+  /* ------- stroke ------- */
+
+  --color-stroke: var(--color-silt-200);
+  --color-stroke-soft: --alpha(var(--color-silt-950) / 8%);
+  --color-stroke-solid: var(--color-silt-300);
+}
+
+@layer theme {
+  .dark {
+    /* ------- surface ------- */
+
+    --color-surface: var(--color-silt-950);
+    --color-surface-solid: var(--color-silt-100);
+    --color-surface-muted: --alpha(var(--color-silt-50) / 6%);
+    --color-surface-soft: color-mix(
+      in srgb,
+      var(--color-silt-950) 96%,
+      var(--color-silt-50)
+    );
+
+    --color-surface-brand: var(--color-clay-600);
+    --color-surface-accent: --alpha(var(--color-clay-400) / 12%);
+
+    /* ------- foreground ------- */
+
+    --color-foreground: var(--color-silt-50);
+    --color-foreground-soft: var(--color-silt-300);
+    --color-foreground-prose: var(--color-silt-200);
+    --color-foreground-muted: var(--color-silt-400);
+    --color-foreground-solid: var(--color-silt-950);
+
+    --color-foreground-brand: var(--color-clay-50);
+    --color-foreground-accent: var(--color-clay-400);
+
+    /* ------- stroke ------- */
+
+    --color-stroke: var(--color-silt-900);
+    --color-stroke-soft: --alpha(var(--color-silt-50) / 8%);
+    --color-stroke-solid: var(--color-silt-800);
+  }
+}
