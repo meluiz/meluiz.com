@@ -1,4 +1,4 @@
-import { ColorScheme } from '@/components/providers';
+import { ColorScheme, SoundEffects } from '@/components/providers';
 import { geist, geistMono } from '@/configs/fonts';
 import { ldJSON } from '@/constants/metadata';
 
@@ -15,15 +15,18 @@ const Layout = async (props: LayoutProps<'/'>) => {
     >
       <head>
         <ColorScheme.Script />
+        <SoundEffects.Script />
       </head>
       <body className="relative block min-h-min w-full font-sans text-base font-normal antialiased">
         <ColorScheme.Provider>
-          <div
-            id="__APP_ROOT"
-            className="relative isolate flex min-h-dvh w-full flex-col bg-surface text-foreground"
-          >
-            {children}
-          </div>
+          <SoundEffects.Provider>
+            <div
+              id="__APP_ROOT"
+              className="relative isolate flex min-h-dvh w-full flex-col bg-surface text-foreground"
+            >
+              {children}
+            </div>
+          </SoundEffects.Provider>
         </ColorScheme.Provider>
 
         <script
