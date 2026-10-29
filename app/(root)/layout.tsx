@@ -1,3 +1,4 @@
+import { ColorScheme } from '@/components/providers';
 import { geist, geistMono } from '@/configs/fonts';
 import { ldJSON } from '@/constants/metadata';
 
@@ -12,13 +13,18 @@ const Layout = async (props: LayoutProps<'/'>) => {
       className={`${geist.variable} ${geistMono.variable} light overscroll-y-none pointer-coarse:scrollbar-none pointer-coarse:overscroll-y-auto`}
       suppressHydrationWarning
     >
+      <head>
+        <ColorScheme.Script />
+      </head>
       <body className="relative block min-h-min w-full font-sans text-base font-normal antialiased">
-        <div
-          id="__APP_ROOT"
-          className="relative isolate flex min-h-dvh w-full flex-col bg-surface text-foreground"
-        >
-          {children}
-        </div>
+        <ColorScheme.Provider>
+          <div
+            id="__APP_ROOT"
+            className="relative isolate flex min-h-dvh w-full flex-col bg-surface text-foreground"
+          >
+            {children}
+          </div>
+        </ColorScheme.Provider>
 
         <script
           type="application/ld+json"
