@@ -24,7 +24,7 @@
 
   --color-stroke: var(--color-silt-200);
   --color-stroke-soft: --alpha(var(--color-silt-950) / 8%);
-  --color-stroke-solid: var(--color-silt-300);
+  --color-stroke-strong: var(--color-silt-300);
 }
 
 @layer theme {
