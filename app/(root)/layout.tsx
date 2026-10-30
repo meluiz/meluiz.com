@@ -1,6 +1,7 @@
 import { ColorScheme, SoundEffects } from '@/components/providers';
 import { geist, geistMono } from '@/configs/fonts';
 import { ldJSON } from '@/constants/metadata';
+import { Analytics } from '@/modules/analytics';
 
 import '@/assets/styles/globals.css';
 
@@ -18,6 +19,7 @@ const Layout = async (props: LayoutProps<'/'>) => {
         <SoundEffects.Script />
       </head>
       <body className="relative block min-h-min w-full font-sans text-base font-normal antialiased">
+        <Analytics />
         <ColorScheme.Provider>
           <SoundEffects.Provider>
             <div
