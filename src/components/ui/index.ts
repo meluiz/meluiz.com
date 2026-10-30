@@ -8,6 +8,7 @@ export { Button, button } from './button';
 export { Highlight } from './highlight';
 export { Kbd, kbd } from './kbd';
 export { Mascot, mascot } from './mascot';
+export { ScrollArea, scrollArea } from './scroll-area';
 export { Section, section } from './section';
 export { Separator, separator } from './separator';
 export { Swap } from './swap';
