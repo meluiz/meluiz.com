@@ -2,13 +2,7 @@ import Image from 'next/image';
 
 import { masthead } from './masthead.styles';
 
-export interface MastheadProps {
-  headingId: string;
-}
-
-export const Masthead = (props: MastheadProps) => {
-  const { headingId } = props;
-
+export const Masthead = () => {
   const styles = masthead();
 
   return (
@@ -28,7 +22,7 @@ export const Masthead = (props: MastheadProps) => {
           />
         </div>
         <hgroup className="relative flex flex-col gap-y-2">
-          <h1 id={headingId} className={styles.name}>
+          <h1 id="masthead-title" className={styles.name}>
             Luiz Felipe
           </h1>
           <p className={styles.role}>
