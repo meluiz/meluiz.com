@@ -1,5 +1,5 @@
 import { ColorScheme, SoundEffects } from '@/components/providers';
-import { geist, geistMono } from '@/configs/fonts';
+import { GeistMono, GeistSans } from '@/configs/fonts';
 import { ldJSON } from '@/constants/metadata';
 import { Analytics } from '@/modules/analytics';
 
@@ -11,7 +11,7 @@ const Layout = async (props: LayoutProps<'/'>) => {
   return (
     <html
       lang="en-US"
-      className={`${geist.variable} ${geistMono.variable} light overscroll-y-none pointer-coarse:scrollbar-none pointer-coarse:overscroll-y-auto`}
+      className={`${GeistSans.variable} ${GeistMono.variable} light overscroll-y-none pointer-coarse:scrollbar-none pointer-coarse:overscroll-y-auto`}
       suppressHydrationWarning
     >
       <head>
