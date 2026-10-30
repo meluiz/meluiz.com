@@ -6,3 +6,4 @@ export type {
 } from './context';
 
 export { createContext } from './context';
+export { splitProps } from './split-props';
