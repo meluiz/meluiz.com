@@ -16,6 +16,6 @@ export const group = cva({
 });
 
 export const eye = cva({
-  base: 'origin-center fill-foreground-brand transform-fill motion-safe:in-data-blink:animate-blink',
+  base: 'motion-safe:in-data-blink:animate-blink origin-center fill-foreground-on-brand transform-fill',
   variants: {},
 });
