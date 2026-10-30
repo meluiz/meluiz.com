@@ -15,6 +15,11 @@ export default {
       dynamic: 60,
     },
   },
+  images: {
+    loader: 'custom',
+    loaderFile: './lib/image/loader.ts',
+    qualities: [75, 80],
+  },
   turbopack: {
     rules: {
       '*.css': {
