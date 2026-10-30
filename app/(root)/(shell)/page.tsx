@@ -1,3 +1,4 @@
+import { Experience } from '@/modules/career';
 import { About, Masthead } from '@/modules/profile';
 
 const Page = () => {
@@ -7,6 +8,7 @@ const Page = () => {
         <Masthead />
         <About />
       </section>
+      <Experience />
     </div>
   );
 };
