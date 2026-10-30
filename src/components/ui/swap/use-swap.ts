@@ -8,7 +8,8 @@ export interface UseSwapReturn {
   off: UseTransitionStatusReturn;
 }
 
-export interface UseSwapProps extends Omit<UseTransitionStatusProps, 'open' | 'onOpenChangeComplete'> {
+export interface UseSwapProps
+  extends Omit<UseTransitionStatusProps, 'open' | 'onOpenChangeComplete'> {
   swap?: boolean | undefined;
 }
 

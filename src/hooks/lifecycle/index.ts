@@ -6,5 +6,5 @@ export type {
   UseTransitionStatusReturn,
 } from './transition-status';
 
-export { transitionStatusMapping, useTransitionStatus } from './transition-status';
 export { useSafeLayoutEffect } from './safe-layout-effect';
+export { transitionStatusMapping, useTransitionStatus } from './transition-status';
