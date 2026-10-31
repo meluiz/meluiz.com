@@ -2,6 +2,8 @@
   --animate-blink: blink 300ms var(--ease-in-out-quad)
     var(--mascot-blink-delay, 400ms) 1 both;
 
+  --animate-hatch-drift: hatch-drift 600ms linear infinite;
+
   @keyframes blink {
     0%,
     100% {
@@ -11,6 +13,12 @@
     45%,
     55% {
       transform: scaleY(0.12);
+    }
+  }
+
+  @keyframes hatch-drift {
+    to {
+      --tw-hatch-offset: calc(var(--tw-hatch-size) * -1);
     }
   }
 }
