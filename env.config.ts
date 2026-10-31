@@ -14,6 +14,8 @@ export const env = defineEnv({
     APP_URL: process.env.APP_URL,
     VISITORS_TOKEN: process.env.VISITORS_TOKEN,
     CLOUDFLARE_TOKEN: process.env.CLOUDFLARE_TOKEN,
+    VERCEL_ENV: process.env.VERCEL_ENV,
+    VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA,
   },
 });
 
