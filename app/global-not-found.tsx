@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Document, Footer, Header, Scrollview, SkipContent } from '@/components/layout';
+import { Document, Frame, Header } from '@/components/layout';
 import { ColorScheme, SoundEffects } from '@/components/providers';
 import { metadata as baseMetadata, manifest } from '@/constants/metadata';
 import { NotFound } from '@/modules/exception';
@@ -13,18 +13,9 @@ const GlobalNotFound = async () => {
     <Document>
       <ColorScheme.Provider>
         <SoundEffects.Provider>
-          <Scrollview>
-            <SkipContent target="#__APP_MAIN" />
-            <Header />
-            <main
-              id="__APP_MAIN"
-              tabIndex={-1}
-              className="relative flex w-full flex-1 bg-surface text-foreground outline-hidden"
-            >
-              <NotFound request={request} />
-            </main>
-            <Footer />
-          </Scrollview>
+          <Frame header={<Header />}>
+            <NotFound request={request} />
+          </Frame>
         </SoundEffects.Provider>
       </ColorScheme.Provider>
     </Document>
