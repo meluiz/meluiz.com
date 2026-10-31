@@ -8,7 +8,7 @@ export const root = cva({
   variants: {
     animation: {
       none: '',
-      wobble: 'motion-safe:animate-mascot-wobble origin-bottom',
+      wobble: 'origin-bottom motion-safe:animate-mascot-wobble',
     },
   },
 });
