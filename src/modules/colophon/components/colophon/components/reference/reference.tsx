@@ -1,4 +1,4 @@
-import { button } from '@/components/ui';
+import { Button } from '@/components/ui';
 
 export interface ReferenceProps {
   label: string;
@@ -13,14 +13,13 @@ export const Reference = (props: ReferenceProps) => {
   }
 
   return (
-    <a
-      href={href}
-      rel="noreferrer noopener"
-      target="_blank"
-      className={button.root({ variant: 'link' })}
+    <Button
+      variant="link"
+      native={false}
+      render={<a href={href} rel="noreferrer noopener" target="_blank" />}
     >
       {label}
       <span className="sr-only"> (opens in a new tab)</span>
-    </a>
+    </Button>
   );
 };
