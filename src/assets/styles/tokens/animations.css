@@ -4,6 +4,9 @@
 
   --animate-hatch-drift: hatch-drift 600ms linear infinite;
 
+  --animate-mascot-look: mascot-look 6s var(--ease-in-out-quad) infinite;
+  --animate-mascot-wobble: mascot-wobble 4s var(--ease-in-out-quad) infinite;
+
   @keyframes blink {
     0%,
     100% {
@@ -13,6 +16,54 @@
     45%,
     55% {
       transform: scaleY(0.12);
+    }
+  }
+
+  /* Values are in SVG user units (viewBox 0 0 64 64), so they scale with the mascot */
+  @keyframes mascot-look {
+    0%,
+    14% {
+      transform: translate(0, 0);
+    }
+
+    20%,
+    38% {
+      transform: translate(-2.8px, 0.4px);
+    }
+
+    44%,
+    62% {
+      transform: translate(2.8px, 0.4px);
+    }
+
+    68%,
+    82% {
+      transform: translate(0, -1.2px);
+    }
+
+    88%,
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes mascot-wobble {
+    0%,
+    70%,
+    100% {
+      rotate: 0deg;
+    }
+
+    76% {
+      rotate: -6deg;
+    }
+
+    84% {
+      rotate: 4deg;
+    }
+
+    92% {
+      rotate: -2deg;
     }
   }
 
