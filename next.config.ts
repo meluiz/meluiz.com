@@ -10,6 +10,7 @@ export default {
     BUILD_TIMESTAMP: new Date().toISOString(),
   },
   experimental: {
+    globalNotFound: true,
     staleTimes: {
       static: 60,
       dynamic: 60,

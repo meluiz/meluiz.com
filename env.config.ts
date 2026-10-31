@@ -11,6 +11,9 @@ export const env = defineEnv({
     CLOUDFLARE_TOKEN: z.string(),
     BUILD_TIMESTAMP: z.iso.datetime().default(new Date().toISOString()),
   },
+  client: {
+    NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: z.string().optional(),
+  },
   env: {
     APP_URL: process.env.APP_URL,
     VISITORS_TOKEN: process.env.VISITORS_TOKEN,
@@ -18,6 +21,7 @@ export const env = defineEnv({
     BUILD_TIMESTAMP: process.env.BUILD_TIMESTAMP,
     VERCEL_ENV: process.env.VERCEL_ENV,
     VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA,
+    NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA: process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA,
   },
 });
 

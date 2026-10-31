@@ -42,7 +42,7 @@ Variables are declared and validated in [`env.config.ts`](./env.config.ts). See 
 | `CLOUDFLARE_TOKEN` | Yes      | Cloudflare Web Analytics site token                              |
 | `BUILD_TIMESTAMP`  | No       | ISO datetime of the build, set automatically by `next.config.ts` |
 
-`VERCEL_ENV` and `VERCEL_GIT_COMMIT_SHA` are provided by Vercel.
+`VERCEL_ENV`, `VERCEL_GIT_COMMIT_SHA` and `NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA` are provided by Vercel.
 
 ## Scripts
 
@@ -68,9 +68,11 @@ src/
     ui/              Design system primitives
   configs/           Fonts and HTTP setup
   constants/         Site metadata and build info
-  modules/           Feature modules (analytics, career, colophon, profile, projects)
+  modules/           Feature modules (analytics, career, colophon, exception, profile, projects)
   utils/             Helpers, DOM, React and style utilities
 ```
+
+`app/global-not-found.tsx` and `app/global-error.tsx` build the 404 and 500 pages from the `exception` module. The 500 page is a Client Component, so it imports layout pieces by path instead of through the `@/components/layout` barrel, which also exports server-only components.
 
 Each module exposes its public API through an `index.ts` and keeps components, constants and services side by side. Components follow the same layout: `component.tsx`, `component.styles.ts` and nested `components/` for private parts.
 
