@@ -8,10 +8,12 @@ export const env = defineEnv({
   server: {
     APP_URL: z.httpUrl(),
     VISITORS_TOKEN: z.string(),
+    CLOUDFLARE_TOKEN: z.string(),
   },
   env: {
     APP_URL: process.env.APP_URL,
     VISITORS_TOKEN: process.env.VISITORS_TOKEN,
+    CLOUDFLARE_TOKEN: process.env.CLOUDFLARE_TOKEN,
   },
 });
 

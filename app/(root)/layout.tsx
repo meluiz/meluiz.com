@@ -19,7 +19,6 @@ const Layout = async (props: LayoutProps<'/'>) => {
         <SoundEffects.Script />
       </head>
       <body className="relative block min-h-min w-full font-sans text-base font-normal antialiased">
-        <Analytics />
         <ColorScheme.Provider>
           <SoundEffects.Provider>
             <div
@@ -30,7 +29,7 @@ const Layout = async (props: LayoutProps<'/'>) => {
             </div>
           </SoundEffects.Provider>
         </ColorScheme.Provider>
-
+        <Analytics />
         <script
           type="application/ld+json"
           // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD has to be serialized into the document
