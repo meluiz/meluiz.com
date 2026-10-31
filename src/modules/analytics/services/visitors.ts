@@ -55,7 +55,7 @@ export interface VisitorFilters {
 /* ///////////////////////////////////////////////// */
 
 const DEFAULT_DAYS = 30;
-const DEFAULT_DOMAIN = 'meluiz.dev';
+const DEFAULT_DOMAIN = 'meluiz.com';
 
 /* ///////////////////////////////////////////////// */
 
