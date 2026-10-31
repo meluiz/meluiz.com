@@ -19,7 +19,6 @@
     }
   }
 
-  /* Values are in SVG user units (viewBox 0 0 64 64), so they scale with the mascot */
   @keyframes mascot-look {
     0%,
     14% {
