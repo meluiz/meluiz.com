@@ -1,4 +1,5 @@
 import { Experience } from '@/modules/career';
+import { Colophon } from '@/modules/colophon';
 import { About, Contact, Masthead } from '@/modules/profile';
 import { Projects } from '@/modules/projects';
 
@@ -12,6 +13,7 @@ const Page = () => {
       <Experience />
       <Projects />
       <Contact />
+      <Colophon />
     </div>
   );
 };
