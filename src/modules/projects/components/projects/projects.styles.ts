@@ -4,7 +4,7 @@ export const projects = sva({
   variants: {},
   slots: ['root', 'panel', 'list', 'item', 'more', 'moreTitle', 'moreUrl'],
   base: {
-    root: 'overflow-hidden bg-surface bg-hatch px-6 text-foreground-on-brand hatch-3 hatch-stroke sm:px-8',
+    root: 'overflow-hidden border-hidden bg-surface bg-hatch px-6 text-foreground-on-brand hatch-2 hatch-stroke sm:px-8',
     panel: 'flex flex-col border-x border-stroke-soft bg-surface text-foreground',
     list: 'grid grid-cols-1 gap-px bg-stroke-soft sm:grid-cols-2',
     item: 'bg-surface',

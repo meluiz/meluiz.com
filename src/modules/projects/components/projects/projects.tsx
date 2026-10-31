@@ -8,7 +8,7 @@ export const Projects = () => {
   const styles = projectsStyles();
 
   return (
-    <Section.Root id="projects" index={4} tone="brand" className={styles.root}>
+    <Section.Root id="projects" index={4} className={styles.root}>
       <div className={styles.panel}>
         <Section.Header divided inset="small">
           <Section.Title>
