@@ -7,6 +7,8 @@ export { Document } from './document';
 export { Footer } from './footer';
 export { Frame } from './frame';
 export { Header } from './header';
+export { Navigation } from './navigation';
 export { Preferences } from './preferences';
 export { Scrollview } from './scrollview';
+export { Settings } from './settings';
 export { SkipContent } from './skip-content';

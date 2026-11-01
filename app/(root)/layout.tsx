@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { Document } from '@/components/layout';
+import { Document, Navigation } from '@/components/layout';
 import { ColorScheme, SoundEffects } from '@/components/providers';
 import { ldJSON } from '@/constants/metadata';
 import { Analytics } from '@/modules/analytics';
@@ -24,7 +24,10 @@ const Layout = async (props: LayoutProps<'/'>) => {
       }
     >
       <ColorScheme.Provider>
-        <SoundEffects.Provider>{children}</SoundEffects.Provider>
+        <SoundEffects.Provider>
+          {children}
+          <Navigation />
+        </SoundEffects.Provider>
       </ColorScheme.Provider>
     </Document>
   );

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { Document, Frame, Header } from '@/components/layout';
+import { Document, Frame, Header, Navigation } from '@/components/layout';
 import { ColorScheme, SoundEffects } from '@/components/providers';
 import { metadata as baseMetadata, manifest } from '@/constants/metadata';
 import { NotFound } from '@/modules/exception';
@@ -16,6 +16,7 @@ const GlobalNotFound = async () => {
           <Frame header={<Header />}>
             <NotFound request={request} />
           </Frame>
+          <Navigation />
         </SoundEffects.Provider>
       </ColorScheme.Provider>
     </Document>
