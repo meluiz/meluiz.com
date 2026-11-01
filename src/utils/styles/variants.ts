@@ -54,7 +54,8 @@ const recipes = createRecipes({
   join: createCn({
     extend: {
       theme: {
-        animate: ['blink'],
+        animate: ['blink', 'flash', 'nudge'],
+        text: ['3xs', '2xs'],
       },
       classGroups: {
         'bg-image': [{ bg: ['hatch'] }],

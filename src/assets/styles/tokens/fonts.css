@@ -8,4 +8,9 @@
     var(--font-geist-mono), ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
   --font-mono--font-feature-settings: "ss04", "ss11", "liga";
+
+  --text-3xs: 0.5625rem;
+  --text-3xs--line-height: 0.625rem;
+  --text-2xs: 0.625rem;
+  --text-2xs--line-height: 0.75rem;
 }

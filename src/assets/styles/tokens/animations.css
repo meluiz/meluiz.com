@@ -4,6 +4,9 @@
 
   --animate-hatch-drift: hatch-drift 600ms linear infinite;
 
+  --animate-flash: flash 300ms var(--ease-out-quint);
+  --animate-nudge: nudge 900ms var(--ease-out-quint) 350ms 1;
+
   --animate-mascot-look: mascot-look 6s var(--ease-in-out-quad) infinite;
   --animate-mascot-wobble: mascot-wobble 4s var(--ease-in-out-quad) infinite;
 
@@ -63,6 +66,31 @@
 
     92% {
       rotate: -2deg;
+    }
+  }
+
+  @keyframes flash {
+    from {
+      color: var(--color-foreground-accent);
+    }
+  }
+
+  @keyframes nudge {
+    0%,
+    100% {
+      translate: 0;
+    }
+
+    25% {
+      translate: 3px;
+    }
+
+    50% {
+      translate: -3px;
+    }
+
+    75% {
+      translate: 2px;
     }
   }
 
