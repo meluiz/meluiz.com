@@ -7,6 +7,7 @@ export type { SkeletonProps } from './skeleton';
 export type { TagProps } from './tag';
 
 export { Button, button } from './button';
+export { Dock, dock } from './dock';
 export { Highlight } from './highlight';
 export { Kbd, kbd } from './kbd';
 export { Mascot, mascot } from './mascot';
