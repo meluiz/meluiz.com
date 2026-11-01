@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 
 import { Script as ColorSchemeScript } from '@/components/providers/color-scheme/color-scheme.script';
 import { Script as SoundEffectsScript } from '@/components/providers/sound-effects/sound-effects.script';
-import { GeistMono, GeistSans } from '@/configs/fonts';
+import { GeistMono, GeistSans, GeistSerif } from '@/configs/fonts';
 
 import '@/assets/styles/globals.css';
 
@@ -17,7 +17,7 @@ export const Document = (props: DocumentProps) => {
   return (
     <html
       lang="en-US"
-      className={`${GeistSans.variable} ${GeistMono.variable} light overscroll-y-none pointer-coarse:scrollbar-none pointer-coarse:overscroll-y-auto`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${GeistSerif.variable} light overscroll-y-none pointer-coarse:scrollbar-none pointer-coarse:overscroll-y-auto`}
       suppressHydrationWarning
     >
       <head>
