@@ -26,7 +26,8 @@
     "paths": {
       "envin/env": ["./env.config.ts"],
       "#/*": ["./lib/*"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "#collections/*": ["./.source/*"]
     }
   }
 }
