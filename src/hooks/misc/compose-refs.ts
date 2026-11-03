@@ -1,17 +1,15 @@
 type PossibleRef<T> = React.Ref<T | null> | undefined;
 
-export const composeRefs = <T>(
-  ...refs: PossibleRef<T>[]
-): React.RefCallback<T> => {
+export const composeRefs = <T>(...refs: PossibleRef<T>[]): React.RefCallback<T> => {
   return (node) => {
     const cleanups: VoidFunction[] = [];
     let hasCustomCleanup = false;
 
     for (const ref of refs) {
-      if (typeof ref === "function") {
+      if (typeof ref === 'function') {
         const callback = ref(node);
 
-        if (typeof callback === "function") {
+        if (typeof callback === 'function') {
           hasCustomCleanup = true;
           cleanups.push(callback);
         } else {
@@ -36,8 +34,6 @@ export const composeRefs = <T>(
   };
 };
 
-export const useComposeRefs = <T>(
-  ...refs: PossibleRef<T>[]
-): React.RefCallback<T> => {
+export const useComposeRefs = <T>(...refs: PossibleRef<T>[]): React.RefCallback<T> => {
   return composeRefs(...refs);
 };
