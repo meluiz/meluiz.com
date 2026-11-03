@@ -1,0 +1,32 @@
+@theme static {
+  /* ------- frame ------- */
+
+  --color-code-surface: var(--color-surface-soft);
+  --color-code-stroke: var(--color-stroke);
+  --color-code-highlight: var(--color-surface-accent);
+  --color-code-highlight-stroke: var(--color-stroke-accent);
+  --color-code-diff-add: var(--color-surface-support);
+  --color-code-diff-remove: var(--color-surface-muted);
+
+  /* ------- tokens ------- */
+
+  --color-code-foreground: var(--color-foreground-prose);
+  --color-code-background: transparent;
+
+  --color-code-token-keyword: var(--color-foreground-accent);
+  --color-code-token-function: var(--color-foreground);
+  --color-code-token-constant: var(--color-clay-800);
+  --color-code-token-parameter: var(--color-foreground-soft);
+  --color-code-token-string: var(--color-foreground-support);
+  --color-code-token-string-expression: var(--color-foreground-support);
+  --color-code-token-comment: var(--color-foreground-muted);
+  --color-code-token-punctuation: var(--color-foreground-muted);
+  --color-code-token-link: var(--color-foreground-accent);
+}
+
+@layer theme {
+  .dark {
+    /* Only the token that reads a raw scale; the rest follow the semantic tokens */
+    --color-code-token-constant: var(--color-clay-300);
+  }
+}
