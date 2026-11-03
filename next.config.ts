@@ -1,6 +1,8 @@
-import type { NextConfig } from 'next';
+import { createMDX } from 'fumadocs-mdx/next';
 
-export default {
+const withMDX = createMDX();
+
+export default withMDX({
   typedRoutes: true,
   reactCompiler: true,
   cacheComponents: false,
@@ -42,4 +44,4 @@ export default {
       },
     ];
   },
-} satisfies NextConfig;
+});
