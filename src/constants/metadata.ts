@@ -99,7 +99,21 @@ export const metadata = freeze<Metadata>({
     title: manifest.short_name,
     siteName: manifest.short_name,
     description: manifest.description,
-    images: new URL('/opengraph-image.png', env.APP_URL),
+    images: {
+      url: new URL('/opengraph-image.png', env.APP_URL),
+      secureUrl: new URL('/opengraph-image.png', env.APP_URL),
+      width: 1200,
+      height: 630,
+      type: 'image/png',
+      alt: manifest.short_name,
+    },
+    videos: {
+      url: new URL('/opengraph-video.mp4', env.APP_URL),
+      secureUrl: new URL('/opengraph-video.mp4', env.APP_URL),
+      width: 1200,
+      height: 630,
+      type: 'video/mp4',
+    },
   },
   twitter: {
     title: manifest.short_name,
