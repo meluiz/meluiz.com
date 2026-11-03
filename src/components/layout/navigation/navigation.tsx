@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import { useSoundEffects } from '@/components/providers';
 import { Button, button, Dock } from '@/components/ui';
-import { useElementWidth } from '@/hooks/dom';
+import { useMeasure } from '@/hooks/sensors';
 import { socialChannels } from '@/modules/profile';
 
 import { Settings } from '../settings';
@@ -19,14 +19,15 @@ export const Navigation = () => {
 
   const { play } = useSoundEffects();
 
-  const [listWidth, listRef] = useElementWidth();
-  const [settingsWidth, settingsRef] = useElementWidth();
+  const [listRef, listMeasure] = useMeasure();
+  const [settingsRef, settingsMeasure] = useMeasure();
 
   const styles = navigationStyles();
 
   const listOpen = value === null;
   const settingsOpen = value === SETTINGS_PANEL;
-  const width = listOpen ? listWidth : settingsWidth;
+
+  const width = listOpen ? listMeasure?.width : settingsMeasure?.width;
 
   const handleValueChange = (next: string | null) => {
     setValue(next);
