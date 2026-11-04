@@ -46,19 +46,64 @@ Variables are declared and validated in [`env.config.ts`](./env.config.ts). See 
 
 ## Scripts
 
-| Command           | Description                         |
-| ----------------- | ----------------------------------- |
-| `bun dev`         | Start the development server        |
-| `bun run build`   | Create a production build           |
-| `bun start`       | Serve the production build          |
-| `bun run analyze` | Inspect the bundle                  |
-| `bun run lint`    | Lint with Biome                     |
-| `bun run format`  | Lint and format with Biome (writes) |
+| Command                    | Description                         |
+| -------------------------- | ----------------------------------- |
+| `bun dev`                  | Start the development server        |
+| `bun run build`            | Create a production build           |
+| `bun start`                | Serve the production build          |
+| `bun run analyze`          | Inspect the bundle                  |
+| `bun run lint`             | Lint with Biome                     |
+| `bun run format`           | Lint and format with Biome (writes) |
+| `bun run craft:new <slug>` | Scaffold a new craft                |
+
+## Creating a craft
+
+Crafts live in `content/crafts/<slug>/`. Run the CLI from the project root to scaffold one with the next free serial and today's date:
+
+```bash
+# Asks for the description and tags in a terminal
+bun run craft:new scroll-ink
+
+# Or pass everything up front
+bun run craft:new scroll-ink \
+  --description "A line that inks the sentence you are on." \
+  --tags motion,reading \
+  --status prototype \
+  --hint "Scroll the page" \
+  --source src/components/ui/scroll-ink
+```
+
+| Option                 | Description                                                              |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `--title <text>`       | Title, defaults to the slug in title case                                |
+| `--description <text>` | One sentence on what it is. Required, asked for if missing               |
+| `--tags <list>`        | Comma-separated `motion`, `interaction`, `layout`, `reading`. Required   |
+| `--status <status>`    | `draft` (default), `idea`, `prototype` or `built`                        |
+| `--hint <text>`        | Text shown in the stage's status bar                                     |
+| `--source <path>`      | Source file or folder, used for the specs and the Source link            |
+| `--dry-run`            | Print the files without writing them                                     |
+| `-h`, `--help`         | Show the usage                                                           |
+
+Without a terminal, such as in a script, `--description` and `--tags` must be passed as flags.
+
+The CLI writes `index.mdx`, plus a `playground.tsx` exporting the `Preview` shown in the stage for every status except `idea`.
+
+`draft` crafts show up in development but stay out of production builds, so change the status to publish one.
+
+With `--source`, the Built with, Anatomy and Size specs are computed from the code. To override one or add others, use `specs` in the frontmatter:
+
+```yaml
+specs:
+  - label: Size
+    value: ~2 kB
+```
 
 ## Project structure
 
 ```
 app/                 Routes, layouts and metadata files
+bin/                 Project CLIs (craft scaffolding)
+content/crafts/      Craft articles and playgrounds
 lib/                 Framework integrations (image loader)
 src/
   assets/            Global styles
@@ -68,7 +113,7 @@ src/
     ui/              Design system primitives
   configs/           Fonts and HTTP setup
   constants/         Site metadata and build info
-  modules/           Feature modules (analytics, career, colophon, exception, profile, projects)
+  modules/           Feature modules (analytics, career, colophon, crafts, exception, profile, projects)
   utils/             Helpers, DOM, React and style utilities
 ```
 
