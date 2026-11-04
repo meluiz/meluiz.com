@@ -35,6 +35,16 @@ export const header = sva({
   },
 });
 
+export const specs = sva({
+  variants: {},
+  slots: ['root', 'list', 'item'],
+  base: {
+    root: 'grid-cols-2 ring ring-stroke-soft sm:auto-cols-fr sm:grid-flow-col sm:grid-cols-none',
+    list: 'horizontal:gap-px vertical:gap-px',
+    item: 'max-sm:odd:last:col-span-full',
+  },
+});
+
 export const pager = sva({
   variants: {},
   slots: ['root', 'trigger', 'label', 'title'],

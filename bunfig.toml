@@ -1,6 +1,3 @@
-# Scripts to run before `bun run`-ing a file or script
-preload = ["zod/compile"]
-
 [install]
 # Only install package versions published at least 3 days ago
 minimumReleaseAge = 259200

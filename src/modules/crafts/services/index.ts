@@ -4,6 +4,6 @@ export {
   getCraftBySlug,
   getCraftList,
   getCraftNeighbors,
+  getCraftPosition,
   getCraftSourceUrl,
-  getCraftStage,
 } from './source';

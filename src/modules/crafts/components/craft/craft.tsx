@@ -1,11 +1,27 @@
+import type { CraftItem } from '../../services';
+
 import { IconArrowLeft, IconArrowRight } from '@central-icons/outlined-sharp';
 import Link from 'next/link';
 
 import { Button, DataList, RuledGrid, Tag } from '@/components/ui';
 
-import { header, pager, topbar } from './craft.styles';
+import { header, pager, specs as specsStyles, topbar } from './craft.styles';
 
-export const Topbar = () => {
+const formatSerial = (serial: number) => {
+  return `No. ${String(serial).padStart(3, '0')}`;
+};
+
+/* ///////////////////////////////////////////////// */
+
+export interface TopbarProps {
+  serial: number;
+  position: number;
+  total: number;
+}
+
+export const Topbar = (props: TopbarProps) => {
+  const { serial, position, total } = props;
+
   const styles = topbar();
 
   return (
@@ -20,14 +36,22 @@ export const Topbar = () => {
         <IconArrowLeft />
         Crafts
       </Button>
-      <span className={styles.label}>No. 006 · 2 of 7</span>
+      <span className={styles.label}>
+        {formatSerial(serial)} · {position} of {total}
+      </span>
     </div>
   );
 };
 
 /* ///////////////////////////////////////////////// */
 
-export const Header = () => {
+export interface HeaderProps {
+  craft: CraftItem;
+}
+
+export const Header = (props: HeaderProps) => {
+  const { craft } = props;
+
   const styles = header();
 
   return (
@@ -36,19 +60,22 @@ export const Header = () => {
         <Tag className={styles.statusTag} tone="accent">
           Craft
         </Tag>
-        <span className={styles.statusDate}>No. 006 · 2026-11</span>
+        <span className={styles.statusDate}>
+          {formatSerial(craft.serial)} · {craft.date.slice(0, 7)}
+        </span>
       </span>
       <div className={styles.content}>
         <h1 id="craft-title" className={styles.title}>
-          Dock Morph
+          {craft.title}
         </h1>
-        <p className={styles.description}>
-          A bottom dock that trades its links for settings, animating width instead of scale.
-        </p>
+        <p className={styles.description}>{craft.description}</p>
       </div>
       <ul className={styles.tagsGroup} aria-label="Tags">
-        <Tag render={<li />}>motion</Tag>
-        <Tag render={<li />}>interaction</Tag>
+        {craft.tags.map((tag) => (
+          <Tag key={tag} render={<li />}>
+            {tag}
+          </Tag>
+        ))}
       </ul>
     </section>
   );
@@ -56,48 +83,58 @@ export const Header = () => {
 
 /* ///////////////////////////////////////////////// */
 
-export const Specs = () => {
+export interface SpecsProps {
+  specs: CraftItem['specs'];
+}
+
+export const Specs = (props: SpecsProps) => {
+  const { specs } = props;
+
+  const styles = specsStyles();
+
+  if (specs.length === 0) {
+    return null;
+  }
+
   return (
-    <RuledGrid.Root
-      className="grid-cols-2 ring ring-stroke-soft sm:grid-cols-3"
-      render={<DataList.Root className="horizontal:gap-px vertical:gap-px" />}
-    >
-      <RuledGrid.Cell render={<DataList.Item />}>
-        <DataList.Term>Built With</DataList.Term>
-        <DataList.Details>React · Motion</DataList.Details>
-      </RuledGrid.Cell>
-      <RuledGrid.Cell render={<DataList.Item />}>
-        <DataList.Term>Anatomy</DataList.Term>
-        <DataList.Details>Root · Bar · Face</DataList.Details>
-      </RuledGrid.Cell>
-      <RuledGrid.Cell className="max-sm:col-span-full" render={<DataList.Item />}>
-        <DataList.Term>Size</DataList.Term>
-        <DataList.Details>~2 kB</DataList.Details>
-      </RuledGrid.Cell>
+    <RuledGrid.Root className={styles.root} render={<DataList.Root className={styles.list} />}>
+      {specs.map((spec) => (
+        <RuledGrid.Cell key={spec.label} className={styles.item} render={<DataList.Item />}>
+          <DataList.Term>{spec.label}</DataList.Term>
+          <DataList.Details>{spec.value}</DataList.Details>
+        </RuledGrid.Cell>
+      ))}
     </RuledGrid.Root>
   );
 };
 
 /* ///////////////////////////////////////////////// */
 
-export const Pager = () => {
+export interface PagerProps {
+  prev: CraftItem;
+  next: CraftItem;
+}
+
+export const Pager = (props: PagerProps) => {
+  const { prev, next } = props;
+
   const styles = pager();
 
   return (
     <nav className={styles.root} aria-label="More crafts">
-      <Link href="/" className={styles.trigger} rel="prev">
+      <Link href={`/crafts/${prev.slug}`} className={styles.trigger} rel="prev">
         <span className={styles.label}>
           <IconArrowLeft />
           Previous
         </span>
-        <span className={styles.title}>Scroll Ink</span>
+        <span className={styles.title}>{prev.title}</span>
       </Link>
-      <Link href="/" className={styles.trigger} rel="next">
+      <Link href={`/crafts/${next.slug}`} className={styles.trigger} rel="next">
         <span className={styles.label}>
           Next
           <IconArrowRight />
         </span>
-        <span className={styles.title}>Volume Readout</span>
+        <span className={styles.title}>{next.title}</span>
       </Link>
     </nav>
   );

@@ -7,6 +7,9 @@ export default withMDX({
   reactCompiler: true,
   cacheComponents: false,
   crossOrigin: 'anonymous',
+  outputFileTracingIncludes: {
+    '/crafts/*': ['./src/**/*.{ts,tsx}'],
+  },
   transpilePackages: ['envin'],
   env: {
     BUILD_TIMESTAMP: new Date().toISOString(),

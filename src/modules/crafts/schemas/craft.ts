@@ -12,5 +12,7 @@ export const CraftSchema = z.object({
   hint: z.string().optional(),
 
   source: z.string().optional(),
+
+  specs: z.object({ label: z.string(), value: z.string() }).array().default([]),
   status: z.enum(['idea', 'prototype', 'built', 'draft']).default('draft'),
 });
