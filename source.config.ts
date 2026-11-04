@@ -27,8 +27,8 @@ export default defineConfig({
     rehypeCodeOptions: {
       icon: false,
       defaultColor: 'light',
-      themes: { light: theme, dark: theme },
       inline: 'tailing-curly-colon',
+      themes: { light: theme, dark: theme },
       langs: ['tsx', 'ts', 'css', 'bash', 'json', 'mdx'],
       transformers: [
         ...(rehypeCodeDefaultOptions.transformers ?? []),
