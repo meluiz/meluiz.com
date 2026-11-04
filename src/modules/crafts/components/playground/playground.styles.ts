@@ -3,7 +3,7 @@ import { cn, cva } from '@/utils/styles';
 export const root = cva({
   base: cn([
     'relative grid max-w-full place-items-center gap-2 overflow-hidden bg-surface bg-hatch text-foreground transition-colors duration-200 ease-in-out-base hatch-stroke/56 hatch-2',
-    'in-[[data-scope=playground][data-part=stage]]:aspect-21/9',
+    'in-[[data-scope=playground][data-part=stage]]:aspect-video',
     'in-[[data-scope=playground][data-part=inline]]:min-h-56 in-[[data-scope=playground][data-part=inline]]:px-4 in-[[data-scope=playground][data-part=inline]]:pt-11 in-[[data-scope=playground][data-part=inline]]:pb-5 in-[[data-scope=playground][data-part=inline]]:ring in-[[data-scope=playground][data-part=inline]]:ring-stroke',
   ]),
   variants: {},
