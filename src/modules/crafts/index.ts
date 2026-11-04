@@ -1,6 +1,6 @@
 export type { CraftItem } from './services';
 
-export { Craft } from './components';
+export { Craft, Playground } from './components';
 export { tags } from './constants';
 export { CraftSchema } from './schemas';
 export {
