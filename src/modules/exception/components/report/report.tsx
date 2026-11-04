@@ -1,8 +1,7 @@
 import type { ReactNode } from 'react';
 
-import { RuledGrid, Section } from '@/components/ui';
+import { DataList, RuledGrid, Section } from '@/components/ui';
 
-import { Entry } from './components';
 import { report } from './report.styles';
 
 export interface ReportEntry {
@@ -29,15 +28,19 @@ export const Report = (props: ReportProps) => {
         <Section.Title className={styles.title}>{title}</Section.Title>
         <Section.Description>{description}</Section.Description>
       </Section.Header>
-      <RuledGrid.Root layout="specs" render={<dl />}>
+      <RuledGrid.Root
+        className="grid-cols-2 sm:grid-cols-4"
+        render={<DataList.Root className="horizontal:gap-px vertical:gap-px" />}
+      >
         {entries.map((entry) => (
-          <Entry
+          <RuledGrid.Cell
             key={entry.label}
-            label={entry.label}
             className={entry.wide ? styles.wide : undefined}
+            render={<DataList.Item />}
           >
-            {entry.value}
-          </Entry>
+            <DataList.Term>{entry.label}</DataList.Term>
+            <DataList.Details className={styles.value}>{entry.value}</DataList.Details>
+          </RuledGrid.Cell>
         ))}
       </RuledGrid.Root>
     </Section.Root>
