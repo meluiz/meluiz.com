@@ -11,7 +11,7 @@ export const item = cva({
 });
 
 export const term = cva({
-  base: 'font-mono text-xs/tight font-medium tracking-wide text-foreground-soft uppercase',
+  base: 'font-mono text-xs/tight font-medium tracking-wide text-foreground-muted uppercase',
   variants: {},
 });
 
