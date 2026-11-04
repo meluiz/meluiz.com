@@ -8,6 +8,7 @@ export type { SkeletonProps } from './skeleton';
 export type { TagProps } from './tag';
 
 export { Button, button } from './button';
+export { DataList, dataList } from './data-list';
 export { Dock, dock } from './dock';
 export { Highlight } from './highlight';
 export { Kbd, kbd } from './kbd';
