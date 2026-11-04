@@ -1,7 +1,7 @@
 import { cva } from '@/utils/styles';
 
 export const root = cva({
-  base: 'grid min-h-0 gap-px bg-stroke-soft',
+  base: 'grid min-h-0 gap-px bg-stroke-soft bg-clip-padding',
   variants: {},
 });
 
