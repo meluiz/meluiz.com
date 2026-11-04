@@ -8,13 +8,13 @@ import { cell, root } from './ruled-grid.styles';
 export type RootProps = useRender.ComponentProps<'div'> & VariantsOf<typeof root>;
 
 export const Root = (props: RootProps) => {
-  const { className, layout, render, ...rest } = props;
+  const { className, render, ...rest } = props;
 
   return useRender({
     defaultTagName: 'div',
     render,
     props: mergeProps(parts.root.attrs, rest, {
-      className: root({ className, layout }),
+      className: root({ className }),
     }),
   });
 };

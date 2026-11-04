@@ -17,7 +17,7 @@ export const Colophon = () => {
       </Section.Header>
       <div className={styles.body}>
         <RuledGrid.Root
-          layout="specs"
+          className="grid-cols-2 sm:grid-cols-4"
           render={<DataList.Root className="horizontal:gap-px vertical:gap-px" />}
         >
           {colophon.specs.map((spec) => (
@@ -30,7 +30,7 @@ export const Colophon = () => {
           ))}
         </RuledGrid.Root>
         <RuledGrid.Root
-          layout="cards"
+          className="grid-cols-1 sm:grid-cols-2"
           render={<DataList.Root className="horizontal:gap-px vertical:gap-px" />}
         >
           <RuledGrid.Cell render={<DataList.Item />}>
@@ -57,7 +57,7 @@ export const Colophon = () => {
           </RuledGrid.Cell>
         </RuledGrid.Root>
         <RuledGrid.Root
-          layout="cards"
+          className="grid-cols-1 sm:grid-cols-2"
           render={<DataList.Root className="horizontal:gap-px vertical:gap-px" />}
         >
           <RuledGrid.Cell stretch render={<DataList.Item />}>

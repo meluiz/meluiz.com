@@ -2,12 +2,7 @@ import { cva } from '@/utils/styles';
 
 export const root = cva({
   base: 'grid min-h-0 gap-px bg-stroke-soft',
-  variants: {
-    layout: {
-      cards: 'grid-cols-1 sm:grid-cols-2',
-      specs: 'grid-cols-2 sm:grid-cols-4',
-    },
-  },
+  variants: {},
 });
 
 export const cell = cva({
