@@ -16,6 +16,6 @@ export const term = cva({
 });
 
 export const details = cva({
-  base: 'text-foregorund m-0 font-mono text-sm/tight tracking-tight wrap-anywhere',
+  base: 'm-0 font-mono text-sm/tight tracking-tight wrap-anywhere text-foreground',
   variants: {},
 });
