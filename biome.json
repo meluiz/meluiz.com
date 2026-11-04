@@ -32,7 +32,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**", "!dist", "!.next", "!.void", "!**/*.css", "!**/*.svg"]
+    "includes": ["**", "!.source", "!dist", "!.next", "!.void", "!**/*.css", "!**/*.svg"]
   },
   "css": {
     "linter": {
