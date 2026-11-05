@@ -100,7 +100,7 @@ export const card = sva({
     title: 'min-w-0 font-mono text-sm/5 font-medium text-foreground',
     link: 'after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground-accent',
     date: 'shrink-0 font-mono text-xs/4 text-foreground-soft',
-    description: 'text-sm/normal text-pretty text-foreground-soft',
+    description: 'line-clamp-3 text-sm/normal text-pretty text-foreground-soft',
     tags: 'mt-1 flex flex-wrap gap-1',
     tag: 'relative z-2 transition-colors duration-150 ease-in-out-base hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground-accent data-[tone=accent]:border-foreground-accent data-[tone=accent]:bg-surface-accent data-[tone=accent]:hover:text-foreground-accent',
   },
