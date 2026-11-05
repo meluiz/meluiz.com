@@ -1,12 +1,21 @@
 import type { Route } from 'next';
-import type { CraftItem } from '../../services';
+import type { CraftItem, CraftTag } from '../../services';
 
 import { IconArrowLeft, IconArrowRight, IconCrossSmall } from '@central-icons/outlined-sharp';
 import Link from 'next/link';
 
 import { Button, DataList, RuledGrid, Tag } from '@/components/ui';
 
-import { filter, header, pager, specs as specsStyles, topbar } from './craft.styles';
+import { Playground } from '../playground';
+import {
+  card,
+  filter,
+  header,
+  pager,
+  results,
+  specs as specsStyles,
+  topbar,
+} from './craft.styles';
 
 const formatSerial = (serial: number) => {
   return `No. ${String(serial).padStart(3, '0')}`;
@@ -201,5 +210,95 @@ export const Filter = (props: FilterProps) => {
         {formatCount(count)} of {formatCount(total)}
       </span>
     </div>
+  );
+};
+
+/* ///////////////////////////////////////////////// */
+
+const toggleTag = (tags: CraftTag[], tag: CraftTag) => {
+  return tags.includes(tag) ? tags.filter((t) => t !== tag) : [...tags, tag];
+};
+
+export interface CardProps {
+  craft: CraftItem;
+  selected: CraftTag[];
+}
+
+export const Card = (props: CardProps) => {
+  const { craft, selected } = props;
+
+  const styles = card();
+
+  const Preview = craft.preview;
+
+  return (
+    <RuledGrid.Cell inset="none" className={styles.root} render={<article />}>
+      <Playground.Stage className={styles.stage} hint={craft.hint}>
+        <span className={styles.serial}>{formatSerial(craft.serial)}</span>
+        {Preview && <Preview />}
+      </Playground.Stage>
+      <div className={styles.meta}>
+        <div className={styles.top}>
+          <h2 className={styles.title}>
+            <Link href={`/crafts/${craft.slug}`} className={styles.link}>
+              {craft.title}
+            </Link>
+          </h2>
+          <span className={styles.date}>{craft.date.slice(0, 7)}</span>
+        </div>
+        <p className={styles.description}>{craft.description}</p>
+        <ul className={styles.tags} aria-label="Tags">
+          {craft.tags.map((tag) => {
+            const active = selected.includes(tag);
+
+            return (
+              <li key={tag}>
+                <Tag
+                  tone={active ? 'accent' : 'plain'}
+                  className={styles.tag}
+                  aria-current={active ? 'true' : undefined}
+                  aria-label={active ? `Remove ${tag} filter` : `Filter by ${tag}`}
+                  render={
+                    <Link href={getFilterHref(toggleTag(selected, tag))} scroll={false} />
+                  }
+                >
+                  {tag}
+                </Tag>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </RuledGrid.Cell>
+  );
+};
+
+/* ///////////////////////////////////////////////// */
+
+export interface ResultsProps {
+  crafts: CraftItem[];
+  selected: CraftTag[];
+}
+
+export const Results = (props: ResultsProps) => {
+  const { crafts, selected } = props;
+
+  const styles = results();
+
+  if (crafts.length === 0) {
+    return <p className={styles.empty}>No crafts on the bench yet</p>;
+  }
+
+  return (
+    <RuledGrid.Root className={styles.root}>
+      {crafts.map((craft) => (
+        <Card key={craft.slug} craft={craft} selected={selected} />
+      ))}
+      {crafts.length % 2 === 1 && (
+        <RuledGrid.Cell inset="none" aria-hidden="true" className={styles.filler}>
+          Next craft on the bench
+        </RuledGrid.Cell>
+      )}
+    </RuledGrid.Root>
   );
 };

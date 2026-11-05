@@ -15,6 +15,7 @@ const Page = async (props: PageProps<'/crafts'>) => {
         <Stats total={stats.total} since={stats.since} latest={stats.latest} />
       </section>
       <Craft.Filter tags={selected} count={filtered.length} total={stats.total} />
+      <Craft.Results crafts={filtered} selected={selected} />
     </div>
   );
 };
