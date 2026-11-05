@@ -233,7 +233,7 @@ export const Card = (props: CardProps) => {
 
   return (
     <RuledGrid.Cell inset="none" className={styles.root} render={<article />}>
-      <Playground.Stage className={styles.stage} hint={craft.hint}>
+      <Playground.Stage className={styles.stage}>
         <span className={styles.serial}>{formatSerial(craft.serial)}</span>
         {Preview && <Preview />}
       </Playground.Stage>
