@@ -5,6 +5,7 @@ import { Mascot } from '@/components/ui';
 import { Visitors } from '@/modules/analytics';
 
 import { Preferences } from '../preferences';
+import { Segments } from './components';
 
 export const Header = () => {
   return (
@@ -18,9 +19,11 @@ export const Header = () => {
             <Link href="/" aria-label="meluiz, home" className="-ml-3 px-3">
               <Mascot size={32} blink follow />
             </Link>
-            <Suspense fallback={<Visitors.Loading />}>
-              <Visitors.Content />
-            </Suspense>
+            <Segments>
+              <Suspense fallback={<Visitors.Loading />}>
+                <Visitors.Content />
+              </Suspense>
+            </Segments>
           </div>
           <div className="flex shrink-0 stretch-center gap-x-0.5 max-sm:flex-col sm:center-end max-sm:*:[button]:flex-row-reverse max-sm:*:[button]:center-start">
             <Preferences.ThemeToggler />
