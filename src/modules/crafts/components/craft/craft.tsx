@@ -41,7 +41,7 @@ export const Topbar = (props: TopbarProps) => {
         className={styles.back}
         size="small"
         native={false}
-        render={<Link href="/" />}
+        render={<Link href="/crafts" />}
       >
         <IconArrowLeft />
         Crafts
