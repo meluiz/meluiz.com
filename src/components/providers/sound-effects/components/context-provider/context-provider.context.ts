@@ -15,10 +15,13 @@ export interface SoundPreferences {
   preset: SoundPreset;
 }
 
-export type SoundTrigger = <A extends unknown[], R>(
-  callback?: (...args: A) => R,
-  options?: SoundOptions,
-) => (...args: A) => R | undefined;
+export interface SoundTrigger {
+  (callback?: undefined, options?: SoundOptions): void;
+  <A extends unknown[], R>(
+    callback: (...args: A) => R,
+    options?: SoundOptions,
+  ): (...args: A) => R;
+}
 
 export type Sound = Record<SoundName, SoundTrigger>;
 

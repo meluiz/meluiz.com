@@ -3,6 +3,7 @@
 import type {
   Sound,
   SoundName,
+  SoundOptions,
   SoundPreferences,
   SoundTrigger,
   UseSoundEffectsReturn,
@@ -74,13 +75,17 @@ const subscribePreferences = (callback: VoidFunction) => {
 };
 
 const createTrigger = (name: SoundName): SoundTrigger => {
-  return (callback, options) => {
-    play(name, options);
+  return ((callback?: (...args: unknown[]) => unknown, options?: SoundOptions) => {
+    if (!callback) {
+      play(name, options);
+      return;
+    }
 
-    return (...args) => {
-      return callback?.(...args);
+    return (...args: unknown[]) => {
+      play(name, options);
+      return callback(...args);
     };
-  };
+  }) as SoundTrigger;
 };
 
 const PLAY = Object.fromEntries(SOUNDS.map((name) => [name, createTrigger(name)])) as Sound;
