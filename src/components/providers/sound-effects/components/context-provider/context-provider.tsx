@@ -9,7 +9,7 @@ import type {
   UseSoundEffectsReturn,
 } from './context-provider.context';
 
-import { play, setEnabled, setTheme, setVolume } from 'cuelume';
+import { play, setEnabled, setTheme, setVolume, unlock } from 'cuelume';
 import React from 'react';
 
 import {
@@ -134,6 +134,26 @@ export const ContextProvider = (props: ContextProviderProps) => {
   React.useEffect(() => {
     applyPreferences(readPreferences());
   }, []);
+
+  React.useEffect(() => {
+    if (!preferences.enabled) {
+      return;
+    }
+
+    const handleGesture = () => void unlock();
+    const options = {
+      capture: true,
+      passive: true,
+    };
+
+    window.addEventListener('pointerdown', handleGesture, options);
+    window.addEventListener('keydown', handleGesture, options);
+
+    return () => {
+      window.removeEventListener('pointerdown', handleGesture, options);
+      window.removeEventListener('keydown', handleGesture, options);
+    };
+  }, [preferences.enabled]);
 
   return (
     <SoundEffectsContext
