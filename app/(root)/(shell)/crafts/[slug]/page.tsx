@@ -32,7 +32,6 @@ const Page = async (props: PageProps<'/crafts/[slug]'>) => {
       {Preview && (
         <Playground.Stage label={`${craft.title} ∙ Live`} hint={craft.hint}>
           <Playground.Toolbar>
-            <Playground.Reset>Reset</Playground.Reset>
             <Playground.Source
               native={false}
               render={
