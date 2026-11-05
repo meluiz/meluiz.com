@@ -8,6 +8,7 @@ import { Fragment } from 'react';
 import { createPortal } from 'react-dom';
 
 import { Button } from '@/components/ui';
+import { useSafeLayoutEffect } from '@/hooks/lifecycle';
 
 import { StatusBar } from './components';
 import { parts } from './playground.anatomy';
@@ -190,11 +191,17 @@ export type StatusProps = React.PropsWithChildren;
 export const Status = (props: StatusProps) => {
   const { children } = props;
 
-  const { statusBarRef } = usePlaygroundContext();
+  const { status } = usePlaygroundContext();
 
-  if (statusBarRef == null) {
-    return null;
-  }
+  status.seed(children);
 
-  return createPortal(children, statusBarRef);
+  useSafeLayoutEffect(() => {
+    status.set(children);
+  }, [status, children]);
+
+  useSafeLayoutEffect(() => {
+    return () => status.set(null);
+  }, [status]);
+
+  return null;
 };
