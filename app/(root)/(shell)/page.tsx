@@ -1,3 +1,5 @@
+import type { Metadata } from 'next';
+
 import { Experience } from '@/modules/career';
 import { Colophon } from '@/modules/colophon';
 import { About, Contact, Masthead } from '@/modules/profile';
@@ -19,3 +21,11 @@ const Page = () => {
 };
 
 export default Page;
+
+/* ///////////////////////////////////////////////// */
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: '/',
+  },
+};

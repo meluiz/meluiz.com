@@ -65,9 +65,6 @@ export const metadata = freeze<Metadata>({
   generator: 'Next.js',
   metadataBase: env.APP_URL,
   manifest: '/manifest.webmanifest',
-  alternates: {
-    canonical: '/',
-  },
   authors: [
     {
       name: 'meluiz',
