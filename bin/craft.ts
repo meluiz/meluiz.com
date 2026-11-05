@@ -185,15 +185,16 @@ const getFrontmatter = (fields: Fields) => {
   ].join('\n');
 };
 
-const getArticle = (hasPreview: boolean) => {
+const getArticle = (filename: string, hasPreview: boolean) => {
   if (hasPreview) {
-    return "export { Preview } from './playground';\n\n## What it is\n\nTODO\n";
+    return `export { Preview } from './${filename}.preview';\n\n## What it is\n\nTODO\n`;
   }
   return '## The idea\n\nTODO\n\n## Open questions\n\n- TODO\n';
 };
 
 const getPreview = (title: string) => {
   const text = /[{}<>]/.test(title) ? `{${JSON.stringify(title)}}` : title;
+
   return [
     "'use client';",
     '',
@@ -276,25 +277,33 @@ const main = async () => {
 
   // Same schema as the collection, so a scaffolded craft can't fail the build on its frontmatter
   const parsed = CraftSchema.safeParse(fields);
+
   if (!parsed.success) {
     const issues = parsed.error.issues.map((issue) => {
       return `${issue.path.join('.')}: ${issue.message}`;
     });
+
     return fail(`Invalid craft:\n  ${issues.join('\n  ')}`);
   }
 
   const hasPreview = status !== 'idea';
-  const files = [
-    { name: 'index.mdx', content: `${getFrontmatter(fields)}\n\n${getArticle(hasPreview)}` },
-    ...(hasPreview ? [{ name: 'playground.tsx', content: getPreview(fields.title) }] : []),
-  ];
+
   const label = `No. ${String(fields.serial).padStart(3, '0')} · ${fields.title}`;
+  const files = [
+    {
+      name: 'index.mdx',
+      content: `${getFrontmatter(fields)}\n\n${getArticle(slug, hasPreview)}`,
+    },
+    ...(hasPreview ? [{ name: `${slug}.preview.tsx`, content: getPreview(fields.title) }] : []),
+  ];
 
   if (values['dry-run']) {
     console.log(`Would create ${label} → ${CONTENT_PATH}/${slug}`);
+
     for (const file of files) {
       console.log(`\n--- ${file.name}\n${file.content}`);
     }
+
     return;
   }
 
