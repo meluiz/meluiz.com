@@ -1,4 +1,4 @@
-export type { CraftItem } from './source';
+export type { CraftItem, CraftTag } from './source';
 
 export {
   getCraftBySlug,
@@ -6,4 +6,7 @@ export {
   getCraftNeighbors,
   getCraftPosition,
   getCraftSourceUrl,
+  getCraftStats,
+  getCraftsByTags,
+  parseCraftTags,
 } from './source';

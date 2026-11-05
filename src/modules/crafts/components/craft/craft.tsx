@@ -1,11 +1,12 @@
+import type { Route } from 'next';
 import type { CraftItem } from '../../services';
 
-import { IconArrowLeft, IconArrowRight } from '@central-icons/outlined-sharp';
+import { IconArrowLeft, IconArrowRight, IconCrossSmall } from '@central-icons/outlined-sharp';
 import Link from 'next/link';
 
 import { Button, DataList, RuledGrid, Tag } from '@/components/ui';
 
-import { header, pager, specs as specsStyles, topbar } from './craft.styles';
+import { filter, header, pager, specs as specsStyles, topbar } from './craft.styles';
 
 const formatSerial = (serial: number) => {
   return `No. ${String(serial).padStart(3, '0')}`;
@@ -28,7 +29,7 @@ export const Topbar = (props: TopbarProps) => {
     <div className={styles.root}>
       <Button
         variant="ghost"
-        className="gap-x-2 font-mono uppercase"
+        className={styles.back}
         size="small"
         native={false}
         render={<Link href="/" />}
@@ -137,5 +138,68 @@ export const Pager = (props: PagerProps) => {
         <span className={styles.title}>{next.title}</span>
       </Link>
     </nav>
+  );
+};
+
+/* ///////////////////////////////////////////////// */
+
+const formatCount = (count: number) => {
+  return String(count).padStart(2, '0');
+};
+
+const getFilterHref = (tags: string[]): Route => {
+  return tags.length > 0 ? `/crafts?tags=${tags.join(',')}` : '/crafts';
+};
+
+export interface FilterProps {
+  tags: string[];
+  count: number;
+  total: number;
+}
+
+export const Filter = (props: FilterProps) => {
+  const { tags, count, total } = props;
+
+  const styles = filter();
+
+  return (
+    <div className={styles.root}>
+      {tags.length > 0 ? (
+        <div className={styles.group}>
+          <p className={styles.label} aria-live="polite">
+            Filtered by
+          </p>
+          <ul className={styles.list}>
+            {tags.map((tag) => {
+              const remaining = tags.filter((t) => t !== tag);
+
+              return (
+                <li key={tag} className={styles.item}>
+                  {tag}
+                  <Button
+                    compact
+                    size="small"
+                    variant="link"
+                    native={false}
+                    aria-label={`Remove ${tag} filter`}
+                    className={styles.remove}
+                    render={<Link href={getFilterHref(remaining)} scroll={false} />}
+                  >
+                    <IconCrossSmall />
+                  </Button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : (
+        <p className={styles.label} aria-live="polite">
+          Tap a tag on any craft to filter.
+        </p>
+      )}
+      <span className={styles.count}>
+        {formatCount(count)} of {formatCount(total)}
+      </span>
+    </div>
   );
 };

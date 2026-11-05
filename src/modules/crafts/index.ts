@@ -1,5 +1,5 @@
 export type { CraftItem } from './services';
 
-export { Craft, Mdx, Playground } from './components';
+export { Craft, Masthead, Mdx, Playground, Stats } from './components';
 export { tags } from './constants';
 export { CraftSchema } from './schemas';

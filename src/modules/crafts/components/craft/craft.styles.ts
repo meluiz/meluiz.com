@@ -2,9 +2,10 @@ import { sva } from '@/utils/styles';
 
 export const topbar = sva({
   variants: {},
-  slots: ['root', 'label'],
+  slots: ['root', 'back', 'label'],
   base: {
     root: 'flex min-h-14 center-between gap-3 px-4 sm:px-6',
+    back: 'gap-x-2 font-mono uppercase',
     label: 'font-mono text-xs font-medium tracking-tighter text-foreground-muted uppercase',
   },
 });
@@ -55,5 +56,20 @@ export const pager = sva({
     label:
       'inline-flex items-center gap-x-2 font-mono text-xs/4 font-medium tracking-wider text-foreground-muted uppercase *:[svg]:size-3.5 *:[svg]:transition-transform *:[svg]:duration-150 *:[svg]:ease-in-out-base group-hover:*:[svg]:in-[[rel=next]]:translate-x-1 group-hover:*:[svg]:in-[[rel=prev]]:-translate-x-1',
     title: 'max-w-full truncate font-mono text-sm/5 font-medium text-foreground',
+  },
+});
+
+export const filter = sva({
+  variants: {},
+  slots: ['root', 'group', 'label', 'list', 'item', 'remove', 'count'],
+  base: {
+    root: 'flex min-h-14 flex-row center-between gap-x-3 px-4 sm:px-6',
+    group: 'flex center gap-x-3',
+    label: 'py-3.5 text-sm/snug font-medium text-foreground-soft',
+    list: 'flex flex-wrap center gap-x-1.5',
+    item: 'flex min-h-6 center gap-x-2 bg-surface-accent px-2 font-mono text-xs/4 text-foreground-accent uppercase ring ring-foreground-accent',
+    remove: '-mx-px',
+    count:
+      'shrink-0 font-mono text-xs/4 font-medium tracking-tighter text-foreground-muted uppercase',
   },
 });

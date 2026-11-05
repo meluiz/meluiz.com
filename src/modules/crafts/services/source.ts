@@ -6,9 +6,13 @@ import { slug as slugify } from '@motiro/string';
 import { crafts as collection } from '#collections/server';
 import { github } from '@/constants/source';
 
+import { tags } from '../constants';
+
 /* ///////////////////////////////////////////////// */
 
 type CollectionItem = (typeof collection)[number];
+
+export type CraftTag = (typeof tags)[number];
 
 export interface CraftItem extends CollectionItem {
   slug: string;
@@ -16,6 +20,10 @@ export interface CraftItem extends CollectionItem {
 }
 
 /* ///////////////////////////////////////////////// */
+
+const isCraftTag = (value: string): value is CraftTag => {
+  return tags.some((tag) => tag === value);
+};
 
 const toSlug = (path: string) => {
   return slugify(path.split('/')[0]);
@@ -143,6 +151,33 @@ export const getCraftBySlug = (slug: string) => {
 
 export const getCraftList = () => {
   return crafts;
+};
+
+// Accepts ?tags=a,b and ?tags=a&tags=b; values outside the known tags are dropped
+export const parseCraftTags = (value?: string | string[]) => {
+  const values = [value ?? []].flat().flatMap((item) => item.split(','));
+  const parsed = values.map((item) => item.trim().toLowerCase()).filter(isCraftTag);
+
+  return Array.from(new Set(parsed));
+};
+
+// A craft matches when it has at least one of the selected tags
+export const getCraftsByTags = (selected: CraftTag[]) => {
+  if (selected.length === 0) {
+    return crafts;
+  }
+
+  return crafts.filter((craft) => craft.tags.some((tag) => selected.includes(tag)));
+};
+
+export const getCraftStats = () => {
+  const dates = crafts.map((craft) => craft.date).sort();
+
+  return {
+    total: crafts.length,
+    since: dates.at(0)?.slice(0, 4) ?? null,
+    latest: dates.at(-1) ?? null,
+  };
 };
 
 export const getCraftPosition = (craft: CraftItem) => {
