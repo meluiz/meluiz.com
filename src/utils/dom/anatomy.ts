@@ -1,3 +1,5 @@
+import { toKebabCase } from '@motiro/string';
+
 export interface AnatomyPart {
   scope: string;
   part: string;
@@ -25,14 +27,6 @@ export interface AnatomyBuilder<T extends string> extends Anatomy<T> {
 
 const toUniqueValues = <T>(values: T[]): T[] => {
   return [...new Set(values)];
-};
-
-const toKebabCase = (value: string) => {
-  return value
-    .replace(/([A-Z])([A-Z])/g, '$1-$2')
-    .replace(/([a-z])([A-Z])/g, '$1-$2')
-    .replace(/[\s_]+/g, '-')
-    .toLowerCase();
 };
 
 export const createPart = (scope: string, name: string): AnatomyPart => {
