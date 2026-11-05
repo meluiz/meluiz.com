@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+import type { Suggestion } from '../../constants';
 import type { RequestInfo } from '../../services';
 
 import { IconArrowLeft } from '@central-icons/outlined-sharp';
@@ -15,10 +17,40 @@ import { notFound } from './not-found.styles';
 
 export interface NotFoundProps {
   request: RequestInfo;
+  /** Heading shown under the 404 banner. */
+  title?: string;
+  /** Extra tags shown in the banner, before the request location. */
+  tags?: string[];
+  /** Body of the "What happened" section. */
+  description?: ReactNode;
+  /** Primary action, rendered before the report link. */
+  action?: ReactNode;
+  suggestions?: {
+    items: Suggestion[];
+    title?: string;
+    description?: string;
+  };
 }
 
 export const NotFound = (props: NotFoundProps) => {
-  const { request } = props;
+  const {
+    request,
+    title = 'Page not found',
+    tags = [],
+    description = (
+      <Fragment>
+        Nothing lives at <Pathname />. The page may have moved, been renamed, or never existed —
+        the link that brought you here might just be older than the site.
+      </Fragment>
+    ),
+    action = (
+      <Button variant="solid" size="large" native={false} render={<Link href="/" />}>
+        <IconArrowLeft aria-hidden="true" />
+        Back home
+      </Button>
+    ),
+    suggestions: suggestionsProps = { items: suggestions },
+  } = props;
 
   const styles = notFound();
 
@@ -31,8 +63,8 @@ export const NotFound = (props: NotFoundProps) => {
         <Masthead
           code="404"
           mood="idle"
-          title="Page not found"
-          tags={['Not found', ...location]}
+          title={title}
+          tags={['Not found', ...tags, ...location]}
           details={[
             `HTTP ${request.status.code}`,
             <span key="path">
@@ -43,19 +75,15 @@ export const NotFound = (props: NotFoundProps) => {
         <Overview
           actions={
             <Fragment>
-              <Button variant="solid" size="large" native={false} render={<Link href="/" />}>
-                <IconArrowLeft aria-hidden="true" />
-                Back home
-              </Button>
+              {action}
               <ReportLink request={request} />
             </Fragment>
           }
         >
-          Nothing lives at <Pathname />. The page may have moved, been renamed, or never existed
-          — the link that brought you here might just be older than the site.
+          {description}
         </Overview>
       </div>
-      <Suggestions items={suggestions} />
+      <Suggestions {...suggestionsProps} />
       <Report
         id="request"
         title="Request"

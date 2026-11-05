@@ -7,10 +7,16 @@ import { suggestions as suggestionsStyles } from './suggestions.styles';
 
 export interface SuggestionsProps {
   items: Suggestion[];
+  title?: string;
+  description?: string;
 }
 
 export const Suggestions = (props: SuggestionsProps) => {
-  const { items } = props;
+  const {
+    items,
+    title = 'Try instead',
+    description = 'The places people usually meant to land on',
+  } = props;
 
   const styles = suggestionsStyles();
 
@@ -19,12 +25,7 @@ export const Suggestions = (props: SuggestionsProps) => {
   }
 
   return (
-    <Panel
-      id="try-instead"
-      index={2}
-      title="Try instead"
-      description="The places people usually meant to land on"
-    >
+    <Panel id="try-instead" index={2} title={title} description={description}>
       <ol className={styles.list}>
         {items.map((item, index) => (
           <li key={item.id}>
