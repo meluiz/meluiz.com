@@ -73,16 +73,16 @@ bun run craft:new scroll-ink \
   --source src/components/ui/scroll-ink
 ```
 
-| Option                 | Description                                                              |
-| ---------------------- | ------------------------------------------------------------------------ |
-| `--title <text>`       | Title, defaults to the slug in title case                                |
-| `--description <text>` | One sentence on what it is. Required, asked for if missing               |
-| `--tags <list>`        | Comma-separated `motion`, `interaction`, `layout`, `reading`. Required   |
-| `--status <status>`    | `draft` (default), `idea`, `prototype` or `built`                        |
-| `--hint <text>`        | Text shown in the stage's status bar                                     |
-| `--source <path>`      | Source file or folder, used for the specs and the Source link            |
-| `--dry-run`            | Print the files without writing them                                     |
-| `-h`, `--help`         | Show the usage                                                           |
+| Option                 | Description                                                            |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `--title <text>`       | Title, defaults to the slug in title case                              |
+| `--description <text>` | One sentence on what it is. Required, asked for if missing             |
+| `--tags <list>`        | Comma-separated `motion`, `interaction`, `layout`, `reading`. Required |
+| `--status <status>`    | `draft` (default), `idea`, `prototype` or `built`                      |
+| `--hint <text>`        | Text shown in the stage's status bar                                   |
+| `--source <path>`      | Source file or folder, used for the specs and the Source link          |
+| `--dry-run`            | Print the files without writing them                                   |
+| `-h`, `--help`         | Show the usage                                                         |
 
 Without a terminal, such as in a script, `--description` and `--tags` must be passed as flags.
 
