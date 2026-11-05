@@ -7,6 +7,7 @@ export type { SeparatorBaseProps, SeparatorProps } from './separator';
 export type { SkeletonBaseProps, SkeletonProps } from './skeleton';
 export type { TagBaseProps, TagProps } from './tag';
 
+export { Breadcrumb, breadcrumb } from './breadcrumb';
 export { Button, button } from './button';
 export { DataList, dataList } from './data-list';
 export { Dock, dock } from './dock';
