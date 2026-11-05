@@ -1,3 +1,6 @@
+import type { Metadata } from 'next';
+
+import { metadata as baseMetadata } from '@/constants/metadata';
 import { Craft, Masthead, Stats } from '@/modules/crafts';
 import { getCraftStats, getCraftsByTags, parseCraftTags } from '@/modules/crafts/services';
 
@@ -21,3 +24,28 @@ const Page = async (props: PageProps<'/crafts'>) => {
 };
 
 export default Page;
+
+/* ///////////////////////////////////////////////// */
+
+const TITLE = 'Crafts';
+const DESCRIPTION =
+  'Small interface experiments on motion, interaction, layout and reading, built to learn how interfaces should feel.';
+
+export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: {
+    canonical: '/crafts',
+  },
+  openGraph: {
+    ...baseMetadata.openGraph,
+    url: '/crafts',
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: {
+    ...baseMetadata.twitter,
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+};
