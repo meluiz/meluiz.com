@@ -10,7 +10,7 @@ export const anatomy = createAnatomy('playground', [
   'actions',
   'action',
   'trigger',
-  'status-bar',
+  'status_bar',
   'status',
   'hint',
 ]);

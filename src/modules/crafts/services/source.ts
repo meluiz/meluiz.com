@@ -88,7 +88,7 @@ const getAnatomy = (files: string[]) => {
   const [, ...names] = Array.from(definition.matchAll(/'([^']+)'/g), (match) => match[1]);
 
   return names
-    .map((name) => name.replace(/-/g, ' ').replace(/^\w/, (char) => char.toUpperCase()))
+    .map((name) => name.replace(/_/g, ' ').replace(/^\w/, (char) => char.toUpperCase()))
     .join(' · ');
 };
 

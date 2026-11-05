@@ -12,7 +12,7 @@ export const StatusBar = (props: StatusBarProps) => {
   const { setStatusBarRef } = usePlaygroundContext();
 
   return (
-    <div {...parts['status-bar'].attrs} className={styles.root()}>
+    <div {...parts.status_bar.attrs} className={styles.root()}>
       <span
         ref={setStatusBarRef}
         {...parts.status.attrs}
