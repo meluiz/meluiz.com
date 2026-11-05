@@ -5,7 +5,8 @@ import { mergeProps, useRender } from '@base-ui/react';
 import { parts } from './skeleton.anatomy';
 import { root } from './skeleton.styles';
 
-export type SkeletonProps = useRender.ComponentProps<'span'> & VariantsOf<typeof root>;
+export type SkeletonBaseProps = VariantsOf<typeof root>;
+export type SkeletonProps = useRender.ComponentProps<'span'> & SkeletonBaseProps;
 
 export const Skeleton = (props: SkeletonProps) => {
   const { className, render, animation, ...rest } = props;

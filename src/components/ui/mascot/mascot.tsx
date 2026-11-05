@@ -12,17 +12,17 @@ import { parts } from './mascot.anatomy';
 import { body, eye, group, mark, root } from './mascot.styles';
 import { useMascot } from './use-mascot';
 
-type MascotBaseProps = UseMascotProps &
-  Omit<useRender.ElementProps<'svg'> & VariantsOf<typeof root>, 'children'>;
-
 export type MascotMood = 'idle' | 'broken';
 
-export type MascotProps = MascotBaseProps & {
-  label?: string;
-  mood?: MascotMood;
-  animated?: boolean;
-  size?: number | string;
-};
+export type MascotBaseProps = VariantsOf<typeof root> &
+  UseMascotProps & {
+    label?: string;
+    mood?: MascotMood;
+    animated?: boolean;
+    size?: number | string;
+  };
+
+export type MascotProps = Omit<useRender.ElementProps<'svg'>, 'children'> & MascotBaseProps;
 
 export const Mascot = (props: MascotProps) => {
   const {

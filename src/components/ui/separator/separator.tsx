@@ -5,7 +5,8 @@ import { Separator as BaseSeparator, mergeProps } from '@base-ui/react';
 import { parts } from './separator.anatomy';
 import { root } from './separator.styles';
 
-export type SeparatorProps = BaseSeparator.Props & VariantsOf<typeof root>;
+export type SeparatorBaseProps = VariantsOf<typeof root>;
+export type SeparatorProps = BaseSeparator.Props & SeparatorBaseProps;
 
 export const Separator = (props: SeparatorProps) => {
   const { className, strength, ...rest } = props;

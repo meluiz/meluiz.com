@@ -7,7 +7,8 @@ import { aside, content, item, root } from './timeline.styles';
 
 /* ///////////////////////////////////////////////// */
 
-export type RootProps = useRender.ComponentProps<'ol'> & VariantsOf<typeof root>;
+export type RootBaseProps = VariantsOf<typeof root>;
+export type RootProps = useRender.ComponentProps<'ol'> & RootBaseProps;
 
 export const Root = (props: RootProps) => {
   const { className, render, ...rest } = props;
@@ -23,7 +24,8 @@ export const Root = (props: RootProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type ItemProps = useRender.ComponentProps<'li'> & VariantsOf<typeof item>;
+export type ItemBaseProps = VariantsOf<typeof item>;
+export type ItemProps = useRender.ComponentProps<'li'> & ItemBaseProps;
 
 export const Item = (props: ItemProps) => {
   const { className, render, ...rest } = props;
@@ -39,7 +41,8 @@ export const Item = (props: ItemProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type AsideProps = useRender.ComponentProps<'div'> & VariantsOf<typeof aside>;
+export type AsideBaseProps = VariantsOf<typeof aside>;
+export type AsideProps = useRender.ComponentProps<'div'> & AsideBaseProps;
 
 export const Aside = (props: AsideProps) => {
   const { className, render, ...rest } = props;
@@ -55,7 +58,8 @@ export const Aside = (props: AsideProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type ContentProps = useRender.ComponentProps<'div'> & VariantsOf<typeof content>;
+export type ContentBaseProps = VariantsOf<typeof content>;
+export type ContentProps = useRender.ComponentProps<'div'> & ContentBaseProps;
 
 export const Content = (props: ContentProps) => {
   const { className, render, ...rest } = props;

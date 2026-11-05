@@ -1,11 +1,11 @@
-export type { ButtonProps } from './button';
-export type { HighlightProps } from './highlight';
-export type { KbdProps } from './kbd';
-export type { MascotMood, MascotProps } from './mascot';
+export type { ButtonBaseProps, ButtonProps } from './button';
+export type { HighlightBaseProps, HighlightProps } from './highlight';
+export type { KbdBaseProps, KbdProps } from './kbd';
+export type { MascotBaseProps, MascotMood, MascotProps } from './mascot';
 export type { PortalProps } from './portal';
-export type { SeparatorProps } from './separator';
-export type { SkeletonProps } from './skeleton';
-export type { TagProps } from './tag';
+export type { SeparatorBaseProps, SeparatorProps } from './separator';
+export type { SkeletonBaseProps, SkeletonProps } from './skeleton';
+export type { TagBaseProps, TagProps } from './tag';
 
 export { Button, button } from './button';
 export { DataList, dataList } from './data-list';

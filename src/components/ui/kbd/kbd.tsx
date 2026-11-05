@@ -10,11 +10,11 @@ import { Fragment } from 'react';
 import { parts } from './kbd.anatomy';
 import { root } from './kbd.styles';
 
-type KbdBaseProps = Omit<useRender.ComponentProps<'kbd'>, 'children'> & VariantsOf<typeof root>;
-
-export type KbdProps = KbdBaseProps & {
+export type KbdBaseProps = VariantsOf<typeof root> & {
   hotkey: IndividualKey;
 };
+
+export type KbdProps = Omit<useRender.ComponentProps<'kbd'>, 'children'> & KbdBaseProps;
 
 export const Kbd = (props: KbdProps) => {
   const { className, hotkey, size, render, ...rest } = props;

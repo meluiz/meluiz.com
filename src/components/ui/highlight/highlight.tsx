@@ -9,7 +9,9 @@ import { splitProps } from '@/utils/react';
 
 import { useHighlight } from './use-highlight';
 
-export type HighlightProps = React.ComponentProps<'mark'> & UseHighlightProps;
+export type HighlightBaseProps = UseHighlightProps;
+
+export type HighlightProps = React.ComponentProps<'mark'> & HighlightBaseProps;
 
 export const Highlight = (props: HighlightProps) => {
   if (typeof props.text !== 'string') {

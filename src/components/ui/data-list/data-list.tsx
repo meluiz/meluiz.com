@@ -29,7 +29,9 @@ export const Root = (props: RootProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type ItemProps = useRender.ComponentProps<'div'> & VariantsOf<typeof styles.item>;
+export type ItemBaseProps = VariantsOf<typeof styles.item>;
+
+export type ItemProps = useRender.ComponentProps<'div'> & ItemBaseProps;
 
 export const Item = (props: ItemProps) => {
   const { className, render, ...rest } = props;
@@ -45,7 +47,9 @@ export const Item = (props: ItemProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type TermProps = useRender.ComponentProps<'dt'> & VariantsOf<typeof styles.term>;
+export type TermBaseProps = VariantsOf<typeof styles.term>;
+
+export type TermProps = useRender.ComponentProps<'dt'> & TermBaseProps;
 
 export const Term = (props: TermProps) => {
   const { className, render, ...rest } = props;
@@ -61,7 +65,9 @@ export const Term = (props: TermProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type DetailsProps = useRender.ComponentProps<'dd'> & VariantsOf<typeof styles.details>;
+export type DetailsBaseProps = VariantsOf<typeof styles.details>;
+
+export type DetailsProps = useRender.ComponentProps<'dd'> & DetailsBaseProps;
 
 export const Details = (props: DetailsProps) => {
   const { className, render, ...rest } = props;

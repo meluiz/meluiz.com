@@ -5,7 +5,8 @@ import { mergeProps, useRender } from '@base-ui/react';
 import { parts } from './tag.anatomy';
 import { root } from './tag.styles';
 
-export type TagProps = useRender.ComponentProps<'span'> & VariantsOf<typeof root>;
+export type TagBaseProps = VariantsOf<typeof root>;
+export type TagProps = useRender.ComponentProps<'span'> & TagBaseProps;
 
 export const Tag = (props: TagProps) => {
   const { className, render, tone, ...rest } = props;

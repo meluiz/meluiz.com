@@ -58,7 +58,9 @@ export type RootState = {
   open: boolean;
 };
 
-export type RootProps = useRender.ComponentProps<'div', RootState> & UseDockProps;
+export type RootBaseProps = UseDockProps;
+
+export type RootProps = useRender.ComponentProps<'div', RootState> & RootBaseProps;
 
 export const Root = (props: RootProps) => {
   const { className, render, value, defaultValue, onValueChange, ...rest } = props;
@@ -150,13 +152,16 @@ export type TriggerState = {
   disabled: boolean;
 };
 
+export type TriggerBaseProps = {
+  value: string;
+};
+
 export type TriggerProps = Omit<
   useRender.ComponentProps<'button', TriggerState>,
   'render' | 'value'
 > &
-  Pick<Toolbar.Button.Props, 'render' | 'nativeButton'> & {
-    value: string;
-  };
+  Pick<Toolbar.Button.Props, 'render' | 'nativeButton'> &
+  TriggerBaseProps;
 
 export const Trigger = (props: TriggerProps) => {
   const { ref, className, render, value, disabled = false, nativeButton, ...rest } = props;
@@ -193,10 +198,13 @@ export type PanelState = {
   value: string;
 };
 
-export type PanelProps = Omit<useRender.ComponentProps<'div', PanelState>, 'value'> & {
+export type PanelBaseProps = {
   value: string;
   keepMounted?: boolean | undefined;
 };
+
+export type PanelProps = Omit<useRender.ComponentProps<'div', PanelState>, 'value'> &
+  PanelBaseProps;
 
 export const Panel = (props: PanelProps) => {
   const { ref, className, render, value, keepMounted = false, ...rest } = props;

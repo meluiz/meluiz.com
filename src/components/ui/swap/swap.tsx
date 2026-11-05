@@ -26,10 +26,12 @@ export type RootState = {
   swapped: boolean;
 };
 
+export type RootBaseProps = UseSwapProps & {
+  className?: ClassName<RootState>;
+};
+
 export type RootProps = Omit<useRender.ComponentProps<'span', RootState>, 'className'> &
-  UseSwapProps & {
-    className?: ClassName<RootState>;
-  };
+  RootBaseProps;
 
 export const Root = (props: RootProps) => {
   const {
@@ -63,13 +65,16 @@ export type IndicatorState = TransitionStatusState & {
   type: 'on' | 'off';
 };
 
-export type IndicatorProps = Omit<
-  useRender.ComponentProps<'span', IndicatorState>,
-  'className'
-> & {
+export type IndicatorBaseProps = {
   type: 'on' | 'off';
   className?: ClassName<IndicatorState>;
 };
+
+export type IndicatorProps = Omit<
+  useRender.ComponentProps<'span', IndicatorState>,
+  'className'
+> &
+  IndicatorBaseProps;
 
 export const Indicator = (props: IndicatorProps) => {
   const { ref, type, render, className, ...rest } = props;

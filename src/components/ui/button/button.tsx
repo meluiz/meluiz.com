@@ -7,13 +7,13 @@ import { ariaAttr, dataAttr } from '@/utils/dom';
 import { parts } from './button.anatomy';
 import { root } from './button.styles';
 
-type ButtonBaseProps = Omit<ButtonBase.Props, 'nativeButton' | 'focusableWhenDisabled'> &
-  VariantsOf<typeof root>;
-
-export type ButtonProps = ButtonBaseProps & {
+export type ButtonBaseProps = VariantsOf<typeof root> & {
   native?: boolean;
   focusable?: boolean;
 };
+
+export type ButtonProps = Omit<ButtonBase.Props, 'nativeButton' | 'focusableWhenDisabled'> &
+  ButtonBaseProps;
 
 export const Button = (props: ButtonProps) => {
   const {

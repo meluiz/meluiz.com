@@ -12,9 +12,8 @@ import { SectionProvider, useSectionContext } from './use-section-context';
 
 /* ///////////////////////////////////////////////// */
 
-type RootBaseProps = useRender.ComponentProps<'section'> & VariantsOf<typeof styles.root>;
-
-export type RootProps = RootBaseProps & UseSectionProps;
+export type RootBaseProps = VariantsOf<typeof styles.root> & UseSectionProps;
+export type RootProps = useRender.ComponentProps<'section'> & RootBaseProps;
 
 export const Root = (props: RootProps) => {
   const { className, index, render, tone, id, ...rest } = props;
@@ -36,7 +35,8 @@ export const Root = (props: RootProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type HeaderProps = useRender.ComponentProps<'header'> & VariantsOf<typeof styles.header>;
+export type HeaderBaseProps = VariantsOf<typeof styles.header>;
+export type HeaderProps = useRender.ComponentProps<'header'> & HeaderBaseProps;
 
 export const Header = (props: HeaderProps) => {
   const { className, divided, inset, render, ...rest } = props;
@@ -52,7 +52,8 @@ export const Header = (props: HeaderProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type IndexProps = useRender.ComponentProps<'span'> & VariantsOf<typeof styles.index>;
+export type IndexBaseProps = VariantsOf<typeof styles.index>;
+export type IndexProps = useRender.ComponentProps<'span'> & IndexBaseProps;
 
 export const Index = (props: IndexProps) => {
   const { children, className, render, ...rest } = props;
@@ -80,7 +81,8 @@ export const Index = (props: IndexProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type TitleProps = useRender.ComponentProps<'h2'> & VariantsOf<typeof styles.title>;
+export type TitleBaseProps = VariantsOf<typeof styles.title>;
+export type TitleProps = useRender.ComponentProps<'h2'> & TitleBaseProps;
 
 export const Title = (props: TitleProps) => {
   const { className, render, size, ...rest } = props;
@@ -99,8 +101,8 @@ export const Title = (props: TitleProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type DescriptionProps = useRender.ComponentProps<'p'> &
-  VariantsOf<typeof styles.description>;
+export type DescriptionBaseProps = VariantsOf<typeof styles.description>;
+export type DescriptionProps = useRender.ComponentProps<'p'> & DescriptionBaseProps;
 
 export const Description = (props: DescriptionProps) => {
   const { className, indent, render, ...rest } = props;
@@ -119,7 +121,8 @@ export const Description = (props: DescriptionProps) => {
 
 /* ///////////////////////////////////////////////// */
 
-export type BodyProps = useRender.ComponentProps<'div'> & VariantsOf<typeof styles.body>;
+export type BodyBaseProps = VariantsOf<typeof styles.body>;
+export type BodyProps = useRender.ComponentProps<'div'> & BodyBaseProps;
 
 export const Body = (props: BodyProps) => {
   const { className, indent, render, ...rest } = props;
