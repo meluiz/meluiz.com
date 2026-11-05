@@ -37,9 +37,9 @@ export const ol = cva({
 
 export const li = cva({
   base: cn([
-    'grid grid-cols-[1rem_minmax(0,1fr)]',
+    'relative pl-4 before:absolute before:top-0 before:left-0',
     'in-[ul]:before:font-semibold in-[ul]:before:text-foreground-accent in-[ul]:before:content-["·"]',
-    'in-[ol]:grid-cols-[2rem_minmax(0,1fr)] in-[ol]:[counter-increment:item] in-[ol]:before:font-mono in-[ol]:before:text-xs/[1.625rem] in-[ol]:before:text-foreground-muted in-[ol]:before:content-[counter(item,decimal-leading-zero)]',
+    'in-[ol]:pl-8 in-[ol]:[counter-increment:item] in-[ol]:before:font-mono in-[ol]:before:text-xs/[1.3125rem] in-[ol]:before:text-foreground-muted in-[ol]:before:content-[counter(item,decimal-leading-zero)]',
   ]),
   variants: {},
 });
