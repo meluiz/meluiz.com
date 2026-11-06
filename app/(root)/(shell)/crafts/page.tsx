@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
+import type { CollectionPage, WithContext } from 'schema-dts';
 import type { CatalogEntry, CraftItem } from '@/modules/crafts';
 
+import env from 'envin/env';
 import { Suspense } from 'react';
 
-import { metadata as baseMetadata } from '@/constants/metadata';
+import { JsonLd } from '@/components/layout';
+import { metadata as baseMetadata, structuredDataIds } from '@/constants/metadata';
 import { Catalog, Masthead, Stats } from '@/modules/crafts';
 import { getCraftList, getCraftStats } from '@/modules/crafts/services';
 
@@ -27,7 +30,8 @@ const toCatalogEntry = (craft: CraftItem): CatalogEntry => {
 
 // Static: every craft is prerendered and the ?tags= filter runs on the client
 const Page = () => {
-  const crafts = getCraftList().map(toCatalogEntry);
+  const list = getCraftList();
+  const crafts = list.map(toCatalogEntry);
   const stats = getCraftStats();
 
   return (
@@ -39,6 +43,7 @@ const Page = () => {
       <Suspense fallback={<Catalog.Root crafts={crafts} selected={[]} />}>
         <Catalog.Search crafts={crafts} />
       </Suspense>
+      <JsonLd data={getStructuredData(list)} />
     </div>
   );
 };
@@ -50,6 +55,32 @@ export default Page;
 const TITLE = 'Crafts';
 const DESCRIPTION =
   'Small interface experiments on motion, interaction, layout and reading, built to learn how interfaces should feel.';
+
+const getStructuredData = (crafts: CraftItem[]): WithContext<CollectionPage> => {
+  const url = new URL('/crafts', env.APP_URL).toString();
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': url,
+    url,
+    name: TITLE,
+    description: DESCRIPTION,
+    inLanguage: 'en-US',
+    isPartOf: { '@id': structuredDataIds.website },
+    author: { '@id': structuredDataIds.person },
+    mainEntity: {
+      '@type': 'ItemList',
+      numberOfItems: crafts.length,
+      itemListElement: crafts.map((craft, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: new URL(`/crafts/${craft.slug}`, env.APP_URL).toString(),
+        name: craft.title,
+      })),
+    },
+  };
+};
 
 export const metadata: Metadata = {
   title: TITLE,

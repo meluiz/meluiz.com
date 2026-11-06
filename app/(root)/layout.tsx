@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 
-import { Document, Navigation } from '@/components/layout';
+import { Document, JsonLd, Navigation } from '@/components/layout';
 import { ColorScheme, SoundEffects } from '@/components/providers';
-import { ldJSON } from '@/constants/metadata';
+import { siteGraph } from '@/constants/metadata';
 import { Analytics } from '@/modules/analytics';
 
 const Layout = async (props: LayoutProps<'/'>) => {
@@ -13,13 +13,7 @@ const Layout = async (props: LayoutProps<'/'>) => {
       trailing={
         <Fragment>
           <Analytics />
-          <script
-            type="application/ld+json"
-            // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD has to be serialized into the document
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify(ldJSON).replace(/</g, '\\u003c'),
-            }}
-          />
+          <JsonLd data={siteGraph} />
         </Fragment>
       }
     >

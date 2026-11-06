@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { Fragment } from 'react';
+
 import { Footer } from '../footer';
 import { Scrollview } from '../scrollview';
 import { SkipContent } from '../skip-content';
@@ -12,18 +14,22 @@ export interface FrameProps {
 export const Frame = (props: FrameProps) => {
   const { header, children } = props;
 
+  // The skip link sits outside the scroll viewport, which is focusable, so it stays the first
+  // tab stop
   return (
-    <Scrollview>
+    <Fragment>
       <SkipContent target="#__APP_MAIN" />
-      {header}
-      <main
-        id="__APP_MAIN"
-        tabIndex={-1}
-        className="relative flex w-full flex-1 bg-surface text-foreground outline-hidden"
-      >
-        {children}
-      </main>
-      <Footer />
-    </Scrollview>
+      <Scrollview>
+        {header}
+        <main
+          id="__APP_MAIN"
+          tabIndex={-1}
+          className="relative flex w-full flex-1 bg-surface text-foreground outline-hidden"
+        >
+          {children}
+        </main>
+        <Footer />
+      </Scrollview>
+    </Fragment>
   );
 };

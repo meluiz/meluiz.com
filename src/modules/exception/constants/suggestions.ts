@@ -27,6 +27,12 @@ export const suggestions = freeze<Suggestion[]>([
     href: '/#projects',
   },
   {
+    id: 'crafts',
+    label: 'Crafts',
+    hint: '/crafts',
+    href: '/crafts',
+  },
+  {
     id: 'contact',
     label: 'Get in touch',
     hint: 'me@meluiz.com',

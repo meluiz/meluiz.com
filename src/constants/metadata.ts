@@ -1,5 +1,5 @@
 import type { Metadata, MetadataRoute, Viewport } from 'next';
-import type { Person, WithContext } from 'schema-dts';
+import type { Graph, Person, WebSite } from 'schema-dts';
 
 import env from 'envin/env';
 
@@ -54,8 +54,9 @@ export const manifest = freeze<MetadataRoute.Manifest>({
 });
 
 export const metadata = freeze<Metadata>({
+  // The home page carries the full name; inner pages read "Crafts | meluiz"
   title: {
-    default: manifest.short_name ?? 'meluiz',
+    default: manifest.name ?? 'Luiz Felipe',
     template: `%s | ${manifest.short_name ?? 'meluiz'}`,
   },
   appleWebApp: true,
@@ -93,7 +94,7 @@ export const metadata = freeze<Metadata>({
     locale: 'en_US',
     type: 'website',
     url: env.APP_URL.toString(),
-    title: manifest.short_name,
+    title: manifest.name,
     siteName: manifest.short_name,
     description: manifest.description,
     images: {
@@ -113,7 +114,7 @@ export const metadata = freeze<Metadata>({
     },
   },
   twitter: {
-    title: manifest.short_name,
+    title: manifest.name,
     description: manifest.description,
     site: '@omeluiz',
     creator: '@omeluiz',
@@ -122,11 +123,10 @@ export const metadata = freeze<Metadata>({
   },
 });
 
+// Zoom stays enabled: blocking it fails WCAG 1.4.4 (Resize Text)
 export const viewport = freeze<Viewport>({
-  minimumScale: 1,
   initialScale: 1,
   width: 'device-width',
-  userScalable: false,
   viewportFit: 'cover',
   colorScheme: 'dark light',
   themeColor: [
@@ -153,9 +153,17 @@ export const sitemap = freeze<MetadataRoute.Sitemap>([
   },
 ]);
 
-export const ldJSON = freeze<WithContext<Person>>({
-  '@context': 'https://schema.org',
+/* ------- structured data ------- */
+
+// Stable node ids, so pages reference the same entities instead of repeating them
+export const structuredDataIds = freeze({
+  person: new URL('/#person', env.APP_URL).toString(),
+  website: new URL('/#website', env.APP_URL).toString(),
+});
+
+export const person = freeze<Person>({
   '@type': 'Person',
+  '@id': structuredDataIds.person,
   name: manifest.name,
   description: manifest.description,
   url: env.APP_URL.toString(),
@@ -185,4 +193,21 @@ export const ldJSON = freeze<WithContext<Person>>({
     'https://github.com/meluiz',
     'https://linkedin.com/in/meluiz',
   ],
+});
+
+export const website = freeze<WebSite>({
+  '@type': 'WebSite',
+  '@id': structuredDataIds.website,
+  url: env.APP_URL.toString(),
+  name: manifest.short_name,
+  alternateName: manifest.name,
+  description: manifest.description,
+  inLanguage: 'en-US',
+  publisher: { '@id': structuredDataIds.person },
+});
+
+// Rendered on every page by the root layout; pages add their own nodes that point here
+export const siteGraph = freeze<Graph>({
+  '@context': 'https://schema.org',
+  '@graph': [website, person],
 });

@@ -6,7 +6,8 @@ import { IconArrowUpRight } from '@central-icons/outlined-sharp';
 import env from 'envin/env';
 import { notFound } from 'next/navigation';
 
-import { metadata as baseMetadata, manifest } from '@/constants/metadata';
+import { JsonLd } from '@/components/layout';
+import { metadata as baseMetadata, structuredDataIds } from '@/constants/metadata';
 import { Craft, Mdx, Playground } from '@/modules/crafts';
 import {
   getCraftBySlug,
@@ -60,13 +61,7 @@ const Page = async (props: PageProps<'/crafts/[slug]'>) => {
 
       {neighbors && <Craft.Pager prev={neighbors.prev} next={neighbors.next} />}
 
-      <script
-        type="application/ld+json"
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD has to be serialized into the document
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(getStructuredData(craft)).replace(/</g, '\\u003c'),
-        }}
-      />
+      <JsonLd data={getStructuredData(craft)} />
     </div>
   );
 };
@@ -79,11 +74,8 @@ const getCraftPath = (craft: CraftItem) => `/crafts/${craft.slug}`;
 
 const getStructuredData = (craft: CraftItem): Graph => {
   const url = new URL(getCraftPath(craft), env.APP_URL).toString();
-  const author = {
-    '@type': 'Person',
-    name: manifest.name,
-    url: env.APP_URL.toString(),
-  } as const;
+  const crafts = new URL('/crafts', env.APP_URL).toString();
+  const author = { '@id': structuredDataIds.person };
 
   return {
     '@context': 'https://schema.org',
@@ -97,14 +89,10 @@ const getStructuredData = (craft: CraftItem): Graph => {
         description: craft.description,
         datePublished: craft.date,
         keywords: craft.tags.join(', '),
-        inLanguage: 'en',
+        inLanguage: 'en-US',
         author,
         creator: author,
-        isPartOf: {
-          '@type': 'CollectionPage',
-          name: 'Crafts',
-          url: new URL('/crafts', env.APP_URL).toString(),
-        },
+        isPartOf: { '@id': crafts },
       },
       {
         '@type': 'BreadcrumbList',
@@ -114,7 +102,7 @@ const getStructuredData = (craft: CraftItem): Graph => {
             '@type': 'ListItem',
             position: 2,
             name: 'Crafts',
-            item: new URL('/crafts', env.APP_URL).toString(),
+            item: crafts,
           },
           { '@type': 'ListItem', position: 3, name: craft.title, item: url },
         ],
@@ -126,6 +114,11 @@ const getStructuredData = (craft: CraftItem): Graph => {
 export const generateStaticParams = () => {
   return getCraftList().map((craft) => ({ slug: craft.slug }));
 };
+
+// Every craft is known at build time, so unknown slugs 404 straight away and get the global
+// not-found page. Calling `notFound()` from the page instead ships an empty HTML shell on
+// Next 16.4 (reproduced in a fresh app), and a segment not-found also made every craft dynamic
+export const dynamicParams = false;
 
 export const generateMetadata = async (
   props: PageProps<'/crafts/[slug]'>,
