@@ -1,23 +1,42 @@
 'use client';
 
-import { useHydrated } from '@/hooks/lifecycle';
+import React from 'react';
 
 import { toRelativeDate } from '../../visitors.utils';
 
 /* ///////////////////////////////////////////////// */
 
+const TICK_INTERVAL = 60_000;
+
+/* ///////////////////////////////////////////////// */
+
 export interface RelativeDateProps {
   iso: string;
-  /** Text rendered on the server, kept until hydration so the markup matches. */
+  /** Text rendered on the server, kept until the first tick so hydration changes nothing. */
   fallback: string;
 }
 
-// The page HTML is cached, so the server text can be a few seconds old and in UTC. Once
-// hydrated, the date is formatted again against the visitor's clock and timezone
+// The page HTML is cached, so the server text can be a little old and in UTC. Recomputing it
+// on hydration made the header flicker; instead the server text stays put and the browser
+// takes over on the next tick, where a changing "x minutes ago" reads as the clock moving
 export const RelativeDate = (props: RelativeDateProps) => {
   const { iso, fallback } = props;
 
-  const hydrated = useHydrated();
+  const [now, setNow] = React.useState<number | null>(null);
 
-  return <>{hydrated ? (toRelativeDate(iso) ?? fallback) : fallback}</>;
+  React.useEffect(() => {
+    const timer = window.setInterval(() => {
+      setNow(Date.now());
+    }, TICK_INTERVAL);
+
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, []);
+
+  if (now === null) {
+    return fallback;
+  }
+
+  return toRelativeDate(iso, now) ?? fallback;
 };

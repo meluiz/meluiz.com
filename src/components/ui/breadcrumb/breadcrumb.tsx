@@ -25,8 +25,14 @@ const decodeSegment = (segment: string) => {
   }
 };
 
+// Next names the root page `index` internally, and a render can surface `/index` as the
+// pathname (seen flashing "meluiz / index" on the home page); no route is called that
+const toPathname = (pathname: string) => {
+  return pathname.replace(/\/index$/, '') || '/';
+};
+
 const toAncestorRoutes = (pathname: string): Segment[] => {
-  const parts = pathname.split('/').filter(Boolean);
+  const parts = toPathname(pathname).split('/').filter(Boolean);
 
   return parts.map((part, index) => ({
     href: `/${parts.slice(0, index + 1).join('/')}` as Route,
