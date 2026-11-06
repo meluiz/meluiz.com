@@ -8,10 +8,7 @@ export const PaddedCount = (props: PaddedCountProps) => {
 
   if (value === null) {
     return (
-      <span
-        aria-hidden
-        className="font-mono text-2xl leading-none font-medium text-foreground-soft"
-      >
+      <span aria-hidden className="text-numeral font-mono text-foreground-soft">
         {'-'.repeat(length)}
       </span>
     );
@@ -23,7 +20,7 @@ export const PaddedCount = (props: PaddedCountProps) => {
   const zeros = padded.length - raw.length;
 
   return (
-    <span className="font-mono text-2xl leading-none font-medium">
+    <span className="text-numeral font-mono">
       <span aria-hidden className="text-foreground-soft">
         {padded.slice(0, zeros)}
       </span>

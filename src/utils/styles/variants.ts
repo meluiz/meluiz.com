@@ -55,7 +55,18 @@ const recipes = createRecipes({
     extend: {
       theme: {
         animate: ['blink', 'flash', 'nudge'],
-        text: ['3xs', '2xs'],
+        text: [
+          '3xs',
+          '2xs',
+          'display',
+          'display-sm',
+          'body',
+          'body-strong',
+          'heading',
+          'label',
+          'numeral',
+          'value',
+        ],
       },
       classGroups: {
         'bg-image': [{ bg: ['hatch'] }],

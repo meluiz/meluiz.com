@@ -11,7 +11,7 @@ export const list = cva({
 });
 
 export const item = cva({
-  base: 'inline-flex items-center gap-1.5 font-mono text-xs/4 font-medium tracking-wide',
+  base: 'inline-flex items-center gap-1.5 font-mono text-label',
   variants: {},
 });
 

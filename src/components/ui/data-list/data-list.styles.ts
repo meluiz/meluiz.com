@@ -11,11 +11,11 @@ export const item = cva({
 });
 
 export const term = cva({
-  base: 'font-mono text-xs/tight font-medium tracking-wide text-foreground-muted uppercase',
+  base: 'text-label font-mono text-foreground-muted uppercase',
   variants: {},
 });
 
 export const details = cva({
-  base: 'm-0 font-mono text-sm/tight tracking-tight wrap-anywhere text-foreground',
+  base: 'text-value m-0 font-mono wrap-anywhere text-foreground',
   variants: {},
 });

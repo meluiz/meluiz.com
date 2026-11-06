@@ -12,7 +12,7 @@ export const TotalVisits = (props: TotalVisitsProps) => {
       <PaddedCount value={visits} length={3} />
       <span
         aria-hidden
-        className="text-center font-mono text-xs font-medium text-foreground-soft/56 uppercase"
+        className="text-center font-mono text-label text-foreground-soft/56 uppercase"
       >
         Visits
       </span>

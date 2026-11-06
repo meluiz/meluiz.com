@@ -18,7 +18,7 @@ export const StatusHeader = (props: StatusHeaderProps) => {
           <a href="/" aria-label="meluiz, home" className="-ml-3 px-3">
             <Mascot size={32} blink follow />
           </a>
-          <p className="inline-flex h-7 center gap-x-2 border border-stroke px-2.5 font-mono text-xs font-medium tracking-wider text-foreground-soft uppercase">
+          <p className="inline-flex h-7 center gap-x-2 border border-stroke px-2.5 font-mono text-label text-foreground-soft uppercase">
             <span
               aria-hidden="true"
               className="size-1.5 rounded-full bg-surface-brand motion-safe:animate-pulse"

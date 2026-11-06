@@ -11,7 +11,7 @@ export const LatestAccess = (props: LatestAccessProps) => {
   return (
     <dl
       aria-hidden
-      className="flex flex-col gap-y-0.5 font-mono text-sm font-medium uppercase max-sm:hidden"
+      className="flex flex-col gap-y-0.5 font-mono text-value uppercase max-sm:hidden"
     >
       <div className="flex items-center">
         <dt className="inline-block w-13 text-foreground-soft">Last</dt>

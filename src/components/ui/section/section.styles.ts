@@ -32,7 +32,7 @@ export const header = cva({
 });
 
 export const index = cva({
-  base: 'font-mono text-xs font-medium text-foreground-soft tabular-nums',
+  base: 'font-mono text-label text-foreground-soft tabular-nums',
   variants: {},
 });
 
@@ -43,7 +43,7 @@ export const title = cva({
   },
   variants: {
     size: {
-      medium: 'flex baseline-start gap-x-3 font-mono text-base font-medium',
+      medium: 'flex baseline-start gap-x-3 font-mono text-heading',
       large:
         'max-w-[18ch] font-sans text-xl leading-tight font-medium tracking-tight sm:text-2xl',
     },

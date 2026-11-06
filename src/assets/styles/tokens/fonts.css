@@ -14,8 +14,54 @@
     serif;
   --font-serif--font-feature-settings: "ss01", "ss05";
 
+  /* ------- sizes ------- */
+
   --text-3xs: 0.5625rem;
   --text-3xs--line-height: 0.625rem;
   --text-2xs: 0.625rem;
   --text-2xs--line-height: 0.75rem;
+
+  /* ------- display ------- */
+
+  --text-display: 40px;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.035em;
+  --text-display--font-weight: 500;
+
+  --text-display-sm: 32px;
+  --text-display-sm--line-height: 1.15;
+  --text-display-sm--letter-spacing: -0.03em;
+  --text-display-sm--font-weight: 500;
+
+  /* ------- text ------- */
+
+  --text-body: 14px;
+  --text-body--line-height: 1.65;
+  --text-body--letter-spacing: 0.025em;
+  --text-body--font-weight: 400;
+
+  --text-body-strong: 16px;
+  --text-body-strong--line-height: 1.4;
+  --text-body-strong--letter-spacing: 0.025em;
+  --text-body-strong--font-weight: 500;
+
+  /* ------- mono ------- */
+
+  --text-heading: 16px;
+  --text-heading--line-height: 1.4;
+  --text-heading--font-weight: 500;
+
+  --text-label: 12px;
+  --text-label--line-height: 16px;
+  --text-label--letter-spacing: 0.04em;
+  --text-label--font-weight: 500;
+
+  --text-numeral: 24px;
+  --text-numeral--line-height: 1;
+  --text-numeral--font-weight: 500;
+
+  --text-value: 14px;
+  --text-value--line-height: 1.4;
+  --text-value--letter-spacing: -0.01em;
+  --text-value--font-weight: 500;
 }

@@ -5,7 +5,7 @@ export const colophon = sva({
   slots: ['header', 'title', 'body', 'list', 'inspirations'],
   base: {
     header: 'sm:flex-row sm:center-between sm:px-6',
-    title: 'font-mono text-sm font-medium text-foreground',
+    title: 'font-mono text-value text-foreground',
     body: 'divide-y divide-stroke',
     list: 'flex flex-col gap-y-px',
     inspirations:

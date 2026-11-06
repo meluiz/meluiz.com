@@ -9,7 +9,7 @@ export const projects = sva({
     list: 'grid grid-cols-1 gap-px bg-stroke-soft sm:grid-cols-2',
     item: 'bg-surface',
     more: 'flex size-full flex-col center bg-surface px-3 py-4 hover:bg-surface/64 max-sm:hover:underline',
-    moreTitle: 'font-mono text-sm font-medium text-foreground-prose uppercase',
+    moreTitle: 'font-mono text-value text-foreground-prose uppercase',
     moreUrl: 'font-sans text-sm font-medium text-foreground-soft max-sm:hidden',
   },
 });

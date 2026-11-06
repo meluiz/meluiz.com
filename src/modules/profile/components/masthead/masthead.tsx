@@ -27,7 +27,7 @@ export const Masthead = () => {
           </h1>
           <p className={styles.role}>
             Front-end Developer
-            <span>·</span>
+            <span aria-hidden="true"> · </span>
             Minas Gerais, Brazil
           </p>
         </hgroup>

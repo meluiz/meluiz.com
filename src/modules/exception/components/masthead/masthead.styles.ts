@@ -10,11 +10,10 @@ export const masthead = sva({
     code: 'flex center gap-x-[0.04em] font-sans text-[7rem] leading-none font-semibold tracking-tighter sm:text-[12rem]',
     mascot:
       'size-[0.82em] shrink-0 **:data-[part=body]:fill-foreground-on-brand **:data-[part=eye]:fill-surface-brand **:data-[part=mark]:stroke-surface-brand',
-    meta: 'flex center-between gap-x-4 font-mono text-xs leading-normal font-medium tracking-wider uppercase',
+    meta: 'text-label flex center-between gap-x-4 font-mono uppercase',
     heading: 'flex flex-col gap-y-2 px-4 py-8 sm:px-6',
-    title:
-      'font-sans text-3xl leading-none font-medium tracking-tight text-balance text-foreground sm:text-4xl',
+    title: 'text-display-sm sm:text-display text-balance text-foreground',
     details:
-      'font-mono text-xs leading-normal font-medium tracking-wider text-foreground-soft uppercase **:[code]:break-all **:[code]:text-foreground **:[code]:normal-case',
+      'text-label font-mono text-foreground-soft uppercase **:[code]:break-all **:[code]:text-foreground **:[code]:normal-case',
   },
 });

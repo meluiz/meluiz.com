@@ -21,7 +21,7 @@ export const SkipContent = (props: SkipContentProps) => {
   return (
     <a
       href={target}
-      className="sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-2 focus-visible:left-2 focus-visible:z-50 focus-visible:border focus-visible:border-foreground-accent focus-visible:bg-surface-accent focus-visible:px-2.5 focus-visible:py-1 focus-visible:font-mono focus-visible:text-xs focus-visible:font-medium focus-visible:text-foreground-accent focus-visible:uppercase focus-visible:outline-none"
+      className="focus-visible:text-label sr-only focus-visible:not-sr-only focus-visible:absolute focus-visible:top-2 focus-visible:left-2 focus-visible:z-50 focus-visible:border focus-visible:border-foreground-accent focus-visible:bg-surface-accent focus-visible:px-2.5 focus-visible:py-1 focus-visible:font-mono focus-visible:font-medium focus-visible:text-foreground-accent focus-visible:uppercase focus-visible:outline-none"
       onClick={handleClick}
     >
       {label}

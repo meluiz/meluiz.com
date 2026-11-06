@@ -7,7 +7,7 @@ export const project = sva({
     root: 'flex flex-col gap-y-3 px-3 py-4',
     header: 'flex flex-col gap-y-1',
     heading: 'flex center-between gap-x-3',
-    title: 'font-mono text-sm font-medium text-foreground',
+    title: 'font-mono text-value text-foreground',
     description: 'line-clamp-2 font-sans text-sm text-foreground-soft',
   },
 });

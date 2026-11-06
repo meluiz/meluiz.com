@@ -1,17 +1,17 @@
 import { cn, cva } from '@/utils/styles';
 
 export const h2 = cva({
-  base: 'scroll-mt-24 font-mono text-base/6 font-medium text-foreground',
+  base: 'scroll-mt-24 font-mono text-heading text-foreground',
   variants: {},
 });
 
 export const h3 = cva({
-  base: 'scroll-mt-24 font-mono text-sm/6 font-medium text-foreground',
+  base: 'scroll-mt-24 font-mono text-value text-foreground',
   variants: {},
 });
 
 export const p = cva({
-  base: 'max-w-[64ch] text-sm/normal text-pretty text-foreground-prose',
+  base: 'max-w-[64ch] text-body text-pretty text-foreground-prose',
   variants: {},
 });
 
@@ -26,12 +26,12 @@ export const strong = cva({
 });
 
 export const ul = cva({
-  base: 'flex max-w-[64ch] flex-col gap-2 text-sm/normal text-foreground-prose',
+  base: 'flex max-w-[64ch] flex-col gap-2 text-body text-foreground-prose',
   variants: {},
 });
 
 export const ol = cva({
-  base: 'flex max-w-[64ch] list-none flex-col gap-2 text-sm/normal text-foreground-prose [counter-reset:item]',
+  base: 'flex max-w-[64ch] list-none flex-col gap-2 text-body text-foreground-prose [counter-reset:item]',
   variants: {},
 });
 
