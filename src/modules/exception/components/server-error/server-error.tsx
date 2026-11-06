@@ -2,7 +2,6 @@
 
 import { IconArrowRotateClockwise } from '@central-icons/outlined-sharp';
 import { env } from 'envin/env';
-import { DateTime } from 'luxon';
 import { Fragment } from 'react';
 
 import { Button } from '@/components/ui';
@@ -17,6 +16,18 @@ import { serverError } from './server-error.styles';
 
 const SHORT_SHA_LENGTH = 7;
 const EMAIL = 'me@meluiz.com';
+
+/* ///////////////////////////////////////////////// */
+
+const pad = (value: number) => String(value).padStart(2, '0');
+
+// `yyyy-MM-dd HH:mm` in the visitor's timezone, without pulling a date library into the bundle
+const formatTimestamp = (date: Date) => {
+  const day = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+  const time = `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+
+  return `${day} ${time}`;
+};
 
 /* ///////////////////////////////////////////////// */
 
@@ -38,7 +49,7 @@ export const ServerError = (props: ServerErrorProps) => {
   const styles = serverError();
 
   const error = toError(props.error);
-  const now = DateTime.now();
+  const now = new Date();
 
   const build = env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, SHORT_SHA_LENGTH) ?? 'dev';
 
@@ -116,8 +127,8 @@ export const ServerError = (props: ServerErrorProps) => {
           {
             label: 'Timestamp',
             value: (
-              <time dateTime={now.toISO() ?? undefined} suppressHydrationWarning>
-                {now.toFormat('yyyy-MM-dd HH:mm')}
+              <time dateTime={now.toISOString()} suppressHydrationWarning>
+                {formatTimestamp(now)}
               </time>
             ),
           },
