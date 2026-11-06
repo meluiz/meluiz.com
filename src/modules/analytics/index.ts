@@ -8,9 +8,15 @@ export type {
   StatsResponse,
   Visit,
   VisitorFilters,
+  VisitorsSummary,
   VisitsResponse,
 } from './services';
 
 export { Analytics, Visitors } from './components';
 export { visitors } from './configs';
-export { getVisitorsCount, getVisitorsStats, getVisitorsVisit } from './services';
+export {
+  getVisitorsCount,
+  getVisitorsStats,
+  getVisitorsSummary,
+  getVisitorsVisit,
+} from './services';

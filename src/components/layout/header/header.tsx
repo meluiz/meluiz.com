@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 import { Mascot } from '@/components/ui';
 import { Visitors } from '@/modules/analytics';
@@ -20,9 +19,7 @@ export const Header = () => {
               <Mascot size={32} blink follow />
             </Link>
             <Segments>
-              <Suspense fallback={<Visitors.Loading />}>
-                <Visitors.Content />
-              </Suspense>
+              <Visitors.Content />
             </Segments>
           </div>
           <div className="flex shrink-0 stretch-center gap-x-0.5 max-sm:flex-col sm:center-end max-sm:*:[button]:flex-row-reverse max-sm:*:[button]:center-start">

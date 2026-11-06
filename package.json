@@ -4,14 +4,15 @@
   "private": true,
   "packageManager": "bun@1.4.4",
   "scripts": {
-    "postinstall": "fumadocs-mdx",
-    "dev": "bun run --bun next dev",
-    "build": "bun run --bun next build",
+    "postinstall": "fumadocs-mdx && bun run craft:specs",
+    "dev": "bun run craft:specs && bun run --bun next dev",
+    "build": "bun run craft:specs && bun run --bun next build",
     "start": "bun run --bun next start",
     "analyze": "bun run --bun next experimental-analyze",
     "lint": "biome lint",
     "format": "biome check --write",
-    "craft:new": "bun run bin/craft.ts"
+    "craft:new": "bun run bin/craft.ts",
+    "craft:specs": "bun run bin/specs.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

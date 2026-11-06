@@ -1,14 +1,33 @@
 import type { Metadata } from 'next';
+import type { CatalogEntry, CraftItem } from '@/modules/crafts';
+
+import { Suspense } from 'react';
 
 import { metadata as baseMetadata } from '@/constants/metadata';
-import { Craft, Masthead, Stats } from '@/modules/crafts';
-import { getCraftStats, getCraftsByTags, parseCraftTags } from '@/modules/crafts/services';
+import { Catalog, Masthead, Stats } from '@/modules/crafts';
+import { getCraftList, getCraftStats } from '@/modules/crafts/services';
 
-const Page = async (props: PageProps<'/crafts'>) => {
-  const { tags } = await props.searchParams;
+/* ///////////////////////////////////////////////// */
 
-  const selected = parseCraftTags(tags);
-  const filtered = getCraftsByTags(selected);
+const toCatalogEntry = (craft: CraftItem): CatalogEntry => {
+  const Preview = craft.preview;
+
+  return {
+    slug: craft.slug,
+    serial: craft.serial,
+    title: craft.title,
+    description: craft.description,
+    date: craft.date,
+    tags: craft.tags,
+    preview: Preview ? <Preview /> : null,
+  };
+};
+
+/* ///////////////////////////////////////////////// */
+
+// Static: every craft is prerendered and the ?tags= filter runs on the client
+const Page = () => {
+  const crafts = getCraftList().map(toCatalogEntry);
   const stats = getCraftStats();
 
   return (
@@ -17,8 +36,9 @@ const Page = async (props: PageProps<'/crafts'>) => {
         <Masthead total={stats.total} />
         <Stats total={stats.total} since={stats.since} latest={stats.latest} />
       </section>
-      <Craft.Filter tags={selected} count={filtered.length} total={stats.total} />
-      <Craft.Results crafts={filtered} selected={selected} />
+      <Suspense fallback={<Catalog.Root crafts={crafts} selected={[]} />}>
+        <Catalog.Search crafts={crafts} />
+      </Suspense>
     </div>
   );
 };

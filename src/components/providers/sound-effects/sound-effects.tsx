@@ -1,15 +1,6 @@
 import type React from 'react';
 
-import { COOKIE_NAME, ContextProvider, toPreferences } from './components';
-
-/* ///////////////////////////////////////////////// */
-
-const getPreferences = async () => {
-  const { cookies } = await import('next/headers');
-  const cookieStore = await cookies();
-
-  return toPreferences(cookieStore.get(COOKIE_NAME)?.value);
-};
+import { ContextProvider } from './components';
 
 /* ///////////////////////////////////////////////// */
 
@@ -17,12 +8,12 @@ export interface ProviderProps {
   children?: React.ReactNode;
 }
 
-export const Provider = async (props: ProviderProps) => {
+// Preferences are read on the client only: the inline script mirrors them on the root before
+// paint, so the server never touches cookies and pages stay static
+export const Provider = (props: ProviderProps) => {
   const { children } = props;
 
-  const preferences = await getPreferences();
-
-  return <ContextProvider preferences={preferences}>{children}</ContextProvider>;
+  return <ContextProvider>{children}</ContextProvider>;
 };
 
 /* ///////////////////////////////////////////////// */

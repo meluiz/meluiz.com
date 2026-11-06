@@ -1,18 +1,18 @@
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
-import { join } from 'node:path';
-import { gzipSync } from 'node:zlib';
+import type { CraftTag } from '../utils';
+
 import { slug as slugify } from '@motiro/string';
 
 import { crafts as collection } from '#collections/server';
+import generatedSpecs from '#collections/specs.json' with { type: 'json' };
 import { github } from '@/constants/source';
 
-import { tags } from '../constants';
+import { matchesCraftTags } from '../utils';
 
 /* ///////////////////////////////////////////////// */
 
 type CollectionItem = (typeof collection)[number];
 
-export type CraftTag = (typeof tags)[number];
+export type { CraftTag };
 
 export interface CraftItem extends CollectionItem {
   slug: string;
@@ -21,9 +21,11 @@ export interface CraftItem extends CollectionItem {
 
 /* ///////////////////////////////////////////////// */
 
-const isCraftTag = (value: string): value is CraftTag => {
-  return tags.some((tag) => tag === value);
-};
+// Computed at build time by `bin/specs.ts`, keyed by each craft's `source`
+const sourceSpecs: Record<string, { label: string; value: string }[] | undefined> =
+  generatedSpecs;
+
+/* ///////////////////////////////////////////////// */
 
 const toSlug = (path: string) => {
   return slugify(path.split('/')[0]);
@@ -47,83 +49,17 @@ const getPreviewFromItem = (craft: CollectionItem) => {
   return preview as React.ComponentType;
 };
 
-const getSourceFiles = (source: string) => {
-  const path = join(process.cwd(), source);
-
-  if (!existsSync(path)) {
-    return [];
-  }
-
-  if (statSync(path).isFile()) {
-    return [path];
-  }
-
-  return readdirSync(path, { encoding: 'utf8', recursive: true })
-    .filter((file) => /\.tsx?$/.test(file))
-    .map((file) => join(path, file));
-};
-
-const getBuiltWith = (code: string) => {
-  const imports = code.matchAll(/^import\s+(?!type\b)[^;'"]*?from\s+['"]([^'"]+)['"]/gm);
-  const specifiers = Array.from(imports, (match) => match[1]);
-  const packages = specifiers
-    .filter((specifier) => /^(?!node:|@\/)[@a-z]/.test(specifier))
-    .map((specifier) => {
-      const size = specifier.startsWith('@') ? 2 : 1;
-
-      return specifier.split('/').slice(0, size).join('/');
-    });
-
-  return Array.from(new Set(packages)).sort().join(' · ');
-};
-
-const getAnatomy = (files: string[]) => {
-  const file = files.find((path) => path.endsWith('.anatomy.ts'));
-
-  if (file == null) {
-    return '';
-  }
-
-  const definition = readFileSync(file, 'utf8').split('createAnatomy(')[1] ?? '';
-  const [, ...names] = Array.from(definition.matchAll(/'([^']+)'/g), (match) => match[1]);
-
-  return names
-    .map((name) => name.replace(/_/g, ' ').replace(/^\w/, (char) => char.toUpperCase()))
-    .join(' · ');
-};
-
-const getSize = (code: string) => {
-  return `~${(gzipSync(code).byteLength / 1000).toFixed(1)} kB`;
-};
-
-const getSourceSpecs = (source: string) => {
-  const files = getSourceFiles(source);
-
-  if (files.length === 0) {
-    return [];
-  }
-
-  const code = files.map((file) => readFileSync(file, 'utf8')).join('\n');
-  const specs = [
-    { label: 'Built with', value: getBuiltWith(code) },
-    { label: 'Anatomy', value: getAnatomy(files) },
-    { label: 'Size', value: getSize(code) },
-  ];
-
-  return specs.filter((spec) => spec.value !== '');
-};
-
 const getSpecsFromItem = (craft: CollectionItem) => {
-  const sourceSpecs = craft.source ? getSourceSpecs(craft.source) : [];
+  const generated = craft.source ? (sourceSpecs[craft.source] ?? []) : [];
   const isSameSpec = (a: { label: string }, b: { label: string }) => {
     return a.label.toLowerCase() === b.label.toLowerCase();
   };
 
-  const computed = sourceSpecs.map((spec) => {
+  const computed = generated.map((spec) => {
     return craft.specs.find((custom) => isSameSpec(custom, spec)) ?? spec;
   });
   const extras = craft.specs.filter((custom) => {
-    return !sourceSpecs.some((spec) => isSameSpec(custom, spec));
+    return !generated.some((spec) => isSameSpec(custom, spec));
   });
 
   return [...computed, ...extras];
@@ -153,21 +89,9 @@ export const getCraftList = () => {
   return crafts;
 };
 
-// Accepts ?tags=a,b and ?tags=a&tags=b; values outside the known tags are dropped
-export const parseCraftTags = (value?: string | string[]) => {
-  const values = [value ?? []].flat().flatMap((item) => item.split(','));
-  const parsed = values.map((item) => item.trim().toLowerCase()).filter(isCraftTag);
-
-  return Array.from(new Set(parsed));
-};
-
 // A craft matches when it has at least one of the selected tags
 export const getCraftsByTags = (selected: CraftTag[]) => {
-  if (selected.length === 0) {
-    return crafts;
-  }
-
-  return crafts.filter((craft) => craft.tags.some((tag) => selected.includes(tag)));
+  return crafts.filter((craft) => matchesCraftTags(craft.tags, selected));
 };
 
 export const getCraftStats = () => {

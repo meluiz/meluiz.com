@@ -1,5 +1,6 @@
 export type { CraftItem, CraftTag } from './source';
 
+export { parseCraftTags } from '../utils';
 export {
   getCraftBySlug,
   getCraftList,
@@ -8,5 +9,4 @@ export {
   getCraftSourceUrl,
   getCraftStats,
   getCraftsByTags,
-  parseCraftTags,
 } from './source';

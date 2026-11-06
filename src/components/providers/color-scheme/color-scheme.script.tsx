@@ -12,6 +12,7 @@ const THEME_SCRIPT = `(() => {
     const root = document.documentElement;
     root.classList.remove('light', 'dark');
     root.classList.add(resolved);
+    root.dataset.theme = theme;
     root.style.colorScheme = resolved;
   } catch {}
 })()`;

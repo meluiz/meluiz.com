@@ -12,10 +12,13 @@ import type {
 import { play, setEnabled, setTheme, setVolume, unlock } from 'cuelume';
 import React from 'react';
 
+import { useSafeLayoutEffect } from '@/hooks/lifecycle';
+
 import {
   CHANGE_EVENT_NAME,
   COOKIE_MAX_AGE,
   COOKIE_NAME,
+  DEFAULT_PREFERENCES,
   PRESETS,
   SOUNDS,
 } from './context-provider.constants';
@@ -92,8 +95,11 @@ const PLAY = Object.fromEntries(SOUNDS.map((name) => [name, createTrigger(name)]
 
 /* ///////////////////////////////////////////////// */
 
+const getServerPreferences = () => DEFAULT_PREFERENCES;
+
+/* ///////////////////////////////////////////////// */
+
 export interface ContextProviderProps {
-  preferences: SoundPreferences;
   children?: React.ReactNode;
 }
 
@@ -103,7 +109,7 @@ export const ContextProvider = (props: ContextProviderProps) => {
   const preferences = React.useSyncExternalStore(
     subscribePreferences,
     readPreferences,
-    () => props.preferences,
+    getServerPreferences,
   );
 
   const setPreferences: UseSoundEffectsReturn['setPreferences'] = (value) => {
@@ -131,7 +137,8 @@ export const ContextProvider = (props: ContextProviderProps) => {
     setPreferences({ preset });
   };
 
-  React.useEffect(() => {
+  // Also restores the root data attributes if React re-creates <html> after a hydration mismatch
+  useSafeLayoutEffect(() => {
     applyPreferences(readPreferences());
   }, []);
 

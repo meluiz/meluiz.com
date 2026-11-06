@@ -57,6 +57,10 @@ export interface VisitorFilters {
 const DEFAULT_DAYS = 30;
 const DEFAULT_DOMAIN = 'meluiz.com';
 
+// Keep in sync with `revalidate` in app/(root)/(shell)/layout.tsx, so the page and the data
+// expire together
+const REVALIDATE_SECONDS = 10;
+
 /* ///////////////////////////////////////////////// */
 
 const getRange = (days: number) => {
@@ -107,7 +111,7 @@ export const getVisitorsVisit = unstable_cache(
     }
   },
   ['getVisitorsVisit'],
-  { revalidate: 60 },
+  { revalidate: REVALIDATE_SECONDS },
 );
 
 export type GetStatsParams = VisitorFilters;
@@ -140,7 +144,7 @@ export const getVisitorsStats = unstable_cache(
     }
   },
   ['getVisitorsStats'],
-  { revalidate: 60 },
+  { revalidate: REVALIDATE_SECONDS },
 );
 
 export interface GetCountParams {
@@ -168,5 +172,5 @@ export const getVisitorsCount = unstable_cache(
     }
   },
   ['getVisitorsCount'],
-  { revalidate: 60 },
+  { revalidate: REVALIDATE_SECONDS },
 );

@@ -1,3 +1,4 @@
+export type { VisitorsSummary } from './summary';
 export type {
   CountryStat,
   DayStat,
@@ -11,4 +12,5 @@ export type {
   VisitsResponse,
 } from './visitors';
 
+export { getVisitorsSummary } from './summary';
 export { getVisitorsCount, getVisitorsStats, getVisitorsVisit } from './visitors';

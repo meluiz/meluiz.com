@@ -4,11 +4,14 @@ import type { ResolvedTheme, Theme, UseColorSchemeReturn } from './context-provi
 
 import React from 'react';
 
+import { useSafeLayoutEffect } from '@/hooks/lifecycle';
+
 import {
   CHANGE_EVENT_NAME,
   COOKIE_MAX_AGE,
   COOKIE_NAME,
   DARK_MEDIA,
+  DEFAULT_THEME,
   THEMES,
 } from './context-provider.constants';
 import { ColorSchemeContext } from './context-provider.context';
@@ -39,6 +42,7 @@ const applyTheme = (theme: Theme) => {
   root.classList.remove('light', 'dark');
   root.classList.add(resolved);
 
+  root.dataset.theme = theme;
   root.style.colorScheme = resolved;
 };
 
@@ -74,20 +78,23 @@ const subscribeSystemTheme = (callback: VoidFunction) => {
 
 /* ///////////////////////////////////////////////// */
 
+const getServerTheme = (): Theme => DEFAULT_THEME;
+const getServerSystemTheme = (): ResolvedTheme => 'light';
+
+/* ///////////////////////////////////////////////// */
+
 export interface ContextProviderProps {
-  theme: Theme;
-  systemTheme?: ResolvedTheme;
   children?: React.ReactNode;
 }
 
 export const ContextProvider = (props: ContextProviderProps) => {
   const { children } = props;
 
-  const theme = React.useSyncExternalStore(subscribeTheme, readTheme, () => props.theme);
+  const theme = React.useSyncExternalStore(subscribeTheme, readTheme, getServerTheme);
   const systemTheme = React.useSyncExternalStore(
     subscribeSystemTheme,
     getSystemTheme,
-    () => props.systemTheme ?? 'light',
+    getServerSystemTheme,
   );
 
   const resolvedTheme = theme === 'system' ? systemTheme : theme;
@@ -106,9 +113,12 @@ export const ContextProvider = (props: ContextProviderProps) => {
     setTheme(isLightTheme ? 'dark' : 'light');
   };
 
-  // React.useLayoutEffect(() => {
-  //   applyTheme(readTheme());
-  // }, []);
+  // When hydration fails (a proxy rewriting the HTML, a browser extension), React re-creates
+  // <html> from the server markup and drops the class the inline script set. Re-apply it before
+  // paint; on a normal load this is a no-op
+  useSafeLayoutEffect(() => {
+    applyTheme(readTheme());
+  }, []);
 
   return (
     <ColorSchemeContext

@@ -1,5 +1,7 @@
+import type React from 'react';
+
 export interface LatestAccessProps {
-  date?: string;
+  date?: React.ReactNode;
   country?: string;
 }
 
