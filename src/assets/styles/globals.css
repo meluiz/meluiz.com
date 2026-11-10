@@ -34,7 +34,7 @@
 
   ::selection {
     color: var(--color-foreground-accent);
-    background-color: var(--color-surface-accent);
+    background-color: var(--color-surface-accent-muted);
   }
 
   /* ------- prefers-reduced-motion ------- */

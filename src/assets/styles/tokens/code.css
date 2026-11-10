@@ -3,9 +3,9 @@
 
   --color-code-surface: var(--color-surface-soft);
   --color-code-stroke: var(--color-stroke);
-  --color-code-highlight: var(--color-surface-accent);
+  --color-code-highlight: var(--color-surface-accent-muted);
   --color-code-highlight-stroke: var(--color-stroke-accent);
-  --color-code-diff-add: var(--color-surface-support);
+  --color-code-diff-add: var(--color-surface-support-muted);
   --color-code-diff-remove: var(--color-surface-muted);
 
   /* ------- tokens ------- */

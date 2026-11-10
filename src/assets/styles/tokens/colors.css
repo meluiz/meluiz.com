@@ -6,9 +6,12 @@
   --color-surface-inverse: var(--color-silt-950);
   --color-surface-muted: --alpha(var(--color-silt-950) / 6%);
 
-  --color-surface-brand: var(--color-clay-600);
-  --color-surface-accent: --alpha(var(--color-clay-500) / 12%);
-  --color-surface-support: --alpha(var(--color-dusk-500) / 12%);
+  --color-surface-accent: var(--color-clay-600);
+  --color-surface-accent-strong: var(--color-clay-700);
+  --color-surface-accent-muted: --alpha(var(--color-clay-500) / 12%);
+  --color-surface-support: var(--color-dusk-600);
+  --color-surface-support-strong: var(--color-dusk-700);
+  --color-surface-support-muted: --alpha(var(--color-dusk-500) / 12%);
 
   /* ------- foreground ------- */
 
@@ -19,8 +22,9 @@
   --color-foreground-inverse: var(--color-silt-50);
 
   --color-foreground-accent: var(--color-clay-600);
-  --color-foreground-on-brand: var(--color-clay-50);
+  --color-foreground-on-accent: var(--color-clay-50);
   --color-foreground-support: var(--color-dusk-700);
+  --color-foreground-on-support: var(--color-dusk-50);
 
   /* ------- stroke ------- */
 
@@ -44,9 +48,12 @@
       var(--color-silt-50)
     );
 
-    --color-surface-brand: var(--color-clay-600);
-    --color-surface-accent: --alpha(var(--color-clay-400) / 12%);
-    --color-surface-support: --alpha(var(--color-dusk-400) / 12%);
+    --color-surface-accent: var(--color-clay-600);
+    --color-surface-accent-strong: var(--color-clay-500);
+    --color-surface-accent-muted: --alpha(var(--color-clay-400) / 12%);
+    --color-surface-support: var(--color-dusk-600);
+    --color-surface-support-strong: var(--color-dusk-500);
+    --color-surface-support-muted: --alpha(var(--color-dusk-400) / 12%);
 
     /* ------- foreground ------- */
 
@@ -56,9 +63,10 @@
     --color-foreground-muted: var(--color-silt-400);
     --color-foreground-inverse: var(--color-silt-950);
 
-    --color-foreground-on-brand: var(--color-clay-50);
     --color-foreground-accent: var(--color-clay-400);
+    --color-foreground-on-accent: var(--color-clay-50);
     --color-foreground-support: var(--color-dusk-400);
+    --color-foreground-on-support: var(--color-dusk-50);
 
     /* ------- stroke ------- */
 
