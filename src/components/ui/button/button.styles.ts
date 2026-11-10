@@ -2,7 +2,7 @@ import { cn, cva } from '@/utils/styles';
 
 export const root = cva({
   base: cn([
-    'group/button relative inline-flex cursor-pointer center gap-x-2 rounded-none border border-transparent bg-clip-padding font-sans text-sm font-medium whitespace-nowrap text-foreground tabular-nums outline-hidden transition focus-visible:ring-2 focus-visible:ring-surface-brand focus-visible:ring-offset-1 focus-visible:ring-offset-surface',
+    'group/button relative inline-flex cursor-pointer center gap-x-2 rounded-none border border-transparent bg-clip-padding font-sans text-sm font-medium whitespace-nowrap text-foreground tabular-nums outline-hidden transition focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-surface',
     'is-disabled:pointer-events-none is-disabled:cursor-not-allowed is-disabled:opacity-56 is-disabled:select-none',
     "**:[span]:truncate **:[svg]:-mx-0.5 *:[svg:not([class*='opacity-'])]:opacity-80",
   ]),
@@ -10,6 +10,7 @@ export const root = cva({
     size: 'small',
     compact: false,
     variant: 'solid',
+    intent: 'accent',
   },
   variants: {
     size: {
@@ -25,15 +26,46 @@ export const root = cva({
       true: 'aspect-square px-0',
     },
     variant: {
-      solid:
-        'bg-surface-brand text-foreground-on-brand hatch-foreground-on-brand/10 hatch-1.5 hover:bg-hatch',
+      solid: 'hatch-1.5 hover:bg-hatch',
       outline: 'border-stroke bg-surface hover:border-stroke-strong',
       soft: 'hover:bg-surface-contrast/8 bg-surface-muted text-foreground-prose',
       ghost: 'bg-transparent text-foreground-soft hover:bg-surface-muted',
-      link: 'h-auto px-0 text-foreground underline decoration-stroke-strong underline-offset-4 hover:text-foreground-accent hover:decoration-foreground-accent',
+      link: 'h-auto px-0 text-foreground underline decoration-stroke-strong underline-offset-4',
+    },
+    intent: {
+      accent: 'focus-visible:ring-surface-accent',
+      support: 'focus-visible:ring-surface-support',
     },
   },
   compoundVariants: [
+    {
+      className: 'text-foreground-on-accent hatch-foreground-on-accent/10 bg-surface-accent',
+      variants: {
+        variant: 'solid',
+        intent: 'accent',
+      },
+    },
+    {
+      className: 'text-foreground-on-support hatch-foreground-on-support/10 bg-surface-support',
+      variants: {
+        variant: 'solid',
+        intent: 'support',
+      },
+    },
+    {
+      className: 'hover:text-foreground-accent hover:decoration-foreground-accent',
+      variants: {
+        variant: 'link',
+        intent: 'accent',
+      },
+    },
+    {
+      className: 'hover:text-foreground-support hover:decoration-foreground-support',
+      variants: {
+        variant: 'link',
+        intent: 'support',
+      },
+    },
     {
       className: 'active:scale-97',
       variants: {

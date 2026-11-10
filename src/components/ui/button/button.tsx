@@ -21,6 +21,7 @@ export const Button = (props: ButtonProps) => {
     compact,
     focusable = false,
     native = true,
+    intent,
     size,
     variant,
     ...rest
@@ -31,7 +32,7 @@ export const Button = (props: ButtonProps) => {
   return (
     <ButtonBase
       {...buttonProps}
-      className={root({ className, compact, size, variant })}
+      className={root({ className, compact, intent, size, variant })}
       aria-disabled={ariaAttr(rest.disabled)}
       data-disabled={dataAttr(rest.disabled)}
       nativeButton={native}
