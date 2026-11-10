@@ -15,7 +15,7 @@ export const errorDetails = sva({
   ],
   base: {
     summary:
-      'border-b border-stroke-soft bg-surface-accent px-3 py-4 font-mono text-sm wrap-break-word sm:px-6',
+      'border-b border-stroke-soft bg-surface-accent-muted px-3 py-4 font-mono text-sm wrap-break-word sm:px-6',
     name: 'text-foreground-accent',
     message: 'text-foreground',
     frames: 'flex flex-col py-2 font-mono text-sm',

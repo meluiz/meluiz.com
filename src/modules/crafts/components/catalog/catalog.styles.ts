@@ -8,7 +8,7 @@ export const filter = sva({
     group: 'flex center gap-x-3',
     label: 'py-3.5 text-sm/snug font-medium text-foreground-soft',
     list: 'flex flex-wrap center gap-x-1.5',
-    item: 'flex min-h-6 center gap-x-2 bg-surface-accent px-2 font-mono text-xs/4 text-foreground-accent uppercase ring ring-foreground-accent',
+    item: 'flex min-h-6 center gap-x-2 bg-surface-accent-muted px-2 font-mono text-xs/4 text-foreground-accent uppercase ring ring-foreground-accent',
     remove: '-mx-px',
     count: 'text-label shrink-0 font-mono text-foreground-muted uppercase',
   },
@@ -42,7 +42,7 @@ export const card = sva({
     date: 'shrink-0 font-mono text-xs/4 text-foreground-soft',
     description: 'text-body line-clamp-3 text-pretty text-foreground-soft',
     tags: 'mt-1 flex flex-wrap gap-1',
-    tag: 'relative z-2 transition-colors duration-150 ease-in-out-base hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground-accent data-[tone=accent]:border-foreground-accent data-[tone=accent]:bg-surface-accent data-[tone=accent]:hover:text-foreground-accent',
+    tag: 'relative z-2 transition-colors duration-150 ease-in-out-base hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground-accent data-[tone=accent]:border-foreground-accent data-[tone=accent]:bg-surface-accent-muted data-[tone=accent]:hover:text-foreground-accent',
   },
 });
 

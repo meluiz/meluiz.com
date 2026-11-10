@@ -21,7 +21,7 @@ export const StatusHeader = (props: StatusHeaderProps) => {
           <p className="inline-flex h-7 center gap-x-2 border border-stroke px-2.5 font-mono text-label text-foreground-soft uppercase">
             <span
               aria-hidden="true"
-              className="size-1.5 rounded-full bg-surface-brand motion-safe:animate-pulse"
+              className="size-1.5 rounded-full bg-surface-accent motion-safe:animate-pulse"
             />
             {status}
           </p>

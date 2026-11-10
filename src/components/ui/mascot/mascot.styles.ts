@@ -14,7 +14,7 @@ export const root = cva({
 });
 
 export const body = cva({
-  base: 'fill-surface-brand',
+  base: 'fill-surface-accent',
   variants: {},
 });
 
@@ -32,11 +32,11 @@ export const group = cva({
 });
 
 export const eye = cva({
-  base: 'origin-center fill-foreground-on-brand transform-fill motion-safe:in-data-blink:animate-blink',
+  base: 'fill-foreground-on-accent origin-center transform-fill motion-safe:in-data-blink:animate-blink',
   variants: {},
 });
 
 export const mark = cva({
-  base: 'fill-none stroke-foreground-on-brand',
+  base: 'stroke-foreground-on-accent fill-none',
   variants: {},
 });

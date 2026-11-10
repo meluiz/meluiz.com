@@ -4,7 +4,7 @@ export const contact = sva({
   variants: {},
   slots: ['root', 'header', 'heading', 'eyebrow', 'title', 'description', 'email', 'emailIcon'],
   base: {
-    root: 'overflow-hidden border-hidden bg-surface-brand bg-hatch text-foreground-on-brand hatch-foreground-on-brand/8 hatch-2',
+    root: 'text-foreground-on-accent hatch-foreground-on-accent/8 overflow-hidden border-hidden bg-surface-accent bg-hatch hatch-2',
     header: 'gap-y-6 px-4 py-10 sm:px-6 sm:py-14',
     heading: 'flex flex-col gap-y-3',
     eyebrow: 'font-mono text-label uppercase',
