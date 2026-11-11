@@ -1,0 +1,29 @@
+/* ---------------------- ledge ---------------------- */
+
+@property --tw-ledge-color {
+  syntax: "*";
+  inherits: false;
+}
+
+@property --tw-ledge-depth {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 1px;
+}
+
+@utility ledge {
+  box-shadow: 0 var(--tw-ledge-depth) 0 0
+    var(--tw-ledge-color, var(--color-stroke-heavy));
+}
+
+@utility ledge-* {
+  --tw-ledge-color: --value(--color-*, [color]);
+  --tw-ledge-color: color-mix(
+    in oklab,
+    --value(--color-*, [color]) calc(--modifier(integer) * 1%),
+    transparent
+  );
+
+  --tw-ledge-depth: calc(--value(integer) * 1px);
+  --tw-ledge-depth: --value([length]);
+}
