@@ -49,6 +49,10 @@ const isBracketsColor = (value: string) => {
   return !isNumber(value) && !isArbitraryLength(value);
 };
 
+const isLedgeColor = (value: string) => {
+  return !isInteger(value) && !isArbitraryLength(value);
+};
+
 const originals = new WeakMap<object, any>();
 const recipes = createRecipes({
   join: createCn({
@@ -77,6 +81,9 @@ const recipes = createRecipes({
         brackets: ['brackets'],
         'brackets-color': [{ brackets: [isBracketsColor] }],
         'brackets-gap': [{ brackets: [isNumber, isArbitraryLength] }],
+        ledge: ['ledge'],
+        'ledge-color': [{ ledge: [isLedgeColor] }],
+        'ledge-depth': [{ ledge: [isInteger, isArbitraryLength] }],
         type: [
           {
             type: [
@@ -93,6 +100,10 @@ const recipes = createRecipes({
             ],
           },
         ],
+      },
+      conflictingClassGroups: {
+        ledge: ['shadow'],
+        shadow: ['ledge', 'ledge-color', 'ledge-depth'],
       },
     },
   }),
