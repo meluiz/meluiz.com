@@ -1,5 +1,6 @@
 export type { ButtonBaseProps, ButtonProps } from './button';
 export type { HighlightBaseProps, HighlightProps } from './highlight';
+export type { InputBaseProps, InputProps } from './input';
 export type { KbdBaseProps, KbdProps } from './kbd';
 export type { MascotBaseProps, MascotMood, MascotProps } from './mascot';
 export type { NumeralBaseProps, NumeralProps } from './numeral';
@@ -14,6 +15,7 @@ export { Button, button } from './button';
 export { DataList, dataList } from './data-list';
 export { Dock, dock } from './dock';
 export { Highlight } from './highlight';
+export { Input, input } from './input';
 export { Kbd, kbd } from './kbd';
 export { Mascot, mascot } from './mascot';
 export { Numeral, numeral } from './numeral';
