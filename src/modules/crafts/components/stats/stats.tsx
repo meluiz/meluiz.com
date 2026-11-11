@@ -1,4 +1,4 @@
-import { DataList, RuledGrid } from '@/components/ui';
+import { DataList, Numeral, RuledGrid } from '@/components/ui';
 
 import { stats } from './stats.styles';
 
@@ -19,7 +19,9 @@ export const Stats = (props: StatsProps) => {
     <RuledGrid.Root className={styles.root} render={<DataList.Root className={styles.list} />}>
       <RuledGrid.Cell className={styles.item} render={<DataList.Item />}>
         <DataList.Term>Crafts</DataList.Term>
-        <DataList.Details>{String(total).padStart(2, '0')}</DataList.Details>
+        <DataList.Details>
+          <Numeral value={total} pad={2} label="crafts" className="text-value" />
+        </DataList.Details>
       </RuledGrid.Cell>
       <RuledGrid.Cell className={styles.item} render={<DataList.Item />}>
         <DataList.Term>Since</DataList.Term>
