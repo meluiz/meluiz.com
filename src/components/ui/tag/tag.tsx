@@ -3,9 +3,9 @@ import type { VariantsOf } from '@/utils/styles';
 import { mergeProps, useRender } from '@base-ui/react';
 
 import { parts } from './tag.anatomy';
-import { root } from './tag.styles';
+import * as styles from './tag.styles';
 
-export type TagBaseProps = VariantsOf<typeof root>;
+export type TagBaseProps = VariantsOf<typeof styles.root>;
 export type TagProps = useRender.ComponentProps<'span'> & TagBaseProps;
 
 export const Tag = (props: TagProps) => {
@@ -16,7 +16,7 @@ export const Tag = (props: TagProps) => {
     render,
     props: mergeProps(parts.root.attrs, rest, {
       'data-tone': tone ?? 'default',
-      className: root({ className, tone }),
+      className: styles.root({ className, tone }),
     }),
   });
 };

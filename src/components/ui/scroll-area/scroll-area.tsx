@@ -1,7 +1,7 @@
 import { mergeProps, ScrollArea as ScrollAreaBase } from '@base-ui/react';
 
 import { parts } from './scroll-area.anatomy';
-import { content, corner, root, scrollbar, thumb, viewport } from './scroll-area.styles';
+import * as styles from './scroll-area.styles';
 
 /* ///////////////////////////////////////////////// */
 
@@ -12,7 +12,7 @@ export const Root = (props: RootProps) => {
 
   const rootProps = mergeProps(parts.root.attrs, rest);
 
-  return <ScrollAreaBase.Root {...rootProps} className={root({ className })} />;
+  return <ScrollAreaBase.Root {...rootProps} className={styles.root({ className })} />;
 };
 
 /* ///////////////////////////////////////////////// */
@@ -24,7 +24,9 @@ export const Viewport = (props: ViewportProps) => {
 
   const viewportProps = mergeProps(parts.viewport.attrs, rest);
 
-  return <ScrollAreaBase.Viewport {...viewportProps} className={viewport({ className })} />;
+  return (
+    <ScrollAreaBase.Viewport {...viewportProps} className={styles.viewport({ className })} />
+  );
 };
 
 /* ///////////////////////////////////////////////// */
@@ -36,7 +38,7 @@ export const Content = (props: ContentProps) => {
 
   const contentProps = mergeProps(parts.content.attrs, rest);
 
-  return <ScrollAreaBase.Content {...contentProps} className={content({ className })} />;
+  return <ScrollAreaBase.Content {...contentProps} className={styles.content({ className })} />;
 };
 
 /* ///////////////////////////////////////////////// */
@@ -48,7 +50,9 @@ export const Scrollbar = (props: ScrollbarProps) => {
 
   const scrollbarProps = mergeProps(parts.scrollbar.attrs, rest);
 
-  return <ScrollAreaBase.Scrollbar {...scrollbarProps} className={scrollbar({ className })} />;
+  return (
+    <ScrollAreaBase.Scrollbar {...scrollbarProps} className={styles.scrollbar({ className })} />
+  );
 };
 
 /* ///////////////////////////////////////////////// */
@@ -60,7 +64,7 @@ export const Thumb = (props: ThumbProps) => {
 
   const thumbProps = mergeProps(parts.thumb.attrs, rest);
 
-  return <ScrollAreaBase.Thumb {...thumbProps} className={thumb({ className })} />;
+  return <ScrollAreaBase.Thumb {...thumbProps} className={styles.thumb({ className })} />;
 };
 
 /* ///////////////////////////////////////////////// */
@@ -72,5 +76,5 @@ export const Corner = (props: CornerProps) => {
 
   const cornerProps = mergeProps(parts.corner.attrs, rest);
 
-  return <ScrollAreaBase.Corner {...cornerProps} className={corner({ className })} />;
+  return <ScrollAreaBase.Corner {...cornerProps} className={styles.corner({ className })} />;
 };

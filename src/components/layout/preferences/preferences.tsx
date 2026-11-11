@@ -8,7 +8,7 @@ import { useColorScheme, useSoundEffects } from '@/components/providers';
 import { Button, Swap } from '@/components/ui';
 import { useHydrated } from '@/hooks/lifecycle';
 
-import { fallback, indicator, label } from './preferences.styles';
+import * as styles from './preferences.styles';
 
 /* ///////////////////////////////////////////////// */
 
@@ -16,14 +16,14 @@ import { fallback, indicator, label } from './preferences.styles';
 // toggles render every state and let the attributes the inline scripts put on <html> pick one
 
 const ThemeIconFallback = () => {
-  const styles = fallback();
+  const classes = styles.fallback();
 
   return (
-    <span className={styles.root}>
-      <span className={`${styles.indicator} hidden in-data-[theme=dark]:inline-flex`}>
+    <span className={classes.root}>
+      <span className={`${classes.indicator} hidden in-data-[theme=dark]:inline-flex`}>
         <IconMoon />
       </span>
-      <span className={`${styles.indicator} inline-flex in-data-[theme=dark]:hidden`}>
+      <span className={`${classes.indicator} inline-flex in-data-[theme=dark]:hidden`}>
         <IconSun />
       </span>
     </span>
@@ -41,14 +41,14 @@ const ThemeLabelFallback = () => {
 };
 
 const SoundIconFallback = () => {
-  const styles = fallback();
+  const classes = styles.fallback();
 
   return (
-    <span className={styles.root}>
-      <span className={`${styles.indicator} hidden in-data-[sound=on]:inline-flex`}>
+    <span className={classes.root}>
+      <span className={`${classes.indicator} hidden in-data-[sound=on]:inline-flex`}>
         <IconVolumeFull />
       </span>
-      <span className={`${styles.indicator} inline-flex in-data-[sound=on]:hidden`}>
+      <span className={`${classes.indicator} inline-flex in-data-[sound=on]:hidden`}>
         <IconVolumeOff />
       </span>
     </span>
@@ -82,10 +82,10 @@ export const SoundToggler = () => {
     >
       {hydrated ? (
         <Swap.Root swap={enabled} className="-mx-0.5 size-3.5 text-foreground">
-          <Swap.Indicator type="on" className={indicator({ animation: 'swing' })}>
+          <Swap.Indicator type="on" className={styles.indicator({ animation: 'swing' })}>
             <IconVolumeFull />
           </Swap.Indicator>
-          <Swap.Indicator type="off" className={indicator({ animation: 'swing' })}>
+          <Swap.Indicator type="off" className={styles.indicator({ animation: 'swing' })}>
             <IconVolumeOff />
           </Swap.Indicator>
         </Swap.Root>
@@ -93,7 +93,7 @@ export const SoundToggler = () => {
         <SoundIconFallback />
       )}
       <span
-        className={label({
+        className={styles.label({
           className: hydrated
             ? 'in-data-pressed:text-foreground-accent'
             : 'in-data-[sound=on]:text-foreground-accent',
@@ -124,10 +124,10 @@ export const ThemeToggler = () => {
     >
       {hydrated ? (
         <Swap.Root swap={theme === 'dark'} className="-mx-0.5 size-3.5 text-foreground">
-          <Swap.Indicator type="on" className={indicator({ animation: 'dial' })}>
+          <Swap.Indicator type="on" className={styles.indicator({ animation: 'dial' })}>
             <IconMoon />
           </Swap.Indicator>
-          <Swap.Indicator type="off" className={indicator({ animation: 'dial' })}>
+          <Swap.Indicator type="off" className={styles.indicator({ animation: 'dial' })}>
             <IconSun />
           </Swap.Indicator>
         </Swap.Root>

@@ -9,12 +9,12 @@ import { Fragment } from 'react';
 import { ariaAttr, dataAttr } from '@/utils/dom';
 
 import { parts } from './mascot.anatomy';
-import { body, eye, group, mark, root } from './mascot.styles';
+import * as styles from './mascot.styles';
 import { useMascot } from './use-mascot';
 
 export type MascotMood = 'idle' | 'broken';
 
-export type MascotBaseProps = VariantsOf<typeof root> &
+export type MascotBaseProps = VariantsOf<typeof styles.root> &
   UseMascotProps & {
     label?: string;
     mood?: MascotMood;
@@ -65,7 +65,7 @@ export const Mascot = (props: MascotProps) => {
       'data-animated': dataAttr(animated),
       focusable: 'false',
       role: label ? 'img' : undefined,
-      className: root({ className, animation: isWobbling ? 'wobble' : 'none' }),
+      className: styles.root({ className, animation: isWobbling ? 'wobble' : 'none' }),
       style: {
         ...style,
         '--mascot-blink-delay': `${delay}ms`,
@@ -74,18 +74,30 @@ export const Mascot = (props: MascotProps) => {
         <Fragment>
           <path
             {...parts.body.attrs}
-            className={body()}
+            className={styles.body()}
             d="M30.6 3.4c14.1-1.2 29.7 8.7 30.3 26.4.6 16.5-10.4 30.9-28.1 31.1C16.3 61.1 3.4 50.4 3.1 33.7 2.8 17.2 15.8 4.6 30.6 3.4Z"
           />
           <g
             {...parts.group.attrs}
-            className={group({ animation: isLooking ? 'look' : 'none' })}
+            className={styles.group({ animation: isLooking ? 'look' : 'none' })}
           >
             {mood === 'broken' ? (
               <g strokeWidth="4.5" strokeLinecap="round">
-                <path {...parts.mark.attrs} d="M20 19.5l9 9m0-9-9 9" className={mark()} />
-                <path {...parts.mark.attrs} d="M35.5 19.5l9 9m0-9-9 9" className={mark()} />
-                <path {...parts.mark.attrs} d="M22 45c6-5 14.5-5 20.5 0" className={mark()} />
+                <path
+                  {...parts.mark.attrs}
+                  d="M20 19.5l9 9m0-9-9 9"
+                  className={styles.mark()}
+                />
+                <path
+                  {...parts.mark.attrs}
+                  d="M35.5 19.5l9 9m0-9-9 9"
+                  className={styles.mark()}
+                />
+                <path
+                  {...parts.mark.attrs}
+                  d="M22 45c6-5 14.5-5 20.5 0"
+                  className={styles.mark()}
+                />
               </g>
             ) : (
               <Fragment key={count}>
@@ -96,7 +108,7 @@ export const Mascot = (props: MascotProps) => {
                   width="7"
                   height="14"
                   rx="3.5"
-                  className={eye()}
+                  className={styles.eye()}
                 />
                 <rect
                   {...parts.eye.attrs}
@@ -105,7 +117,7 @@ export const Mascot = (props: MascotProps) => {
                   width="7"
                   height="14"
                   rx="3.5"
-                  className={eye()}
+                  className={styles.eye()}
                 />
               </Fragment>
             )}

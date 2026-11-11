@@ -8,9 +8,9 @@ import { formatForDisplay } from '@tanstack/react-hotkeys';
 import { Fragment } from 'react';
 
 import { parts } from './kbd.anatomy';
-import { root } from './kbd.styles';
+import * as styles from './kbd.styles';
 
-export type KbdBaseProps = VariantsOf<typeof root> & {
+export type KbdBaseProps = VariantsOf<typeof styles.root> & {
   hotkey: IndividualKey;
 };
 
@@ -35,7 +35,7 @@ export const Kbd = (props: KbdProps) => {
     props: mergeProps(parts.root.attrs, rest, {
       title,
       children,
-      className: root({ className, size }),
+      className: styles.root({ className, size }),
     }),
   });
 };

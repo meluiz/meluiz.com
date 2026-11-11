@@ -3,11 +3,11 @@ import type { VariantsOf } from '@/utils/styles';
 import { mergeProps, useRender } from '@base-ui/react';
 
 import { parts } from './timeline.anatomy';
-import { aside, content, item, root } from './timeline.styles';
+import * as styles from './timeline.styles';
 
 /* ///////////////////////////////////////////////// */
 
-export type RootBaseProps = VariantsOf<typeof root>;
+export type RootBaseProps = VariantsOf<typeof styles.root>;
 export type RootProps = useRender.ComponentProps<'ol'> & RootBaseProps;
 
 export const Root = (props: RootProps) => {
@@ -17,14 +17,14 @@ export const Root = (props: RootProps) => {
     defaultTagName: 'ol',
     render,
     props: mergeProps(parts.root.attrs, rest, {
-      className: root({ className }),
+      className: styles.root({ className }),
     }),
   });
 };
 
 /* ///////////////////////////////////////////////// */
 
-export type ItemBaseProps = VariantsOf<typeof item>;
+export type ItemBaseProps = VariantsOf<typeof styles.item>;
 export type ItemProps = useRender.ComponentProps<'li'> & ItemBaseProps;
 
 export const Item = (props: ItemProps) => {
@@ -34,14 +34,14 @@ export const Item = (props: ItemProps) => {
     defaultTagName: 'li',
     render,
     props: mergeProps(parts.item.attrs, rest, {
-      className: item({ className }),
+      className: styles.item({ className }),
     }),
   });
 };
 
 /* ///////////////////////////////////////////////// */
 
-export type AsideBaseProps = VariantsOf<typeof aside>;
+export type AsideBaseProps = VariantsOf<typeof styles.aside>;
 export type AsideProps = useRender.ComponentProps<'div'> & AsideBaseProps;
 
 export const Aside = (props: AsideProps) => {
@@ -51,14 +51,14 @@ export const Aside = (props: AsideProps) => {
     defaultTagName: 'div',
     render,
     props: mergeProps(parts.aside.attrs, rest, {
-      className: aside({ className }),
+      className: styles.aside({ className }),
     }),
   });
 };
 
 /* ///////////////////////////////////////////////// */
 
-export type ContentBaseProps = VariantsOf<typeof content>;
+export type ContentBaseProps = VariantsOf<typeof styles.content>;
 export type ContentProps = useRender.ComponentProps<'div'> & ContentBaseProps;
 
 export const Content = (props: ContentProps) => {
@@ -68,7 +68,7 @@ export const Content = (props: ContentProps) => {
     defaultTagName: 'div',
     render,
     props: mergeProps(parts.content.attrs, rest, {
-      className: content({ className }),
+      className: styles.content({ className }),
     }),
   });
 };

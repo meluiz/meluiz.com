@@ -3,9 +3,9 @@ import type { VariantsOf } from '@/utils/styles';
 import { mergeProps, useRender } from '@base-ui/react';
 
 import { parts } from './ruled-grid.anatomy';
-import { cell, root } from './ruled-grid.styles';
+import * as styles from './ruled-grid.styles';
 
-export type RootBaseProps = VariantsOf<typeof root>;
+export type RootBaseProps = VariantsOf<typeof styles.root>;
 export type RootProps = useRender.ComponentProps<'div'> & RootBaseProps;
 
 export const Root = (props: RootProps) => {
@@ -15,14 +15,14 @@ export const Root = (props: RootProps) => {
     defaultTagName: 'div',
     render,
     props: mergeProps(parts.root.attrs, rest, {
-      className: root({ className }),
+      className: styles.root({ className }),
     }),
   });
 };
 
 /* ///////////////////////////////////////////////// */
 
-export type CellBaseProps = VariantsOf<typeof cell>;
+export type CellBaseProps = VariantsOf<typeof styles.cell>;
 export type CellProps = useRender.ComponentProps<'div'> & CellBaseProps;
 
 export const Cell = (props: CellProps) => {
@@ -32,7 +32,7 @@ export const Cell = (props: CellProps) => {
     defaultTagName: 'div',
     render,
     props: mergeProps(parts.cell.attrs, rest, {
-      className: cell({ className, inset, interactive, stretch }),
+      className: styles.cell({ className, inset, interactive, stretch }),
     }),
   });
 };

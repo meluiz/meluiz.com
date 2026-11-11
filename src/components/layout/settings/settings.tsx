@@ -10,17 +10,7 @@ import { dataAttr } from '@/utils/dom';
 import { clamp, cycle } from '@/utils/helpers';
 
 import { HINT_HANDLE, VOLUME_BARS, VOLUME_KEYS, VOLUME_STEP } from './settings.constants';
-import {
-  arrows,
-  bar,
-  hint,
-  hintPopup,
-  hintViewport,
-  label,
-  meter,
-  readout,
-  value,
-} from './settings.styles';
+import * as styles from './settings.styles';
 
 /* ///////////////////////////////////////////////// */
 
@@ -35,9 +25,9 @@ export const Hint = () => {
     <Tooltip.Root handle={HINT_HANDLE}>
       {({ payload }) => (
         <Tooltip.Portal>
-          <Tooltip.Positioner side="top" sideOffset={8} className={hint()}>
-            <Tooltip.Popup className={hintPopup()}>
-              <Tooltip.Viewport className={hintViewport()}>{payload}</Tooltip.Viewport>
+          <Tooltip.Positioner side="top" sideOffset={8} className={styles.hint()}>
+            <Tooltip.Popup className={styles.hintPopup()}>
+              <Tooltip.Viewport className={styles.hintViewport()}>{payload}</Tooltip.Viewport>
             </Tooltip.Popup>
           </Tooltip.Positioner>
         </Tooltip.Portal>
@@ -57,14 +47,14 @@ export const Theme = () => {
       handle={HINT_HANDLE}
       payload="Click · cycle theme"
       aria-label={`Theme: ${theme}`}
-      className={readout()}
+      className={styles.readout()}
       onClick={() => {
         setTheme(cycle(themes, theme));
         play.select();
       }}
     >
-      <span className={label()}>Theme</span>
-      <span key={theme} className={value({ bracketed: true })}>
+      <span className={styles.label()}>Theme</span>
+      <span key={theme} className={styles.value({ bracketed: true })}>
         {theme}
       </span>
     </Tooltip.Trigger>
@@ -83,14 +73,14 @@ export const Sound = () => {
       handle={HINT_HANDLE}
       payload="Click · on / off"
       aria-label={`Sound: ${state}`}
-      className={readout()}
+      className={styles.readout()}
       onClick={() => {
         setEnabled(!enabled);
         play.toggle();
       }}
     >
-      <span className={label()}>Sound</span>
-      <span key={state} className={value({ bracketed: true })}>
+      <span className={styles.label()}>Sound</span>
+      <span key={state} className={styles.value({ bracketed: true })}>
         {state}
       </span>
     </Tooltip.Trigger>
@@ -152,7 +142,7 @@ export const Volume = (props: VolumeProps) => {
       aria-valuenow={level}
       aria-valuetext={`${level}%`}
       aria-disabled={!enabled}
-      className={readout({ scrub: true })}
+      className={styles.readout({ scrub: true })}
       onPointerDown={(event) => {
         if (!enabled) {
           return;
@@ -179,19 +169,19 @@ export const Volume = (props: VolumeProps) => {
         commit(toLevel(level + delta));
       }}
     >
-      <span aria-hidden className={arrows()}>
+      <span aria-hidden className={styles.arrows()}>
         <span>‹</span>
         <span>›</span>
       </span>
-      <span className={label()}>Volume</span>
-      <span className={value()}>
+      <span className={styles.label()}>Volume</span>
+      <span className={styles.value()}>
         {String(level).padStart(3, ' ')}
-        <span aria-hidden data-nudge={dataAttr(nudge)} className={meter()}>
+        <span aria-hidden data-nudge={dataAttr(nudge)} className={styles.meter()}>
           {Array.from({ length: VOLUME_BARS }, (_, index) => (
             <b
               key={index}
               data-on={dataAttr(index < Math.round((level / 100) * VOLUME_BARS))}
-              className={bar()}
+              className={styles.bar()}
             />
           ))}
         </span>
@@ -211,7 +201,7 @@ export const Preset = () => {
       payload="Click · next preset"
       aria-label={`Preset: ${preset}`}
       aria-disabled={!enabled}
-      className={readout()}
+      className={styles.readout()}
       onClick={() => {
         if (!enabled) {
           return;
@@ -221,8 +211,8 @@ export const Preset = () => {
         play.select();
       }}
     >
-      <span className={label()}>Preset</span>
-      <span key={preset} className={value({ bracketed: true })}>
+      <span className={styles.label()}>Preset</span>
+      <span key={preset} className={styles.value({ bracketed: true })}>
         {preset}
       </span>
     </Tooltip.Trigger>

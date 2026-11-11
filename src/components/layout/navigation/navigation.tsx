@@ -11,7 +11,7 @@ import { socialChannels } from '@/modules/profile';
 
 import { Settings } from '../settings';
 import { CHANNEL_ICONS, SETTINGS_PANEL } from './navigation.constants';
-import { navigation as navigationStyles } from './navigation.styles';
+import * as styles from './navigation.styles';
 
 export const Navigation = () => {
   const [value, setValue] = useState<string | null>(null);
@@ -22,7 +22,7 @@ export const Navigation = () => {
   const [listRef, listMeasure] = useMeasure();
   const [settingsRef, settingsMeasure] = useMeasure();
 
-  const styles = navigationStyles();
+  const classes = styles.navigation();
 
   const listOpen = value === null;
   const settingsOpen = value === SETTINGS_PANEL;
@@ -47,8 +47,8 @@ export const Navigation = () => {
   return (
     <Dock.Positioner>
       <Dock.Root value={value} onValueChange={handleValueChange}>
-        <div style={{ width }} className={styles.faces}>
-          <Dock.List ref={listRef} hidden={false} inert={!listOpen} className={styles.face}>
+        <div style={{ width }} className={classes.faces}>
+          <Dock.List ref={listRef} hidden={false} inert={!listOpen} className={classes.face}>
             {socialChannels.map((channel) => {
               const Icon = CHANNEL_ICONS[channel.id];
 
@@ -89,10 +89,10 @@ export const Navigation = () => {
             ref={settingsRef}
             hidden={false}
             inert={!settingsOpen}
-            className={styles.face}
+            className={classes.face}
           >
             <Tooltip.Provider delay={150} closeDelay={100}>
-              <div className={styles.track}>
+              <div className={classes.track}>
                 <Settings.Theme />
                 <Settings.Sound />
                 <Settings.Volume nudge={opened} />

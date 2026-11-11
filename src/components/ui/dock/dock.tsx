@@ -14,7 +14,7 @@ import {
 import { transitionStatusMapping } from '@/hooks/lifecycle';
 
 import { parts } from './dock.anatomy';
-import { close, item, list, panel, positioner, root, separator, trigger } from './dock.styles';
+import * as styles from './dock.styles';
 import { useDock } from './use-dock';
 import {
   DockListProvider,
@@ -46,7 +46,7 @@ export const Positioner = (props: PositionerProps) => {
     defaultTagName: 'div',
     render,
     props: mergeProps(parts.positioner.attrs, rest, {
-      className: positioner({ className }),
+      className: styles.positioner({ className }),
     }),
   });
 };
@@ -77,7 +77,7 @@ export const Root = (props: RootProps) => {
       value: (current) => (current === null ? null : { 'data-panel': current }),
     },
     props: mergeProps(parts.root.attrs, rest, {
-      className: root({ className }),
+      className: styles.root({ className }),
     }),
   });
 
@@ -122,7 +122,7 @@ export const List = (props: ListProps) => {
     stateAttributesMapping: openStateMapping,
     ref,
     props: mergeProps(parts.list.attrs, { hidden: !open }, rest, {
-      className: list({ className }),
+      className: styles.list({ className }),
     }),
   });
 
@@ -140,7 +140,7 @@ export const Item = (props: ItemProps) => {
     defaultTagName: 'div',
     render,
     props: mergeProps(parts.item.attrs, rest, {
-      className: item({ className }),
+      className: styles.item({ className }),
     }),
   });
 };
@@ -186,7 +186,7 @@ export const Trigger = (props: TriggerProps) => {
         onClick: () => dock.openPanel(value),
       },
       rest,
-      { className: trigger({ className }) },
+      { className: styles.trigger({ className }) },
     ),
   });
 };
@@ -238,7 +238,7 @@ export const Panel = (props: PanelProps) => {
         },
       },
       rest,
-      { className: panel({ className }) },
+      { className: styles.panel({ className }) },
     ),
   });
 
@@ -260,7 +260,7 @@ export const Close = (props: CloseProps) => {
     rest,
   );
 
-  return <ButtonBase {...closeProps} className={close({ className })} />;
+  return <ButtonBase {...closeProps} className={styles.close({ className })} />;
 };
 
 /* ///////////////////////////////////////////////// */
@@ -280,7 +280,7 @@ export const Separator = (props: SeparatorProps) => {
     <SeparatorBase
       {...separatorProps}
       orientation={orientation ?? fallback}
-      className={separator({ className })}
+      className={styles.separator({ className })}
     />
   );
 };

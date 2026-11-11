@@ -1,18 +1,18 @@
 import type { VariantsOf } from '@/utils/styles';
 
-import { Button as ButtonBase, mergeProps } from '@base-ui/react';
+import { Button as BaseButton, mergeProps } from '@base-ui/react';
 
 import { ariaAttr, dataAttr } from '@/utils/dom';
 
 import { parts } from './button.anatomy';
-import { root } from './button.styles';
+import * as styles from './button.styles';
 
-export type ButtonBaseProps = VariantsOf<typeof root> & {
+export type ButtonBaseProps = VariantsOf<typeof styles.root> & {
   native?: boolean;
   focusable?: boolean;
 };
 
-export type ButtonProps = Omit<ButtonBase.Props, 'nativeButton' | 'focusableWhenDisabled'> &
+export type ButtonProps = Omit<BaseButton.Props, 'nativeButton' | 'focusableWhenDisabled'> &
   ButtonBaseProps;
 
 export const Button = (props: ButtonProps) => {
@@ -30,9 +30,9 @@ export const Button = (props: ButtonProps) => {
   const buttonProps = mergeProps(parts.root.attrs, rest);
 
   return (
-    <ButtonBase
+    <BaseButton
       {...buttonProps}
-      className={root({ className, compact, intent, size, variant })}
+      className={styles.root({ className, compact, intent, size, variant })}
       aria-disabled={ariaAttr(rest.disabled)}
       data-disabled={dataAttr(rest.disabled)}
       nativeButton={native}
