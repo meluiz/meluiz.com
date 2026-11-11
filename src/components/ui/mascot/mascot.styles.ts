@@ -32,11 +32,11 @@ export const group = cva({
 });
 
 export const eye = cva({
-  base: 'fill-foreground-on-accent origin-center transform-fill motion-safe:in-data-blink:animate-blink',
+  base: 'origin-center fill-foreground-on-accent transform-fill motion-safe:in-data-blink:animate-blink',
   variants: {},
 });
 
 export const mark = cva({
-  base: 'stroke-foreground-on-accent fill-none',
+  base: 'fill-none stroke-foreground-on-accent',
   variants: {},
 });
