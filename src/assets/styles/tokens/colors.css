@@ -31,6 +31,7 @@
   --color-stroke: var(--color-silt-200);
   --color-stroke-soft: --alpha(var(--color-silt-950) / 8%);
   --color-stroke-strong: var(--color-silt-300);
+  --color-stroke-heavy: var(--color-silt-600);
   --color-stroke-accent: var(--color-clay-500);
   --color-stroke-support: var(--color-dusk-500);
 }
@@ -73,6 +74,7 @@
     --color-stroke: var(--color-silt-900);
     --color-stroke-soft: --alpha(var(--color-silt-50) / 8%);
     --color-stroke-strong: var(--color-silt-800);
+    --color-stroke-heavy: var(--color-silt-500);
     --color-stroke-accent: var(--color-clay-600);
     --color-stroke-support: var(--color-dusk-600);
   }
