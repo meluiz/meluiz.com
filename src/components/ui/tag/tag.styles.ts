@@ -9,6 +9,7 @@ export const root = cva({
     tone: {
       plain: '',
       accent: 'border-foreground-accent/40 text-foreground-accent',
+      support: 'border-foreground-support/40 text-foreground-support',
     },
   },
 });
