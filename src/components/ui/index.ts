@@ -16,7 +16,7 @@ export { Dock, dock } from './dock';
 export { Highlight } from './highlight';
 export { Kbd, kbd } from './kbd';
 export { Mascot, mascot } from './mascot';
-export { Numeral } from './numeral';
+export { Numeral, numeral } from './numeral';
 export { Portal } from './portal';
 export { RuledGrid, ruledGrid } from './ruled-grid';
 export { ScrollArea, scrollArea } from './scroll-area';
