@@ -1,7 +1,7 @@
 import { cva } from '@/utils/styles';
 
 export const root = cva({
-  base: 'inline-flex center border border-b-2 border-stroke-strong bg-surface-soft px-[calc(--spacing(1)-1px)] font-mono leading-none font-medium text-foreground-soft',
+  base: 'border-stroke-heavy ledge is-pressed:ledge-0 inline-flex center border bg-surface-soft px-[calc(--spacing(1)-1px)] font-mono leading-none font-medium text-foreground-prose transition-[translate,box-shadow] duration-100 ease-out-quint is-pressed:translate-y-px',
   defaultVariants: {
     size: 'small',
   },
