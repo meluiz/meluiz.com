@@ -39,14 +39,14 @@ export const root = cva({
   },
   compoundVariants: [
     {
-      className: 'text-foreground-on-accent hatch-foreground-on-accent/10 bg-surface-accent',
+      className: 'bg-surface-accent text-foreground-on-accent hatch-foreground-on-accent/10',
       variants: {
         variant: 'solid',
         intent: 'accent',
       },
     },
     {
-      className: 'text-foreground-on-support hatch-foreground-on-support/10 bg-surface-support',
+      className: 'bg-surface-support text-foreground-on-support hatch-foreground-on-support/10',
       variants: {
         variant: 'solid',
         intent: 'support',
