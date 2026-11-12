@@ -13,15 +13,16 @@ export type InputProps = BaseInput.Props & InputBaseProps;
 export const Input = (props: InputProps) => {
   const { className, intent, size, ...rest } = props;
 
-  const inputProps = mergeProps(parts.root.attrs, rest);
+  const inputProps = {
+    'aria-disabled': ariaAttr(rest.disabled),
+    'data-disabled': dataAttr(rest.disabled),
+    'data-readonly': dataAttr(rest.readOnly),
+  };
 
   return (
     <BaseInput
-      {...inputProps}
+      {...mergeProps(parts.root.attrs, rest, inputProps)}
       className={styles.root({ className, intent, size })}
-      aria-disabled={ariaAttr(rest.disabled)}
-      data-disabled={dataAttr(rest.disabled)}
-      data-readonly={dataAttr(rest.readOnly)}
     />
   );
 };
