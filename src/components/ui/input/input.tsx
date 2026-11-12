@@ -8,7 +8,7 @@ import { parts } from './input.anatomy';
 import * as styles from './input.styles';
 
 export type InputBaseProps = VariantsOf<typeof styles.root>;
-export type InputProps = BaseInput.Props & InputBaseProps;
+export type InputProps = Omit<BaseInput.Props, 'size'> & InputBaseProps;
 
 export const Input = (props: InputProps) => {
   const { className, intent, size, ...rest } = props;
@@ -21,7 +21,7 @@ export const Input = (props: InputProps) => {
 
   return (
     <BaseInput
-      {...mergeProps(parts.root.attrs, rest, inputProps)}
+      {...mergeProps(parts.root.attrs, inputProps, rest)}
       className={styles.root({ className, intent, size })}
     />
   );
