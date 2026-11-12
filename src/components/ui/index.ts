@@ -21,6 +21,7 @@ export { Highlight } from './highlight';
 export { Input, input } from './input';
 export { Kbd, kbd } from './kbd';
 export { Mascot, mascot } from './mascot';
+export { Menu, menu } from './menu';
 export { NumberField, numberField } from './number-field';
 export { Numeral, numeral } from './numeral';
 export { Portal } from './portal';
