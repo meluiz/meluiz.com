@@ -13,6 +13,7 @@ export type { TextareaBaseProps, TextareaProps } from './textarea';
 export { Alert, alert } from './alert';
 export { Breadcrumb, breadcrumb } from './breadcrumb';
 export { Button, button } from './button';
+export { Checkbox, checkbox } from './checkbox';
 export { DataList, dataList } from './data-list';
 export { Dock, dock } from './dock';
 export { Field, field } from './field';
