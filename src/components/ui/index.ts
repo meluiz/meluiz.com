@@ -10,6 +10,7 @@ export type { SkeletonBaseProps, SkeletonProps } from './skeleton';
 export type { TagBaseProps, TagProps } from './tag';
 export type { TextareaBaseProps, TextareaProps } from './textarea';
 
+export { Accordion, accordion } from './accordion';
 export { Alert, alert } from './alert';
 export { Breadcrumb, breadcrumb } from './breadcrumb';
 export { Button, button } from './button';
