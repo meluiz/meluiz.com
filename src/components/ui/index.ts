@@ -29,6 +29,7 @@ export { Section, section } from './section';
 export { Select, select } from './select';
 export { Separator, separator } from './separator';
 export { Skeleton, skeleton } from './skeleton';
+export { Slider, slider } from './slider';
 export { Swap } from './swap';
 export { Tag, tag } from './tag';
 export { Textarea, textarea } from './textarea';
