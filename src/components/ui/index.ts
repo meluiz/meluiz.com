@@ -15,6 +15,7 @@ export { Breadcrumb, breadcrumb } from './breadcrumb';
 export { Button, button } from './button';
 export { DataList, dataList } from './data-list';
 export { Dock, dock } from './dock';
+export { Field, field } from './field';
 export { Highlight } from './highlight';
 export { Input, input } from './input';
 export { Kbd, kbd } from './kbd';
