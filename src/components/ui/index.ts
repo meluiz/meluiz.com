@@ -20,6 +20,7 @@ export { Highlight } from './highlight';
 export { Input, input } from './input';
 export { Kbd, kbd } from './kbd';
 export { Mascot, mascot } from './mascot';
+export { NumberField, numberField } from './number-field';
 export { Numeral, numeral } from './numeral';
 export { Portal } from './portal';
 export { RuledGrid, ruledGrid } from './ruled-grid';
