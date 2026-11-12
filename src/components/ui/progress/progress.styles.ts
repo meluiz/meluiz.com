@@ -25,15 +25,15 @@ export const value = cva({
 
 export const track = cva({
   base: cn([
-    'relative col-span-full h-1.5 w-full overflow-hidden border-b border-stroke-heavy',
-    'before:absolute before:inset-x-0 before:bottom-0 before:h-2 before:bg-[linear-gradient(to_right,var(--color-stroke-heavy)_1px,transparent_1px)] before:mask-[linear-gradient(to_right,transparent_1px,black_1px)] before:bg-size-[10%_100%]',
+    'relative col-span-full h-1.5 w-full overflow-hidden',
+    'before:absolute before:inset-x-0 before:bottom-0 before:h-2 before:border-b before:border-stroke-heavy before:bg-[linear-gradient(to_right,var(--color-stroke-heavy)_1px,transparent_1px)] before:mask-[linear-gradient(to_right,transparent_1px,black_1px)] before:bg-size-[10%_100%]',
   ]),
   variants: {},
 });
 
 export const indicator = cva({
   base: cn([
-    'relative h-full bg-(--progress-color) transition-[width] duration-300 ease-out motion-reduce:transition-none',
+    'relative z-1 h-full bg-(--progress-color) transition-[width] duration-300 ease-out motion-reduce:transition-none',
     'is-indeterminate:animate-progress-indeterminate is-indeterminate:w-1/3 motion-reduce:is-indeterminate:animate-none',
   ]),
   variants: {},
