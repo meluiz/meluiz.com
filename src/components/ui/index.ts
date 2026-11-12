@@ -8,6 +8,7 @@ export type { PortalProps } from './portal';
 export type { SeparatorBaseProps, SeparatorProps } from './separator';
 export type { SkeletonBaseProps, SkeletonProps } from './skeleton';
 export type { TagBaseProps, TagProps } from './tag';
+export type { TextareaBaseProps, TextareaProps } from './textarea';
 
 export { Alert, alert } from './alert';
 export { Breadcrumb, breadcrumb } from './breadcrumb';
@@ -27,4 +28,5 @@ export { Separator, separator } from './separator';
 export { Skeleton, skeleton } from './skeleton';
 export { Swap } from './swap';
 export { Tag, tag } from './tag';
+export { Textarea, textarea } from './textarea';
 export { Timeline, timeline } from './timeline';
