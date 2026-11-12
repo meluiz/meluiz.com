@@ -27,14 +27,15 @@ export const Button = (props: ButtonProps) => {
     ...rest
   } = props;
 
-  const buttonProps = mergeProps(parts.root.attrs, rest);
+  const buttonProps = {
+    'aria-disabled': ariaAttr(rest.disabled),
+    'data-disabled': dataAttr(rest.disabled),
+  };
 
   return (
     <BaseButton
-      {...buttonProps}
+      {...mergeProps(parts.root.attrs, buttonProps, rest)}
       className={styles.root({ className, compact, intent, size, variant })}
-      aria-disabled={ariaAttr(rest.disabled)}
-      data-disabled={dataAttr(rest.disabled)}
       nativeButton={native}
       focusableWhenDisabled={focusable}
     />

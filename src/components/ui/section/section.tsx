@@ -20,13 +20,16 @@ export const Root = (props: RootProps) => {
 
   const section = useSection({ id, index });
 
+  const rootProps = {
+    id: section.id,
+    'aria-labelledby': section.titleId,
+  };
+
   const element = useRender({
     defaultTagName: 'section',
     render,
-    props: mergeProps(parts.root.attrs, rest, {
-      id: section.id,
+    props: mergeProps(parts.root.attrs, rootProps, rest, {
       className: styles.root({ className, tone }),
-      'aria-labelledby': section.titleId,
     }),
   });
 
@@ -62,11 +65,14 @@ export const Index = (props: IndexProps) => {
 
   const value = children ?? section.index;
 
+  const indexProps = {
+    'aria-hidden': true,
+  };
+
   const element = useRender({
     defaultTagName: 'span',
     render,
-    props: mergeProps(parts.index.attrs, rest, {
-      'aria-hidden': true,
+    props: mergeProps(parts.index.attrs, indexProps, rest, {
       className: styles.index({ className }),
       children: value,
     }),
@@ -89,11 +95,14 @@ export const Title = (props: TitleProps) => {
 
   const section = useSectionContext();
 
+  const titleProps = {
+    id: section.titleId,
+  };
+
   return useRender({
     defaultTagName: 'h2',
     render,
-    props: mergeProps(parts.title.attrs, rest, {
-      id: section.titleId,
+    props: mergeProps(parts.title.attrs, titleProps, rest, {
       className: styles.title({ className, size }),
     }),
   });
@@ -109,11 +118,14 @@ export const Description = (props: DescriptionProps) => {
 
   const section = useSectionContext();
 
+  const descriptionProps = {
+    id: section.descriptionId,
+  };
+
   return useRender({
     defaultTagName: 'p',
     render,
-    props: mergeProps(parts.description.attrs, rest, {
-      id: section.descriptionId,
+    props: mergeProps(parts.description.attrs, descriptionProps, rest, {
       className: styles.description({ className, indent }),
     }),
   });

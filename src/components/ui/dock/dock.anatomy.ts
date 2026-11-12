@@ -1,6 +1,6 @@
 import { createAnatomy } from '@/utils/dom';
 
-export const anatomy = createAnatomy('dock').parts(
+export const anatomy = createAnatomy('dock', [
   'positioner',
   'root',
   'list',
@@ -9,6 +9,6 @@ export const anatomy = createAnatomy('dock').parts(
   'trigger',
   'panel',
   'close',
-);
+]);
 
 export const parts = anatomy.build();

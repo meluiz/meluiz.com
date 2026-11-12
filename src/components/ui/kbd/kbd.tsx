@@ -29,11 +29,14 @@ export const Kbd = (props: KbdProps) => {
     </Fragment>
   );
 
+  const kbdProps = {
+    title,
+  };
+
   return useRender({
     defaultTagName: 'kbd',
     render,
-    props: mergeProps(parts.root.attrs, rest, {
-      title,
+    props: mergeProps(parts.root.attrs, kbdProps, rest, {
       children,
       className: styles.root({ className, size }),
     }),

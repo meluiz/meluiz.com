@@ -47,24 +47,24 @@ export const Mascot = (props: MascotProps) => {
   const isLooking = animated && mood === 'idle' && !follow;
   const isWobbling = animated && mood === 'broken';
 
-  const viewport = {
+  const mascotProps = {
     width: size,
     height: size,
+    viewBox: '0 0 64 64',
+    'aria-label': label,
+    'aria-hidden': ariaAttr(!label),
+    'data-blink': dataAttr(shouldBlink),
+    'data-mood': mood,
+    'data-follow': dataAttr(follow),
+    'data-animated': dataAttr(animated),
+    focusable: 'false',
+    role: label ? 'img' : undefined,
   };
 
   const element = useRender({
     defaultTagName: 'svg',
     ref: ref ? [ref, rootRef] : rootRef,
-    props: mergeProps(parts.root.attrs, viewport, rest, {
-      viewBox: '0 0 64 64',
-      'aria-label': label,
-      'aria-hidden': ariaAttr(!label),
-      'data-blink': dataAttr(shouldBlink),
-      'data-mood': mood,
-      'data-follow': dataAttr(follow),
-      'data-animated': dataAttr(animated),
-      focusable: 'false',
-      role: label ? 'img' : undefined,
+    props: mergeProps(parts.root.attrs, mascotProps, rest, {
       className: styles.root({ className, animation: isWobbling ? 'wobble' : 'none' }),
       style: {
         ...style,

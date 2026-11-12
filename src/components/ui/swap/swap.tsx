@@ -47,11 +47,15 @@ export const Root = (props: RootProps) => {
   const swap = useSwap({ swap: swapProp, keepMounted, hideMode, animateInitialOpen });
   const state: RootState = { swapped: swap.swap };
 
+  const rootProps = {
+    style: { display: 'inline-grid' },
+  };
+
   const element = useRender({
     render,
     state,
     defaultTagName: 'span',
-    props: mergeProps(parts.root.attrs, { style: { display: 'inline-grid' } }, rest, {
+    props: mergeProps(parts.root.attrs, rootProps, rest, {
       className: resolveClassName(className, state),
     }),
   });
@@ -83,24 +87,22 @@ export const Indicator = (props: IndicatorProps) => {
   const transition = swap[type];
   const state: IndicatorState = { ...transition.state, type };
 
+  const indicatorProps = {
+    style: {
+      gridArea: '1 / 1',
+      display: 'inline-flex',
+    },
+  };
+
   const element = useRender({
     render,
     state,
     stateAttributesMapping: transitionStatusMapping,
     defaultTagName: 'span',
     ref: ref ? [transition.ref, ref] : transition.ref,
-    props: mergeProps(
-      parts.indicator.attrs,
-      transition.props,
-      {
-        style: {
-          gridArea: '1 / 1',
-          display: 'inline-flex',
-        },
-      },
-      rest,
-      { className: resolveClassName(className, state) },
-    ),
+    props: mergeProps(parts.indicator.attrs, transition.props, indicatorProps, rest, {
+      className: resolveClassName(className, state),
+    }),
   });
 
   if (!transition.mounted) {

@@ -11,11 +11,14 @@ export type TagProps = useRender.ComponentProps<'span'> & TagBaseProps;
 export const Tag = (props: TagProps) => {
   const { className, render, tone, ...rest } = props;
 
+  const tagProps = {
+    'data-tone': tone ?? 'default',
+  };
+
   return useRender({
     defaultTagName: 'span',
     render,
-    props: mergeProps(parts.root.attrs, rest, {
-      'data-tone': tone ?? 'default',
+    props: mergeProps(parts.root.attrs, tagProps, rest, {
       className: styles.root({ className, tone }),
     }),
   });

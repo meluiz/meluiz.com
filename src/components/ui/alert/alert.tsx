@@ -32,11 +32,14 @@ export type IndicatorProps = useRender.ComponentProps<'span'> & IndicatorBasePro
 export const Indicator = (props: IndicatorProps) => {
   const { className, render, tone, ...rest } = props;
 
+  const indicatorProps = {
+    'data-tone': tone ?? 'plain',
+  };
+
   return useRender({
     render,
     defaultTagName: 'span',
-    props: mergeProps(parts.indicator.attrs, rest, {
-      'data-tone': tone ?? 'plain',
+    props: mergeProps(parts.indicator.attrs, indicatorProps, rest, {
       className: styles.indicator({ className, tone }),
     }),
   });

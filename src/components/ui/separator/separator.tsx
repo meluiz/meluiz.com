@@ -11,7 +11,10 @@ export type SeparatorProps = BaseSeparator.Props & SeparatorBaseProps;
 export const Separator = (props: SeparatorProps) => {
   const { className, strength, ...rest } = props;
 
-  const separatorProps = mergeProps(parts.root.attrs, rest);
-
-  return <BaseSeparator {...separatorProps} className={styles.root({ className, strength })} />;
+  return (
+    <BaseSeparator
+      {...mergeProps(parts.root.attrs, rest)}
+      className={styles.root({ className, strength })}
+    />
+  );
 };

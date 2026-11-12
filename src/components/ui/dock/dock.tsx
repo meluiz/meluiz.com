@@ -109,6 +109,10 @@ export const List = (props: ListProps) => {
   const open = !dock.open;
   const state: ListState = { open };
 
+  const listProps = {
+    hidden: !open,
+  };
+
   const element = useRender({
     render: (
       <Toolbar.Root
@@ -121,7 +125,7 @@ export const List = (props: ListProps) => {
     state,
     stateAttributesMapping: openStateMapping,
     ref,
-    props: mergeProps(parts.list.attrs, { hidden: !open }, rest, {
+    props: mergeProps(parts.list.attrs, listProps, rest, {
       className: styles.list({ className }),
     }),
   });
@@ -172,22 +176,21 @@ export const Trigger = (props: TriggerProps) => {
   const open = dock.value === value;
   const state: TriggerState = { open, disabled };
 
+  const triggerProps = {
+    id: dock.triggerId(value),
+    'aria-expanded': open,
+    'aria-controls': open ? dock.panelId(value) : undefined,
+    onClick: () => dock.openPanel(value),
+  };
+
   return useRender({
     render: <Toolbar.Button render={render} disabled={disabled} nativeButton={nativeButton} />,
     state,
     stateAttributesMapping: panelOpenMapping,
     ref: ref ? [register, ref] : register,
-    props: mergeProps(
-      parts.trigger.attrs,
-      {
-        id: dock.triggerId(value),
-        'aria-expanded': open,
-        'aria-controls': open ? dock.panelId(value) : undefined,
-        onClick: () => dock.openPanel(value),
-      },
-      rest,
-      { className: styles.trigger({ className }) },
-    ),
+    props: mergeProps(parts.trigger.attrs, triggerProps, rest, {
+      className: styles.trigger({ className }),
+    }),
   });
 };
 
@@ -215,6 +218,20 @@ export const Panel = (props: PanelProps) => {
   const open = dock.value === value;
   const state: PanelState = { open, value };
 
+  const panelProps = {
+    id: dock.panelId(value),
+    role: 'group',
+    tabIndex: -1,
+    hidden: !open,
+    'aria-labelledby': dock.triggerId(value),
+    onKeyDown: (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && open) {
+        event.stopPropagation();
+        dock.closePanel('escape-key');
+      }
+    },
+  };
+
   const element = useRender({
     enabled: open || keepMounted,
     defaultTagName: 'div',
@@ -222,24 +239,9 @@ export const Panel = (props: PanelProps) => {
     state,
     stateAttributesMapping: openStateMapping,
     ref: ref ? [register, ref] : register,
-    props: mergeProps(
-      parts.panel.attrs,
-      {
-        id: dock.panelId(value),
-        role: 'group',
-        tabIndex: -1,
-        hidden: !open,
-        'aria-labelledby': dock.triggerId(value),
-        onKeyDown: (event: KeyboardEvent) => {
-          if (event.key === 'Escape' && open) {
-            event.stopPropagation();
-            dock.closePanel('escape-key');
-          }
-        },
-      },
-      rest,
-      { className: styles.panel({ className }) },
-    ),
+    props: mergeProps(parts.panel.attrs, panelProps, rest, {
+      className: styles.panel({ className }),
+    }),
   });
 
   return element;
@@ -254,13 +256,16 @@ export const Close = (props: CloseProps) => {
 
   const dock = useDockContext();
 
-  const closeProps = mergeProps(
-    parts.close.attrs,
-    { onClick: () => dock.closePanel('close-press') },
-    rest,
-  );
+  const closeProps = {
+    onClick: () => dock.closePanel('close-press'),
+  };
 
-  return <ButtonBase {...closeProps} className={styles.close({ className })} />;
+  return (
+    <ButtonBase
+      {...mergeProps(parts.close.attrs, closeProps, rest)}
+      className={styles.close({ className })}
+    />
+  );
 };
 
 /* ///////////////////////////////////////////////// */
@@ -274,11 +279,9 @@ export const Separator = (props: SeparatorProps) => {
 
   const fallback = dockList?.orientation === 'horizontal' ? 'vertical' : 'horizontal';
 
-  const separatorProps = mergeProps(parts.separator.attrs, rest);
-
   return (
     <SeparatorBase
-      {...separatorProps}
+      {...mergeProps(parts.separator.attrs, rest)}
       orientation={orientation ?? fallback}
       className={styles.separator({ className })}
     />

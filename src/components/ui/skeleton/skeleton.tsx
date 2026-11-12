@@ -11,10 +11,14 @@ export type SkeletonProps = useRender.ComponentProps<'span'> & SkeletonBaseProps
 export const Skeleton = (props: SkeletonProps) => {
   const { className, render, animation, ...rest } = props;
 
+  const skeletonProps = {
+    'aria-hidden': true,
+  };
+
   return useRender({
     defaultTagName: 'span',
     render,
-    props: mergeProps(parts.root.attrs, { 'aria-hidden': true }, rest, {
+    props: mergeProps(parts.root.attrs, skeletonProps, rest, {
       className: styles.root({ animation, className }),
     }),
   });
