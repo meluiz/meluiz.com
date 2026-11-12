@@ -25,6 +25,7 @@ export { Portal } from './portal';
 export { RuledGrid, ruledGrid } from './ruled-grid';
 export { ScrollArea, scrollArea } from './scroll-area';
 export { Section, section } from './section';
+export { Select, select } from './select';
 export { Separator, separator } from './separator';
 export { Skeleton, skeleton } from './skeleton';
 export { Swap } from './swap';
