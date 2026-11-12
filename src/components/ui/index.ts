@@ -34,6 +34,7 @@ export { Separator, separator } from './separator';
 export { Skeleton, skeleton } from './skeleton';
 export { Slider, slider } from './slider';
 export { Swap } from './swap';
+export { Switch, switch } from './switch';
 export { Tag, tag } from './tag';
 export { Textarea, textarea } from './textarea';
 export { Timeline, timeline } from './timeline';
