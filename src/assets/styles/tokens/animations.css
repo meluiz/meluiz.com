@@ -10,6 +10,9 @@
   --animate-mascot-look: mascot-look 6s var(--ease-in-out-quad) infinite;
   --animate-mascot-wobble: mascot-wobble 4s var(--ease-in-out-quad) infinite;
 
+  --animate-progress-indeterminate: progress-indeterminate 1.4s var(--ease-in-out-quad)
+    infinite;
+
   @keyframes blink {
     0%,
     100% {
@@ -97,6 +100,16 @@
   @keyframes hatch-drift {
     to {
       --tw-hatch-offset: calc(var(--tw-hatch-size) * -1);
+    }
+  }
+
+  @keyframes progress-indeterminate {
+    from {
+      translate: -100%;
+    }
+
+    to {
+      translate: 300%;
     }
   }
 }

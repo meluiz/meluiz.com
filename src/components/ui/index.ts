@@ -23,6 +23,7 @@ export { Mascot, mascot } from './mascot';
 export { NumberField, numberField } from './number-field';
 export { Numeral, numeral } from './numeral';
 export { Portal } from './portal';
+export { Progress, progress } from './progress';
 export { RuledGrid, ruledGrid } from './ruled-grid';
 export { ScrollArea, scrollArea } from './scroll-area';
 export { Section, section } from './section';
