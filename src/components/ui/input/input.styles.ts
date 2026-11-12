@@ -4,6 +4,8 @@ export const root = cva({
   base: cn([
     'flex w-full min-w-0 border border-stroke-strong bg-surface-soft font-sans text-foreground outline-hidden placeholder:text-foreground-soft focus:not-is-invalid:border-stroke-heavy focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-surface',
     'is-invalid:border-foreground-accent is-readonly:cursor-text is-disabled:cursor-not-allowed is-disabled:caret-transparent is-disabled:opacity-46 is-disabled:select-none',
+    'autofill:caret-foreground autofill:shadow-[inset_0_0_0_1000px_var(--color-surface-soft)] autofill:[-webkit-text-fill-color:var(--color-foreground)]',
+    'data-com-onepassword-filled:bg-surface-soft data-com-onepassword-filled:shadow-[inset_0_0_0_1000px_var(--color-surface-soft)]',
   ]),
   defaultVariants: {
     size: 'small',
