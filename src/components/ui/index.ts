@@ -24,6 +24,7 @@ export { Mascot, mascot } from './mascot';
 export { Menu, menu } from './menu';
 export { NumberField, numberField } from './number-field';
 export { Numeral, numeral } from './numeral';
+export { Pagination, pagination } from './pagination';
 export { Portal } from './portal';
 export { Progress, progress } from './progress';
 export { Radio, radio } from './radio';
