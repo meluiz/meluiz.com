@@ -12,6 +12,7 @@ export default withMDX({
     BUILD_TIMESTAMP: new Date().toISOString(),
   },
   experimental: {
+    agentUpgrade: 'security',
     globalNotFound: true,
     staleTimes: {
       static: 60,
