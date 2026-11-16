@@ -114,7 +114,7 @@ export const Card = (props: CardProps) => {
       </Playground.Stage>
       <div className={styles.meta}>
         <div className={styles.top}>
-          <h2 className={styles.title}>
+          <h2 className={styles.title} translate="no">
             <Link href={`/crafts/${craft.slug}`} className={styles.link}>
               {craft.title}
             </Link>

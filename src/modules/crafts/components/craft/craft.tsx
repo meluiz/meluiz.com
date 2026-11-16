@@ -54,7 +54,7 @@ export const Header = (props: HeaderProps) => {
   return (
     <section className={styles.root} aria-labelledby="craft-title">
       <span className={styles.status}>
-        <Tag className={styles.statusTag} tone="accent">
+        <Tag className={styles.statusTag} tone="accent" translate="no">
           Craft
         </Tag>
         <span className={styles.statusDate}>
@@ -62,7 +62,7 @@ export const Header = (props: HeaderProps) => {
         </span>
       </span>
       <div className={styles.content}>
-        <h1 id="craft-title" className={styles.title}>
+        <h1 id="craft-title" className={styles.title} translate="no">
           {craft.title}
         </h1>
         <p className={styles.description}>{craft.description}</p>
@@ -124,14 +124,18 @@ export const Pager = (props: PagerProps) => {
           <IconArrowLeft />
           Previous
         </span>
-        <span className={styles.title}>{prev.title}</span>
+        <span className={styles.title} translate="no">
+          {prev.title}
+        </span>
       </Link>
       <Link href={`/crafts/${next.slug}`} className={styles.trigger} rel="next">
         <span className={styles.label}>
           Next
           <IconArrowRight />
         </span>
-        <span className={styles.title}>{next.title}</span>
+        <span className={styles.title} translate="no">
+          {next.title}
+        </span>
       </Link>
     </nav>
   );

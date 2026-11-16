@@ -18,7 +18,7 @@ export const Stats = (props: StatsProps) => {
   return (
     <RuledGrid.Root className={styles.root} render={<DataList.Root className={styles.list} />}>
       <RuledGrid.Cell className={styles.item} render={<DataList.Item />}>
-        <DataList.Term>Crafts</DataList.Term>
+        <DataList.Term translate="no">Crafts</DataList.Term>
         <DataList.Details>
           <Numeral value={total} pad={2} label="crafts" className="text-value" />
         </DataList.Details>

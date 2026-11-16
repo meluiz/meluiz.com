@@ -21,7 +21,9 @@ export const Masthead = (props: MastheadProps) => {
         <span className={styles.serialLabel}>{formatSerialRange(total)}</span>
       </div>
       <hgroup className={styles.heading}>
-        <p className={styles.eyebrow}>Crafts</p>
+        <p className={styles.eyebrow} translate="no">
+          Crafts
+        </p>
         <h1 id="masthead-title" className={styles.title}>
           <Highlight
             query={['small things', 'should feel']}
