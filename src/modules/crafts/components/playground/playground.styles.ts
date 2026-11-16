@@ -44,7 +44,29 @@ export const actions = cva({
 });
 
 export const action = cva({
-  base: 'font-mono uppercase',
+  base: 'font-mono uppercase pointer-coarse:h-9',
+  variants: {},
+});
+
+// Matches the outline xsmall actions next to it, instead of the form-field look of <Select />
+export const select = cva({
+  base: 'w-auto shrink-0 gap-x-1 border-stroke bg-surface font-mono font-medium uppercase hover:border-stroke-strong pointer-coarse:h-9',
+  variants: {},
+});
+
+// Every label sits in one cell, so the trigger keeps the width of the longest option
+export const selectValue = cva({
+  base: 'grid text-left *:col-start-1 *:row-start-1',
+  variants: {},
+});
+
+export const selectSizer = cva({
+  base: 'invisible',
+  variants: {},
+});
+
+export const selectPopup = cva({
+  base: '**:[[data-scope=select][data-part=item]]:font-mono **:[[data-scope=select][data-part=item]]:uppercase pointer-coarse:**:[[data-scope=select][data-part=item]]:h-9',
   variants: {},
 });
 

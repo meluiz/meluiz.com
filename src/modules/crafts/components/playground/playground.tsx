@@ -7,7 +7,8 @@ import { mergeProps, useRender } from '@base-ui/react';
 import { Fragment } from 'react';
 import { createPortal } from 'react-dom';
 
-import { Button } from '@/components/ui';
+import { useSoundEffects } from '@/components/providers';
+import { Button, Select as SelectBase } from '@/components/ui';
 import { useSafeLayoutEffect } from '@/hooks/lifecycle';
 
 import { StatusBar } from './components';
@@ -125,11 +126,16 @@ export const Toolbar = (props: ToolbarProps) => {
 export type ActionProps = ButtonProps;
 
 export const Action = (props: ActionProps) => {
-  const { className, size = 'xsmall', variant = 'outline', ...rest } = props;
+  const { className, size = 'xsmall', variant = 'outline', onClick, ...rest } = props;
 
+  const sfx = useSoundEffects();
   const { toolbarRef } = usePlaygroundContext();
 
-  const actionProps = mergeProps(parts.action.attrs, rest);
+  const actionProps = mergeProps(parts.action.attrs, rest, {
+    onClick: sfx.play.toggle((event: any) => {
+      onClick?.(event);
+    }),
+  });
 
   if (toolbarRef == null) {
     return null;
@@ -148,10 +154,77 @@ export const Action = (props: ActionProps) => {
 
 /* ///////////////////////////////////////////////// */
 
+export interface SelectOption<Value extends string> {
+  value: Value;
+  label?: string;
+}
+
+export interface SelectProps<Value extends string> {
+  'aria-label': string;
+  className?: string;
+  options: readonly SelectOption<Value>[];
+  value: Value;
+  onValueChange: (value: Value) => void;
+}
+
+export const Select = <Value extends string>(props: SelectProps<Value>) => {
+  const { className, onValueChange, options, value, 'aria-label': ariaLabel } = props;
+
+  const sfx = useSoundEffects();
+  const { toolbarRef } = usePlaygroundContext();
+
+  if (toolbarRef == null) {
+    return null;
+  }
+
+  const items = options.map((option) => ({
+    value: option.value,
+    label: option.label ?? option.value,
+  }));
+
+  const handleValueChange = sfx.play.toggle((next: Value | null) => {
+    if (next != null) {
+      onValueChange(next);
+    }
+  });
+
+  return createPortal(
+    <SelectBase.Root items={items} value={value} onValueChange={handleValueChange}>
+      <SelectBase.Trigger
+        {...parts.select.attrs}
+        aria-label={ariaLabel}
+        size="xsmall"
+        className={styles.select({ className })}
+      >
+        <span className={styles.selectValue()}>
+          {items.map((item) => (
+            <span key={item.value} aria-hidden className={styles.selectSizer()}>
+              {item.label}
+            </span>
+          ))}
+          <SelectBase.Value />
+        </span>
+        <SelectBase.Icon />
+      </SelectBase.Trigger>
+      <SelectBase.Popup size="xsmall" align="end" className={styles.selectPopup()}>
+        {items.map((item) => (
+          <SelectBase.Item key={item.value} value={item.value}>
+            <SelectBase.ItemText>{item.label}</SelectBase.ItemText>
+            <SelectBase.ItemIndicator />
+          </SelectBase.Item>
+        ))}
+      </SelectBase.Popup>
+    </SelectBase.Root>,
+    toolbarRef,
+  );
+};
+
+/* ///////////////////////////////////////////////// */
+
 export type SourceProps = ButtonProps;
 
 export const Source = (props: SourceProps) => {
-  const { className, size = 'small', variant = 'solid', ...rest } = props;
+  const { className, size = 'xsmall', variant = 'solid', ...rest } = props;
 
   const sourceProps = mergeProps(parts.trigger.attrs, rest);
 
