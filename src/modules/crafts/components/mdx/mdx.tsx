@@ -53,6 +53,7 @@ export const Components = freeze<MDXComponents>({
   h2: ({ className, ...props }) => <h2 className={styles.h2({ className })} {...props} />,
   h3: ({ className, ...props }) => <h3 className={styles.h3({ className })} {...props} />,
   p: ({ className, ...props }) => <p className={styles.p({ className })} {...props} />,
+  code: ({ className, ...props }) => <code className={styles.code({ className })} {...props} />,
   a: ({ className, ...props }) => <Anchor className={styles.a({ className })} {...props} />,
   strong: ({ className, ...props }) => (
     <strong className={styles.strong({ className })} {...props} />

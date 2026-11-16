@@ -1,9 +1,12 @@
 'use client';
 
+import type { AnatomyPart } from '@/utils/dom';
 import type { VariantsOf } from '@/utils/styles';
 
 import { mergeProps, useRender } from '@base-ui/react';
 import React from 'react';
+
+import { ScrollArea } from '@/components/ui';
 
 import { parts } from './code-block.anatomy';
 import * as styles from './code-block.styles';
@@ -57,6 +60,58 @@ export const Title = (props: TitleProps) => {
 
 /* ///////////////////////////////////////////////// */
 
+// `part.selector` is a nesting selector (`&[...]`), where `&` resolves to the element itself
+// in `closest()`, so plain attribute selectors are built from `attrs` instead
+const toSelector = ({ attrs }: AnatomyPart) => {
+  return `[data-scope="${attrs['data-scope']}"][data-part="${attrs['data-part']}"]`;
+};
+
+const readCode = (button: HTMLElement) => {
+  const root = button.closest(toSelector(parts.root));
+  const content = root?.querySelector(toSelector(parts.content));
+
+  return content?.textContent?.trimEnd() ?? '';
+};
+
+// `navigator.clipboard` only exists in secure contexts (HTTPS or localhost), so plain-HTTP
+// origins such as a LAN IP fall back to the legacy `execCommand` path
+const copyWithSelection = (text: string) => {
+  const textarea = document.createElement('textarea');
+
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+
+  document.body.append(textarea);
+  textarea.select();
+
+  try {
+    return document.execCommand('copy');
+  } finally {
+    textarea.remove();
+  }
+};
+
+const copyText = async (text: string) => {
+  if (text === '') {
+    return false;
+  }
+
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+
+    return copyWithSelection(text);
+  } catch {
+    return copyWithSelection(text);
+  }
+};
+
+/* ///////////////////////////////////////////////// */
+
 export type ClipboardProps = useRender.ComponentProps<'button'> &
   VariantsOf<typeof styles.clipboard>;
 
@@ -72,13 +127,6 @@ export const Clipboard = (props: ClipboardProps) => {
     'aria-label': copied ? 'Copied' : 'Copy code',
   };
 
-  const readCode = (button: HTMLElement) => {
-    const root = button.closest(parts.root.selector);
-    const content = root?.querySelector(parts.content.selector);
-
-    return content?.textContent ?? '';
-  };
-
   const handleClick = async (event: React.MouseEvent<HTMLButtonElement>) => {
     onClick?.(event);
 
@@ -86,7 +134,11 @@ export const Clipboard = (props: ClipboardProps) => {
       return;
     }
 
-    await navigator.clipboard.writeText(readCode(event.currentTarget));
+    const isCopied = await copyText(readCode(event.currentTarget));
+
+    if (!isCopied) {
+      return;
+    }
 
     setCopied(true);
 
@@ -109,7 +161,11 @@ export const Clipboard = (props: ClipboardProps) => {
     props: mergeProps(parts.clipboard.attrs, copyProps, rest, {
       className: styles.clipboard({ className, placement }),
       onClick: handleClick,
-      children: <span aria-live="polite">{copied ? 'Copied' : 'Copy'}</span>,
+      children: (
+        <span aria-live="polite" className={styles.clipboardText()}>
+          {copied ? 'Copied' : 'Copy'}
+        </span>
+      ),
     }),
   });
 };
@@ -121,11 +177,20 @@ export type ContentProps = useRender.ComponentProps<'pre'> & VariantsOf<typeof s
 export const Content = (props: ContentProps) => {
   const { className, render, ...rest } = props;
 
-  return useRender({
+  const element = useRender({
     render,
     defaultTagName: 'pre',
     props: mergeProps(parts.content.attrs, rest, {
       className: styles.content({ className }),
     }),
   });
+
+  return (
+    <ScrollArea.Root className={styles.scroller()}>
+      <ScrollArea.Viewport className={styles.viewport()}>{element}</ScrollArea.Viewport>
+      <ScrollArea.Scrollbar orientation="horizontal">
+        <ScrollArea.Thumb />
+      </ScrollArea.Scrollbar>
+    </ScrollArea.Root>
+  );
 };
