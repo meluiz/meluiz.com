@@ -15,6 +15,14 @@ export interface Segment {
   href: Route;
 }
 
+export interface CreateSegmentsOptions {
+  /** Label of the home segment. */
+  rootLabel?: string;
+
+  /** Readable labels keyed by href, replacing the URL part (e.g. a slug with its title). */
+  labels?: Partial<Record<string, string>>;
+}
+
 /* ///////////////////////////////////////////////// */
 
 const decodeSegment = (segment: string) => {
@@ -42,8 +50,16 @@ const toAncestorRoutes = (pathname: string): Segment[] => {
 
 /* ///////////////////////////////////////////////// */
 
-export const createSegments = (pathname: string, rootLabel = 'meluiz'): Segment[] | null => {
-  const ancestors = toAncestorRoutes(pathname);
+export const createSegments = (
+  pathname: string,
+  options: CreateSegmentsOptions = {},
+): Segment[] | null => {
+  const { rootLabel = 'meluiz', labels = {} } = options;
+
+  const ancestors = toAncestorRoutes(pathname).map((segment) => ({
+    ...segment,
+    label: labels[segment.href] ?? segment.label,
+  }));
 
   if (ancestors.length === 0) {
     return null;

@@ -6,13 +6,16 @@ import { Fragment } from 'react';
 
 import { Breadcrumb } from '@/components/ui';
 
-export type SegmentProps = React.PropsWithChildren;
+export type SegmentProps = React.PropsWithChildren<{
+  /** Readable labels keyed by href, e.g. a craft's title for its slug. */
+  labels?: Partial<Record<string, string>>;
+}>;
 
 export const Segments = (props: SegmentProps) => {
-  const { children } = props;
+  const { children, labels } = props;
 
   const pathname = usePathname();
-  const segments = Breadcrumb.createSegments(pathname);
+  const segments = Breadcrumb.createSegments(pathname, { labels });
 
   if (segments == null) {
     return children;

@@ -2,9 +2,17 @@ import Link from 'next/link';
 
 import { Mascot } from '@/components/ui';
 import { Visitors } from '@/modules/analytics';
+import { getCraftList } from '@/modules/crafts/services';
 
 import { Preferences } from '../preferences';
 import { Segments } from './components';
+
+// Resolved on the server, so the breadcrumb renders the title from the first paint
+const getSegmentLabels = () => {
+  return Object.fromEntries(
+    getCraftList().map((craft) => [`/crafts/${craft.slug}`, craft.title]),
+  );
+};
 
 export const Header = () => {
   return (
@@ -18,7 +26,7 @@ export const Header = () => {
             <Link href="/" aria-label="meluiz, home" className="-ml-3 px-3">
               <Mascot size={32} blink follow />
             </Link>
-            <Segments>
+            <Segments labels={getSegmentLabels()}>
               <Visitors.Content />
             </Segments>
           </div>
