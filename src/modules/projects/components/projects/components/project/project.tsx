@@ -16,7 +16,7 @@ export const Project = (props: ProjectProps) => {
     <article className={styles.root} aria-labelledby={`project-${project.id}-title`}>
       <div className={styles.header}>
         <div className={styles.heading}>
-          <h3 id={`project-${project.id}-title`} className={styles.title}>
+          <h3 id={`project-${project.id}-title`} className={styles.title} translate="no">
             {project.name}
           </h3>
           <Links name={project.name} links={project.links} />

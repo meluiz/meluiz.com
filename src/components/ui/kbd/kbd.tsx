@@ -31,6 +31,7 @@ export const Kbd = (props: KbdProps) => {
 
   const kbdProps = {
     title,
+    translate: 'no',
   };
 
   return useRender({

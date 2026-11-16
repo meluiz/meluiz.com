@@ -18,7 +18,8 @@ export const Reference = (props: ReferenceProps) => {
       native={false}
       render={<a href={href} rel="noreferrer noopener" target="_blank" />}
     >
-      {label}
+      {/* Links point at names (people, products, a commit), so only the hint is translated */}
+      <span translate="no">{label}</span>
       <span className="sr-only"> (opens in a new tab)</span>
     </Button>
   );

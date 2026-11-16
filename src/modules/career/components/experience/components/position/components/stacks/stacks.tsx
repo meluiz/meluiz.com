@@ -19,7 +19,7 @@ export const Stacks = (props: StacksProps) => {
   }
 
   return (
-    <ul className={styles.root} aria-label={`Technologies used at ${company}`}>
+    <ul className={styles.root} aria-label={`Technologies used at ${company}`} translate="no">
       {items.map((stack) => (
         <Tag key={stack} render={<li />}>
           {stack}

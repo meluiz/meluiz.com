@@ -49,10 +49,14 @@ export type TitleProps = useRender.ComponentProps<'figcaption'> &
 export const Title = (props: TitleProps) => {
   const { className, render, ...rest } = props;
 
+  const titleProps = {
+    translate: 'no',
+  };
+
   return useRender({
     render,
     defaultTagName: 'figcaption',
-    props: mergeProps(parts.title.attrs, rest, {
+    props: mergeProps(parts.title.attrs, titleProps, rest, {
       className: styles.title({ className }),
     }),
   });
@@ -177,10 +181,14 @@ export type ContentProps = useRender.ComponentProps<'pre'> & VariantsOf<typeof s
 export const Content = (props: ContentProps) => {
   const { className, render, ...rest } = props;
 
+  const contentProps = {
+    translate: 'no',
+  };
+
   const element = useRender({
     render,
     defaultTagName: 'pre',
-    props: mergeProps(parts.content.attrs, rest, {
+    props: mergeProps(parts.content.attrs, contentProps, rest, {
       className: styles.content({ className }),
     }),
   });

@@ -11,5 +11,9 @@ export const Pathname = (props: PathnameProps) => {
 
   const pathname = usePathname();
 
-  return <code className={className}>{pathname}</code>;
+  return (
+    <code translate="no" className={className}>
+      {pathname}
+    </code>
+  );
 };

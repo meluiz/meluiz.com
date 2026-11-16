@@ -65,7 +65,7 @@ export const ServerError = (props: ServerErrorProps) => {
             'Unexpected error',
             error.digest && (
               <span key="digest">
-                Digest <code>{error.digest}</code>
+                Digest <code translate="no">{error.digest}</code>
               </span>
             ),
           ].filter(Boolean)}
@@ -84,7 +84,11 @@ export const ServerError = (props: ServerErrorProps) => {
           }
           note={
             <Fragment>
-              Still broken? Email <a href={`mailto:${EMAIL}`}>{EMAIL}</a> with the digest above.
+              Still broken? Email{' '}
+              <a href={`mailto:${EMAIL}`} translate="no">
+                {EMAIL}
+              </a>{' '}
+              with the digest above.
             </Fragment>
           }
         >

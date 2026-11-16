@@ -45,12 +45,12 @@ export const ErrorDetails = (props: ErrorDetailsProps) => {
       description="For whoever is debugging this — probably me"
       action={<CopyButton value={report} />}
     >
-      <p className={styles.summary}>
+      <p className={styles.summary} translate="no">
         <span className={styles.name}>{error.name}</span>{' '}
         <span className={styles.message}>{error.message}</span>
       </p>
       {frames.length > 0 && (
-        <ol className={styles.frames}>
+        <ol className={styles.frames} translate="no">
           {frames.map((frame, index) => (
             <li
               key={index}

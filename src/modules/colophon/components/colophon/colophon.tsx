@@ -10,7 +10,9 @@ export const Colophon = () => {
   return (
     <Section.Root id="colophon">
       <Section.Header divided inset="small" className={styles.header}>
-        <Section.Title className={styles.title}>meluiz.com</Section.Title>
+        <Section.Title className={styles.title} translate="no">
+          meluiz.com
+        </Section.Title>
         <Section.Description>
           Relishing the details. Fostering innovation. Achieving excellence.
         </Section.Description>
@@ -36,7 +38,7 @@ export const Colophon = () => {
           <RuledGrid.Cell render={<DataList.Item />}>
             <DataList.Term>Stack</DataList.Term>
             <DataList.Details>
-              <ul className={styles.list}>
+              <ul className={styles.list} translate="no">
                 {colophon.stacks.map((stack) => (
                   <li key={stack}>{stack}</li>
                 ))}

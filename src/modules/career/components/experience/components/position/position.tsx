@@ -48,7 +48,7 @@ export const Position = (props: PositionProps) => {
       <Timeline.Content className={styles.content}>
         <div className={styles.header}>
           <h3 className={styles.title}>
-            {position.role} <span>at</span> {position.company}
+            {position.role} <span>at</span> <span translate="no">{position.company}</span>
           </h3>
           <p className={styles.summary}>{position.summary}</p>
         </div>

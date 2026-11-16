@@ -39,7 +39,9 @@ export const Report = (props: ReportProps) => {
             render={<DataList.Item />}
           >
             <DataList.Term>{entry.label}</DataList.Term>
-            <DataList.Details className={styles.value}>{entry.value}</DataList.Details>
+            <DataList.Details className={styles.value} translate="no">
+              {entry.value}
+            </DataList.Details>
           </RuledGrid.Cell>
         ))}
       </RuledGrid.Root>

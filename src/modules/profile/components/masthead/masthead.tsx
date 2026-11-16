@@ -22,7 +22,7 @@ export const Masthead = () => {
           />
         </div>
         <hgroup className="relative flex flex-col gap-y-2">
-          <h1 id="masthead-title" className={styles.name}>
+          <h1 id="masthead-title" className={styles.name} translate="no">
             Luiz Felipe
           </h1>
           <p className={styles.role}>

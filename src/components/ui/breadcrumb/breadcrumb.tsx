@@ -104,10 +104,14 @@ export type ItemProps = useRender.ComponentProps<'li'> & ItemBaseProps;
 export const Item = (props: ItemProps) => {
   const { className, render, ...rest } = props;
 
+  const itemProps = {
+    translate: 'no',
+  };
+
   return useRender({
     render,
     defaultTagName: 'li',
-    props: mergeProps(parts.item.attrs, rest, {
+    props: mergeProps(parts.item.attrs, itemProps, rest, {
       className: styles.item({ className }),
     }),
   });
