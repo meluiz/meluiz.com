@@ -11,6 +11,6 @@ export const masthead = sva({
     heading: 'relative flex min-w-0 flex-1 flex-col gap-y-2 pt-12 pb-11',
     eyebrow: 'font-mono text-value text-foreground-accent uppercase',
     title:
-      'text-display-sm text-balance text-foreground sm:text-display **:[mark]:bg-transparent **:[mark]:text-foreground-accent',
+      'text-display-sm text-balance text-foreground sm:text-display **:data-highlight:text-foreground-accent',
   },
 });

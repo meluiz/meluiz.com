@@ -11,7 +11,7 @@ import { useHighlight } from './use-highlight';
 
 export type HighlightBaseProps = UseHighlightProps;
 
-export type HighlightProps = React.ComponentProps<'mark'> & HighlightBaseProps;
+export type HighlightProps = React.ComponentProps<'span'> & HighlightBaseProps;
 
 export const Highlight = (props: HighlightProps) => {
   if (typeof props.text !== 'string') {
@@ -32,9 +32,11 @@ export const Highlight = (props: HighlightProps) => {
     <Fragment>
       {chunks.map(({ text, match }, i) =>
         match ? (
-          <mark key={i} {...localProps}>
+          // Not a <mark>: Google Translate translates a <mark> apart from its sentence and drops
+          // the spaces around it ("Eu construopequenas coisaspara…"); a span keeps the sentence whole
+          <span key={i} data-highlight="" role="mark" {...localProps}>
             {text}
-          </mark>
+          </span>
         ) : (
           <Fragment key={i}>{text}</Fragment>
         ),

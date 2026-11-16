@@ -4,7 +4,7 @@ import { IconArrowRotateClockwise } from '@central-icons/outlined-sharp';
 import { env } from 'envin/env';
 import { Fragment } from 'react';
 
-import { Button } from '@/components/ui';
+import { Button, Highlight } from '@/components/ui';
 
 import { Masthead } from '../masthead';
 import { Overview } from '../overview';
@@ -92,9 +92,10 @@ export const ServerError = (props: ServerErrorProps) => {
             </Fragment>
           }
         >
-          The site hit an error it couldn't recover from, so the whole page stopped loading.
-          It's <mark>not something you did</mark> — the error was logged, and trying again
-          usually fixes it.
+          <Highlight
+            query="not something you did"
+            text="The site hit an error it couldn't recover from, so the whole page stopped loading. It's not something you did — the error was logged, and trying again usually fixes it."
+          />
         </Overview>
       </div>
       <ErrorDetails error={error} />
