@@ -11,5 +11,5 @@ export default Layout;
 /* ///////////////////////////////////////////////// */
 
 // The header renders the visitors counter into the static HTML, so the pages regenerate in the
-// background on the same interval as the visitors service (REVALIDATE_SECONDS). Must be a literal
+// background every 10 seconds. This is the only cache for the visitors data. Must be a literal
 export const revalidate = 10;

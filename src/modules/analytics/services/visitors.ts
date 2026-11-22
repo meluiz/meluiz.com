@@ -1,5 +1,4 @@
 import { DateTime } from 'luxon';
-import { unstable_cache } from 'next/cache';
 import { isXiorError } from 'xior';
 
 import { visitors } from '../configs';
@@ -57,14 +56,14 @@ export interface VisitorFilters {
 const DEFAULT_DAYS = 30;
 const DEFAULT_DOMAIN = 'meluiz.com';
 
-// Keep in sync with `revalidate` in app/(root)/(shell)/layout.tsx, so the page and the data
-// expire together
-const REVALIDATE_SECONDS = 10;
-
 /* ///////////////////////////////////////////////// */
 
+// The pages are ISR (see `revalidate` in app/(root)/(shell)/layout.tsx), so any stale-while-
+// revalidate cache under them makes a regeneration render the previous data. The range ends at the
+// current millisecond: the latest visit is always included, and since the URL is the fetch cache
+// key, a regeneration never reads a stale entry from it
 const getRange = (days: number) => {
-  const until = DateTime.utc().startOf('minute');
+  const until = DateTime.utc();
   const since = until.minus({ days });
 
   return {
@@ -89,30 +88,26 @@ export interface GetVisitorsVisitsParams extends VisitorFilters {
   offset?: number;
 }
 
-export const getVisitorsVisit = unstable_cache(
-  async (params?: GetVisitorsVisitsParams) => {
-    const { domain = DEFAULT_DOMAIN, path, days = DEFAULT_DAYS, limit, offset } = params ?? {};
+export const getVisitorsVisit = async (params?: GetVisitorsVisitsParams) => {
+  const { domain = DEFAULT_DOMAIN, path, days = DEFAULT_DAYS, limit, offset } = params ?? {};
 
-    try {
-      const { data } = await visitors.get<VisitsResponse>('/visits', {
-        params: {
-          domain,
-          path,
-          limit,
-          offset,
-          ...getRange(days),
-        },
-      });
+  try {
+    const { data } = await visitors.get<VisitsResponse>('/visits', {
+      params: {
+        domain,
+        path,
+        limit,
+        offset,
+        ...getRange(days),
+      },
+    });
 
-      return data;
-    } catch (error) {
-      logError('getVisitorsVisit', error);
-      return null;
-    }
-  },
-  ['getVisitorsVisit'],
-  { revalidate: REVALIDATE_SECONDS },
-);
+    return data;
+  } catch (error) {
+    logError('getVisitorsVisit', error);
+    return null;
+  }
+};
 
 export type GetStatsParams = VisitorFilters;
 
@@ -124,53 +119,45 @@ export interface StatsResponse {
   days: DayStat[];
 }
 
-export const getVisitorsStats = unstable_cache(
-  async (params?: GetStatsParams) => {
-    const { domain = DEFAULT_DOMAIN, path, days = DEFAULT_DAYS } = params ?? {};
+export const getVisitorsStats = async (params?: GetStatsParams) => {
+  const { domain = DEFAULT_DOMAIN, path, days = DEFAULT_DAYS } = params ?? {};
 
-    try {
-      const { data } = await visitors.get<StatsResponse>('/stats', {
-        params: {
-          domain,
-          path,
-          ...getRange(days),
-        },
-      });
+  try {
+    const { data } = await visitors.get<StatsResponse>('/stats', {
+      params: {
+        domain,
+        path,
+        ...getRange(days),
+      },
+    });
 
-      return data;
-    } catch (error) {
-      logError('getVisitorsStats', error);
-      return null;
-    }
-  },
-  ['getVisitorsStats'],
-  { revalidate: REVALIDATE_SECONDS },
-);
+    return data;
+  } catch (error) {
+    logError('getVisitorsStats', error);
+    return null;
+  }
+};
 
 export interface GetCountParams {
   domain?: string;
   path?: string;
 }
 
-export const getVisitorsCount = unstable_cache(
-  async (params?: GetCountParams): Promise<number | null> => {
-    const { domain = DEFAULT_DOMAIN, path } = params ?? {};
+export const getVisitorsCount = async (params?: GetCountParams): Promise<number | null> => {
+  const { domain = DEFAULT_DOMAIN, path } = params ?? {};
 
-    try {
-      const { data } = await visitors.get<VisitsResponse>('/visits', {
-        params: {
-          domain,
-          path,
-          limit: 1,
-        },
-      });
+  try {
+    const { data } = await visitors.get<VisitsResponse>('/visits', {
+      params: {
+        domain,
+        path,
+        limit: 1,
+      },
+    });
 
-      return data.total;
-    } catch (error) {
-      logError('getVisitorsCount', error);
-      return null;
-    }
-  },
-  ['getVisitorsCount'],
-  { revalidate: REVALIDATE_SECONDS },
-);
+    return data.total;
+  } catch (error) {
+    logError('getVisitorsCount', error);
+    return null;
+  }
+};
