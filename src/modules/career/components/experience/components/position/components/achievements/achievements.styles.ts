@@ -6,8 +6,8 @@ export const achievements = sva({
   base: {
     root: 'flex flex-col gap-y-3',
     item: 'flex flex-col gap-y-1',
-    label: 'text-label font-mono text-foreground-accent uppercase',
+    label: 'font-mono text-label text-foreground-accent uppercase',
     separator: 'text-foreground',
-    description: 'text-body max-w-[64ch] font-sans text-foreground-prose',
+    description: 'max-w-[64ch] font-sans text-body text-foreground-prose',
   },
 });

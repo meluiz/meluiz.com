@@ -6,7 +6,7 @@ export const masthead = sva({
   base: {
     root: 'relative flex shrink-0 flex-col stretch-start',
     banner:
-      'text-foreground-on-accent hatch-foreground-on-accent/8 relative block h-28 overflow-hidden bg-surface-accent bg-hatch hatch-2 sm:h-36',
+      'relative block h-28 overflow-hidden bg-surface-accent bg-hatch text-foreground-on-accent hatch-foreground-on-accent/8 hatch-2 sm:h-36',
     locale: 'absolute right-4 bottom-3 bg-inherit font-mono text-label uppercase sm:right-6',
     avatar:
       'rounded-mark relative -mt-11 size-22 shrink-0 rounded-full bg-surface p-1 sm:-mt-12 sm:size-24 *:[img]:size-full *:[img]:rounded-full *:[img]:object-cover *:[img]:object-center',

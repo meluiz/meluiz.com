@@ -10,7 +10,7 @@ export const filter = sva({
     list: 'flex flex-wrap center gap-x-1.5',
     item: 'flex min-h-6 center gap-x-2 bg-surface-accent-muted px-2 font-mono text-xs/4 text-foreground-accent uppercase ring ring-foreground-accent',
     remove: '-mx-px',
-    count: 'text-label shrink-0 font-mono text-foreground-muted uppercase',
+    count: 'shrink-0 font-mono text-label text-foreground-muted uppercase',
   },
 });
 
@@ -34,13 +34,13 @@ export const card = sva({
     stage:
       'z-1 border-b border-stroke-soft *:data-[part=root]:aspect-16/10 sm:*:data-[part=root]:aspect-4/3',
     serial:
-      'text-label pointer-events-none absolute top-2.5 left-3 font-mono text-foreground-muted',
+      'pointer-events-none absolute top-2.5 left-3 font-mono text-label text-foreground-muted',
     meta: 'flex flex-col gap-y-1.5 px-4 pt-3 pb-3.5 sm:pt-3.5 sm:pb-4',
     top: 'flex items-baseline justify-between gap-x-3',
-    title: 'text-value min-w-0 font-mono text-foreground',
+    title: 'min-w-0 font-mono text-value text-foreground',
     link: 'after:absolute after:inset-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground-accent',
     date: 'shrink-0 font-mono text-xs/4 text-foreground-soft',
-    description: 'text-body line-clamp-3 text-pretty text-foreground-soft',
+    description: 'line-clamp-3 text-body text-pretty text-foreground-soft',
     tags: 'mt-1 flex flex-wrap gap-1',
     tag: 'relative z-2 transition-colors duration-150 ease-in-out-base hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground-accent data-[tone=accent]:border-foreground-accent data-[tone=accent]:bg-surface-accent-muted data-[tone=accent]:hover:text-foreground-accent',
   },
@@ -52,8 +52,8 @@ export const results = sva({
   base: {
     root: 'grid-cols-1 sm:grid-cols-2',
     filler:
-      'text-label min-h-50 center px-4 py-8 text-center font-mono text-foreground-muted uppercase max-sm:hidden',
+      'min-h-50 center px-4 py-8 text-center font-mono text-label text-foreground-muted uppercase max-sm:hidden',
     empty:
-      'text-label flex min-h-50 center px-4 py-8 text-center font-mono text-foreground-muted uppercase',
+      'flex min-h-50 center px-4 py-8 text-center font-mono text-label text-foreground-muted uppercase',
   },
 });

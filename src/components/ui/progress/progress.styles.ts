@@ -34,7 +34,7 @@ export const track = cva({
 export const indicator = cva({
   base: cn([
     'relative z-1 h-full bg-(--progress-color) transition-[width] duration-300 ease-out motion-reduce:transition-none',
-    'is-indeterminate:animate-progress-indeterminate is-indeterminate:w-1/3 motion-reduce:is-indeterminate:animate-none',
+    'is-indeterminate:w-1/3 is-indeterminate:animate-progress-indeterminate motion-reduce:is-indeterminate:animate-none',
   ]),
   variants: {},
 });
